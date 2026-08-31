@@ -1,0 +1,22 @@
+name: validate
+on: [push, pull_request]
+permissions:
+  contents: read
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  specifications:
+    name: Validate specifications
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: recursive
+      - uses: pkl-community/setup-pkl@0bffd1602015ccf46333e880f81087e73fd1a361 # v0.0.9
+        with:
+          pkl-version: 0.32.1
+      - run: ./scripts/check.sh
+      - run: npx --yes markdownlint-cli2@0.18.1

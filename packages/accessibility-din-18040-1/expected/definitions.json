@@ -1,0 +1,304 @@
+{
+  "definitions": {
+    "axioval:definition.boolean-property-equals": {
+      "capability": "axioval:capability.property-value-equals",
+      "description": {
+        "default": "Require an exact canonical boolean property value.",
+        "translations": {
+          "de": "Fordert einen exakt aufgelösten kanonischen booleschen Eigenschaftswert."
+        }
+      },
+      "id": "axioval:definition.boolean-property-equals",
+      "name": {
+        "default": "Boolean property equals",
+        "translations": {
+          "de": "Boolesche Eigenschaft entspricht"
+        }
+      },
+      "parameters": {
+        "expected": {
+          "allowedValues": [],
+          "id": "expected",
+          "kind": "boolean",
+          "name": {
+            "default": "Expected value",
+            "translations": {
+              "de": "Erwarteter Wert"
+            }
+          },
+          "required": true
+        },
+        "property": {
+          "allowedValues": [],
+          "id": "property",
+          "kind": "propertyReference",
+          "name": {
+            "default": "Property",
+            "translations": {
+              "de": "Eigenschaft"
+            }
+          },
+          "referencedValueKind": "boolean",
+          "required": true
+        }
+      },
+      "tags": [
+        "property",
+        "fail-closed"
+      ]
+    },
+    "axioval:definition.free-floor-rectangle": {
+      "capability": "axioval:capability.free-floor-rectangle",
+      "description": {
+        "default": "Require an exact unobstructed floor rectangle inside each selected spatial scope.",
+        "translations": {
+          "de": "Fordert in jedem ausgewählten räumlichen Bereich eine exakt nachgewiesene, hindernisfreie rechteckige Bodenfläche."
+        }
+      },
+      "id": "axioval:definition.free-floor-rectangle",
+      "name": {
+        "default": "Free rectangular movement area",
+        "translations": {
+          "de": "Freie rechteckige Bewegungsfläche"
+        }
+      },
+      "parameters": {
+        "height_metres": {
+          "allowedValues": [],
+          "id": "height_metres",
+          "kind": "number",
+          "name": {
+            "default": "Conservative evaluation height in metres",
+            "translations": {
+              "de": "Konservative Prüfhöhe in Metern"
+            }
+          },
+          "required": true
+        },
+        "length_metres": {
+          "allowedValues": [],
+          "id": "length_metres",
+          "kind": "number",
+          "name": {
+            "default": "Length in metres",
+            "translations": {
+              "de": "Länge in Metern"
+            }
+          },
+          "required": true
+        },
+        "width_metres": {
+          "allowedValues": [],
+          "id": "width_metres",
+          "kind": "number",
+          "name": {
+            "default": "Width in metres",
+            "translations": {
+              "de": "Breite in Metern"
+            }
+          },
+          "required": true
+        }
+      },
+      "tags": [
+        "geometry",
+        "accessibility",
+        "fail-closed"
+      ]
+    },
+    "axioval:definition.minimum-clear-opening": {
+      "capability": "axioval:capability.minimum-clear-opening",
+      "description": {
+        "default": "Require the exact passable aperture, not the nominal element width, to meet the threshold.",
+        "translations": {
+          "de": "Fordert, dass die exakt passierbare Öffnung und nicht die Nennbreite des Bauteils den Grenzwert erfüllt."
+        }
+      },
+      "id": "axioval:definition.minimum-clear-opening",
+      "name": {
+        "default": "Minimum clear opening",
+        "translations": {
+          "de": "Lichte Mindestöffnung"
+        }
+      },
+      "parameters": {
+        "width_metres": {
+          "allowedValues": [],
+          "id": "width_metres",
+          "kind": "number",
+          "name": {
+            "default": "Clear width in metres",
+            "translations": {
+              "de": "Lichte Breite in Metern"
+            }
+          },
+          "required": true
+        }
+      },
+      "tags": [
+        "geometry",
+        "opening",
+        "fail-closed"
+      ]
+    },
+    "axioval:definition.minimum-clear-route": {
+      "capability": "axioval:capability.minimum-clear-route",
+      "description": {
+        "default": "Require an exact continuous route with the configured clear width.",
+        "translations": {
+          "de": "Fordert einen exakt nachgewiesenen durchgehenden Weg mit der festgelegten lichten Breite."
+        }
+      },
+      "id": "axioval:definition.minimum-clear-route",
+      "name": {
+        "default": "Minimum continuous clear route",
+        "translations": {
+          "de": "Durchgehend freie Mindestwegbreite"
+        }
+      },
+      "parameters": {
+        "width_metres": {
+          "allowedValues": [],
+          "id": "width_metres",
+          "kind": "number",
+          "name": {
+            "default": "Clear width in metres",
+            "translations": {
+              "de": "Lichte Breite in Metern"
+            }
+          },
+          "required": true
+        }
+      },
+      "tags": [
+        "geometry",
+        "routing",
+        "fail-closed"
+      ]
+    }
+  },
+  "objectTypes": {
+    "axioval:ifc4.door": {
+      "description": {
+        "default": "An IFC door occurrence.",
+        "translations": {
+          "de": "Ein IFC-Türvorkommen."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "IfcDoor",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.door",
+      "name": {
+        "default": "Door",
+        "translations": {
+          "de": "Tür"
+        }
+      }
+    },
+    "axioval:ifc4.ramp": {
+      "description": {
+        "default": "An IFC ramp occurrence.",
+        "translations": {
+          "de": "Ein IFC-Rampenvorkommen."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "IfcRamp",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.ramp",
+      "name": {
+        "default": "Ramp",
+        "translations": {
+          "de": "Rampe"
+        }
+      }
+    },
+    "axioval:ifc4.space": {
+      "description": {
+        "default": "An IFC spatial area.",
+        "translations": {
+          "de": "Ein räumlicher IFC-Bereich."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "IfcSpace",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.space",
+      "name": {
+        "default": "Space",
+        "translations": {
+          "de": "Raum"
+        }
+      }
+    }
+  },
+  "package": {
+    "authors": [
+      "Axioval contributors"
+    ],
+    "description": "English and German reusable accessibility rule definitions / Wiederverwendbare barrierefreie Regeldefinitionen.",
+    "id": "axioval:specification.accessibility-din-18040-1.definitions",
+    "license": "AGPL-3.0-or-later",
+    "name": "Accessibility / Barrierefreiheit — DIN 18040-1",
+    "repository": "https://github.com/axioval/specifications",
+    "version": "0.1.0"
+  },
+  "properties": {
+    "axioval:ifc4.handicap-accessible": {
+      "description": {
+        "default": "IFC accessibility intent flag.",
+        "translations": {
+          "de": "IFC-Kennzeichen für die vorgesehene Barrierefreiheit."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "HandicapAccessible",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.handicap-accessible",
+      "name": {
+        "default": "Accessible",
+        "translations": {
+          "de": "Barrierefrei"
+        }
+      },
+      "valueKind": "boolean"
+    }
+  },
+  "propertySets": {
+    "axioval:ifc4.pset-door-common": {
+      "description": {
+        "default": "IFC4 Pset_DoorCommon.",
+        "translations": {
+          "de": "IFC4 Pset_DoorCommon."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "Pset_DoorCommon",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.pset-door-common",
+      "name": {
+        "default": "Door common properties",
+        "translations": {
+          "de": "Allgemeine Türeigenschaften"
+        }
+      }
+    }
+  },
+  "schemaVersion": "0.1.0"
+}

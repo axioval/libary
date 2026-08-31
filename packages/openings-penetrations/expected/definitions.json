@@ -1,0 +1,342 @@
+{
+  "definitions": {
+    "axioval:template.boolean-property-equals": {
+      "capability": "axioval:capability.property-value-equals",
+      "id": "axioval:template.boolean-property-equals",
+      "name": {
+        "default": "Boolean property equals",
+        "translations": {
+          "de": "Boolesche Eigenschaft entspricht Sollwert"
+        }
+      },
+      "parameters": {
+        "expected": {
+          "allowedValues": [],
+          "id": "expected",
+          "kind": "boolean",
+          "name": {
+            "default": "Expected",
+            "translations": {
+              "de": "Sollwert"
+            }
+          },
+          "required": true
+        },
+        "property": {
+          "allowedValues": [],
+          "id": "property",
+          "kind": "propertyReference",
+          "name": {
+            "default": "Property",
+            "translations": {
+              "de": "Eigenschaft"
+            }
+          },
+          "referencedValueKind": "boolean",
+          "required": true
+        }
+      },
+      "tags": [
+        "property",
+        "boolean"
+      ]
+    },
+    "axioval:template.no-host-clash-outside-opening": {
+      "capability": "axioval:capability.no-host-clash-outside-opening",
+      "id": "axioval:template.no-host-clash-outside-opening",
+      "name": {
+        "default": "No service-host clash outside opening",
+        "translations": {
+          "de": "Keine TGA-Bauteilkollision außerhalb der Öffnung"
+        }
+      },
+      "parameters": {},
+      "tags": [
+        "geometry",
+        "clash"
+      ]
+    },
+    "axioval:template.opening-fully-cuts-host": {
+      "capability": "axioval:capability.opening-fully-cuts-host",
+      "id": "axioval:template.opening-fully-cuts-host",
+      "name": {
+        "default": "Opening fully cuts host",
+        "translations": {
+          "de": "Öffnung durchdringt Bauteil vollständig"
+        }
+      },
+      "parameters": {},
+      "tags": [
+        "geometry",
+        "opening"
+      ]
+    },
+    "axioval:template.opening-has-service-or-fill": {
+      "capability": "axioval:capability.opening-has-service-or-fill",
+      "id": "axioval:template.opening-has-service-or-fill",
+      "name": {
+        "default": "Opening has service or filling",
+        "translations": {
+          "de": "Öffnung hat TGA-Element oder Füllung"
+        }
+      },
+      "parameters": {},
+      "tags": [
+        "relationship",
+        "opening"
+      ]
+    },
+    "axioval:template.opening-quantities-match-geometry": {
+      "capability": "axioval:capability.opening-quantities-match-geometry",
+      "id": "axioval:template.opening-quantities-match-geometry",
+      "name": {
+        "default": "Opening quantities match geometry",
+        "translations": {
+          "de": "Öffnungsmengen stimmen mit Geometrie überein"
+        }
+      },
+      "parameters": {
+        "depth": {
+          "allowedValues": [],
+          "id": "depth",
+          "kind": "propertyReference",
+          "name": {
+            "default": "Depth quantity",
+            "translations": {
+              "de": "Tiefenmenge"
+            }
+          },
+          "referencedValueKind": "quantity",
+          "required": true
+        },
+        "height": {
+          "allowedValues": [],
+          "id": "height",
+          "kind": "propertyReference",
+          "name": {
+            "default": "Height quantity",
+            "translations": {
+              "de": "Höhenmenge"
+            }
+          },
+          "referencedValueKind": "quantity",
+          "required": true
+        },
+        "tolerance_metres": {
+          "allowedValues": [],
+          "id": "tolerance_metres",
+          "kind": "number",
+          "name": {
+            "default": "Tolerance",
+            "translations": {
+              "de": "Toleranz"
+            }
+          },
+          "required": true
+        },
+        "width": {
+          "allowedValues": [],
+          "id": "width",
+          "kind": "propertyReference",
+          "name": {
+            "default": "Width quantity",
+            "translations": {
+              "de": "Breitenmenge"
+            }
+          },
+          "referencedValueKind": "quantity",
+          "required": true
+        }
+      },
+      "tags": [
+        "geometry",
+        "qto"
+      ]
+    },
+    "axioval:template.service-contained-in-opening": {
+      "capability": "axioval:capability.service-contained-in-opening",
+      "id": "axioval:template.service-contained-in-opening",
+      "name": {
+        "default": "Service fits opening with allowance",
+        "translations": {
+          "de": "TGA-Element passt mit Montagezugabe in Öffnung"
+        }
+      },
+      "parameters": {
+        "end_clearance_metres": {
+          "allowedValues": [],
+          "id": "end_clearance_metres",
+          "kind": "number",
+          "name": {
+            "default": "End clearance",
+            "translations": {
+              "de": "Montagezugabe an den Enden"
+            }
+          },
+          "required": true
+        },
+        "side_clearance_metres": {
+          "allowedValues": [],
+          "id": "side_clearance_metres",
+          "kind": "number",
+          "name": {
+            "default": "Side clearance",
+            "translations": {
+              "de": "Seitliche Montagezugabe"
+            }
+          },
+          "required": true
+        }
+      },
+      "tags": [
+        "geometry",
+        "coordination"
+      ]
+    }
+  },
+  "objectTypes": {
+    "axioval:ifc4.distribution-element": {
+      "externalNames": [
+        {
+          "name": "IfcDistributionElement",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.distribution-element",
+      "name": {
+        "default": "Distribution element",
+        "translations": {
+          "de": "TGA-Element"
+        }
+      }
+    },
+    "axioval:ifc4.opening-element": {
+      "externalNames": [
+        {
+          "name": "IfcOpeningElement",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.opening-element",
+      "name": {
+        "default": "Opening element",
+        "translations": {
+          "de": "Öffnungselement"
+        }
+      }
+    }
+  },
+  "package": {
+    "authors": [
+      "Axioval contributors"
+    ],
+    "description": "Bilingual reusable definitions / Zweisprachige wiederverwendbare Definitionen.",
+    "id": "axioval:specification.openings-penetrations.definitions",
+    "license": "AGPL-3.0-or-later",
+    "name": "Openings and penetrations / Schlitz- und Durchbruchsplanung",
+    "repository": "https://github.com/axioval/specifications",
+    "version": "0.1.0"
+  },
+  "properties": {
+    "axioval:ifc4.opening.depth": {
+      "externalNames": [
+        {
+          "name": "Depth",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.opening.depth",
+      "name": {
+        "default": "Opening depth",
+        "translations": {
+          "de": "Öffnungstiefe"
+        }
+      },
+      "unitDimension": "https://qudt.org/vocab/quantitykind/Length",
+      "valueKind": "quantity"
+    },
+    "axioval:ifc4.opening.height": {
+      "externalNames": [
+        {
+          "name": "Height",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.opening.height",
+      "name": {
+        "default": "Opening height",
+        "translations": {
+          "de": "Öffnungshöhe"
+        }
+      },
+      "unitDimension": "https://qudt.org/vocab/quantitykind/Length",
+      "valueKind": "quantity"
+    },
+    "axioval:ifc4.opening.protected": {
+      "externalNames": [
+        {
+          "name": "ProtectedOpening",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.opening.protected",
+      "name": {
+        "default": "Protected opening",
+        "translations": {
+          "de": "Geschützte Öffnung"
+        }
+      },
+      "valueKind": "boolean"
+    },
+    "axioval:ifc4.opening.width": {
+      "externalNames": [
+        {
+          "name": "Width",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.opening.width",
+      "name": {
+        "default": "Opening width",
+        "translations": {
+          "de": "Öffnungsbreite"
+        }
+      },
+      "unitDimension": "https://qudt.org/vocab/quantitykind/Length",
+      "valueKind": "quantity"
+    }
+  },
+  "propertySets": {
+    "axioval:ifc4.pset-opening-common": {
+      "externalNames": [
+        {
+          "name": "Pset_OpeningElementCommon",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.pset-opening-common",
+      "name": {
+        "default": "Opening common properties",
+        "translations": {
+          "de": "Allgemeine Öffnungseigenschaften"
+        }
+      }
+    },
+    "axioval:ifc4.qto-opening-base": {
+      "externalNames": [
+        {
+          "name": "Qto_OpeningElementBaseQuantities",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.qto-opening-base",
+      "name": {
+        "default": "Opening base quantities",
+        "translations": {
+          "de": "Basisgrößen der Öffnung"
+        }
+      }
+    }
+  },
+  "schemaVersion": "0.1.0"
+}

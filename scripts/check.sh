@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$repo_root"
+export PATH="$HOME/.local/bin:$PATH"
+python3 -m unittest discover -s tests -v
+python3 scripts/validate.py

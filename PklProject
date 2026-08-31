@@ -1,0 +1,3 @@
+amends "pkl:Project"
+
+// Rules import the pinned schema submodule using repository-local paths.

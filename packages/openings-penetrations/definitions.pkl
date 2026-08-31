@@ -1,0 +1,43 @@
+amends "../../vendor/schema/schema/Definitions.pkl"
+import "../../vendor/schema/schema/Types.pkl"
+import "../../vendor/schema/schema/Definitions.pkl"
+local function text(en: String, de: String): Types.LocalizedText = new Types.LocalizedText { default = en; translations { ["de"] = de } }
+package = new Types.PackageMetadata { id = "axioval:specification.openings-penetrations.definitions"; version = "0.1.0"; name = "Openings and penetrations / Schlitz- und Durchbruchsplanung"; description = "Bilingual reusable definitions / Zweisprachige wiederverwendbare Definitionen."; repository = "https://github.com/axioval/specifications"; license = "AGPL-3.0-or-later"; authors { "Axioval contributors" } }
+local function externalNameFor(externalName: String): Definitions.ExternalName = new Definitions.ExternalName { typeSystem = "urn:buildingsmart:ifc:IFC4-ADD2-TC1"; name = externalName }
+local function objectType(conceptId: String, en: String, de: String, ifcName: String): Definitions.ObjectTypeDefinition = new Definitions.ObjectTypeDefinition { id = conceptId; name = text(en, de); externalNames { externalNameFor(ifcName) } }
+local function property(conceptId: String, en: String, de: String, ifcName: String, kind: Definitions.PropertyValueKind): Definitions.PropertyDefinition = new Definitions.PropertyDefinition { id = conceptId; name = text(en, de); valueKind = kind; externalNames { externalNameFor(ifcName) } }
+local function lengthQuantity(conceptId: String, en: String, de: String, ifcName: String): Definitions.PropertyDefinition = new Definitions.PropertyDefinition { id = conceptId; name = text(en, de); valueKind = "quantity"; unitDimension = "https://qudt.org/vocab/quantitykind/Length"; externalNames { externalNameFor(ifcName) } }
+local function container(conceptId: String, en: String, de: String, ifcName: String): Definitions.PropertySetDefinition = new Definitions.PropertySetDefinition { id = conceptId; name = text(en, de); externalNames { externalNameFor(ifcName) } }
+objectTypes {
+  ["axioval:ifc4.opening-element"] = objectType("axioval:ifc4.opening-element", "Opening element", "Öffnungselement", "IfcOpeningElement")
+  ["axioval:ifc4.distribution-element"] = objectType("axioval:ifc4.distribution-element", "Distribution element", "TGA-Element", "IfcDistributionElement")
+}
+properties {
+  ["axioval:ifc4.opening.width"] = lengthQuantity("axioval:ifc4.opening.width", "Opening width", "Öffnungsbreite", "Width")
+  ["axioval:ifc4.opening.height"] = lengthQuantity("axioval:ifc4.opening.height", "Opening height", "Öffnungshöhe", "Height")
+  ["axioval:ifc4.opening.depth"] = lengthQuantity("axioval:ifc4.opening.depth", "Opening depth", "Öffnungstiefe", "Depth")
+  ["axioval:ifc4.opening.protected"] = property("axioval:ifc4.opening.protected", "Protected opening", "Geschützte Öffnung", "ProtectedOpening", "boolean")
+}
+propertySets {
+  ["axioval:ifc4.qto-opening-base"] = container("axioval:ifc4.qto-opening-base", "Opening base quantities", "Basisgrößen der Öffnung", "Qto_OpeningElementBaseQuantities")
+  ["axioval:ifc4.pset-opening-common"] = container("axioval:ifc4.pset-opening-common", "Opening common properties", "Allgemeine Öffnungseigenschaften", "Pset_OpeningElementCommon")
+}
+definitions {
+  ["axioval:template.opening-fully-cuts-host"] = new Definitions.RuleDefinition { id = "axioval:template.opening-fully-cuts-host"; name = text("Opening fully cuts host", "Öffnung durchdringt Bauteil vollständig"); capability = "axioval:capability.opening-fully-cuts-host"; tags { "geometry"; "opening" } }
+  ["axioval:template.service-contained-in-opening"] = new Definitions.RuleDefinition { id = "axioval:template.service-contained-in-opening"; name = text("Service fits opening with allowance", "TGA-Element passt mit Montagezugabe in Öffnung"); capability = "axioval:capability.service-contained-in-opening"; parameters {
+    ["side_clearance_metres"] = new Definitions.ParameterDefinition { id = "side_clearance_metres"; name = text("Side clearance", "Seitliche Montagezugabe"); kind = "number" }
+    ["end_clearance_metres"] = new Definitions.ParameterDefinition { id = "end_clearance_metres"; name = text("End clearance", "Montagezugabe an den Enden"); kind = "number" }
+  }; tags { "geometry"; "coordination" } }
+  ["axioval:template.no-host-clash-outside-opening"] = new Definitions.RuleDefinition { id = "axioval:template.no-host-clash-outside-opening"; name = text("No service-host clash outside opening", "Keine TGA-Bauteilkollision außerhalb der Öffnung"); capability = "axioval:capability.no-host-clash-outside-opening"; tags { "geometry"; "clash" } }
+  ["axioval:template.opening-quantities-match-geometry"] = new Definitions.RuleDefinition { id = "axioval:template.opening-quantities-match-geometry"; name = text("Opening quantities match geometry", "Öffnungsmengen stimmen mit Geometrie überein"); capability = "axioval:capability.opening-quantities-match-geometry"; parameters {
+    ["width"] = new Definitions.ParameterDefinition { id = "width"; name = text("Width quantity", "Breitenmenge"); kind = "propertyReference"; referencedValueKind = "quantity" }
+    ["height"] = new Definitions.ParameterDefinition { id = "height"; name = text("Height quantity", "Höhenmenge"); kind = "propertyReference"; referencedValueKind = "quantity" }
+    ["depth"] = new Definitions.ParameterDefinition { id = "depth"; name = text("Depth quantity", "Tiefenmenge"); kind = "propertyReference"; referencedValueKind = "quantity" }
+    ["tolerance_metres"] = new Definitions.ParameterDefinition { id = "tolerance_metres"; name = text("Tolerance", "Toleranz"); kind = "number" }
+  }; tags { "geometry"; "qto" } }
+  ["axioval:template.opening-has-service-or-fill"] = new Definitions.RuleDefinition { id = "axioval:template.opening-has-service-or-fill"; name = text("Opening has service or filling", "Öffnung hat TGA-Element oder Füllung"); capability = "axioval:capability.opening-has-service-or-fill"; tags { "relationship"; "opening" } }
+  ["axioval:template.boolean-property-equals"] = new Definitions.RuleDefinition { id = "axioval:template.boolean-property-equals"; name = text("Boolean property equals", "Boolesche Eigenschaft entspricht Sollwert"); capability = "axioval:capability.property-value-equals"; parameters {
+    ["property"] = new Definitions.ParameterDefinition { id = "property"; name = text("Property", "Eigenschaft"); kind = "propertyReference"; referencedValueKind = "boolean" }
+    ["expected"] = new Definitions.ParameterDefinition { id = "expected"; name = text("Expected", "Sollwert"); kind = "boolean" }
+  }; tags { "property"; "boolean" } }
+}

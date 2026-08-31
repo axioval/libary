@@ -1,0 +1,135 @@
+amends "../../vendor/schema/schema/RuleSets.pkl"
+
+import "../../vendor/schema/schema/Types.pkl"
+import "../../vendor/schema/schema/Values.pkl"
+import "../../vendor/schema/schema/Selectors.pkl"
+import "../../vendor/schema/schema/RuleSets.pkl"
+
+local function text(en: String, de: String): Types.LocalizedText = new Types.LocalizedText {
+  default = en
+  translations { ["de"] = de }
+}
+local function classified(classificationCode: String): Selectors.ClassificationSelector = new Selectors.ClassificationSelector {
+  system = "DIN 18040-1:2010-10 / Axioval applicability profile"
+  code = classificationCode
+}
+local isSpace = new Selectors.EntityTypeSelector { objectType = "axioval:ifc4.space" }
+local isDoor = new Selectors.EntityTypeSelector { objectType = "axioval:ifc4.door" }
+local isRoute = new Selectors.AnyOfSelector {
+  operands {
+    isSpace
+    new Selectors.EntityTypeSelector { objectType = "axioval:ifc4.ramp" }
+  }
+}
+local function scoped(typeSelector: Selectors.Selector, code: String): Selectors.AllOfSelector = new Selectors.AllOfSelector {
+  operands { typeSelector; classified(code) }
+}
+
+package = new Types.PackageMetadata {
+  id = "axioval:specification.accessibility-din-18040-1"
+  version = "0.1.0"
+  name = "Accessibility / Barrierefreiheit — DIN 18040-1"
+  description = "English and German DIN 18040-1 focused geometric requirements / Englisch- und deutschsprachige geometrische Anforderungen mit Schwerpunkt DIN 18040-1."
+  repository = "https://github.com/axioval/specifications"
+  license = "AGPL-3.0-or-later"
+  authors { "Axioval contributors" }
+}
+
+definitionPackages { "axioval:specification.accessibility-din-18040-1.definitions" }
+
+root = new RuleSets.RuleFolder {
+  id = "accessibility-din-18040-1"
+  name = text("Accessibility", "Barrierefreiheit")
+  description = text("DIN 18040-1 focused movement and opening checks.", "Prüfungen für Bewegungsflächen und Öffnungen mit Schwerpunkt DIN 18040-1.")
+  folders {
+    new RuleSets.RuleFolder {
+      id = "movement-areas"
+      name = text("Movement areas", "Bewegungsflächen")
+      description = text("Encounter, turning, and maneuvering cases from DIN 18040-1 clause 4.3.2.", "Begegnungs-, Richtungswechsel- und Rangiervorgänge nach DIN 18040-1 Abschnitt 4.3.2.")
+      rules {
+        new RuleSets.RuleInstance {
+          id = "meeting-two-wheelchairs-1800"
+          definitionId = "axioval:definition.free-floor-rectangle"
+          name = text("Two wheelchair users can meet", "Begegnung zweier Rollstuhlnutzer")
+          description = text("Require a 1.80 m by 1.80 m unobstructed movement area where this encounter case is assigned.", "Fordert eine hindernisfreie Bewegungsfläche von 1,80 m × 1,80 m, wenn dieser Begegnungsfall zugewiesen ist.")
+          message = text("No exact 1.80 m × 1.80 m free movement area was proven.", "Eine freie Bewegungsfläche von 1,80 m × 1,80 m wurde nicht exakt nachgewiesen.")
+          parameters {
+            ["width_metres"] = new Values.NumberValue { value = 1.8 }
+            ["length_metres"] = new Values.NumberValue { value = 1.8 }
+            ["height_metres"] = new Values.NumberValue { value = 2.0 }
+          }
+          applicability = scoped(isSpace, "movement-area.meeting-two-wheelchairs")
+          tags { "din-18040-1"; "4.3.2"; "geometry" }
+        }
+        new RuleSets.RuleInstance {
+          id = "meeting-wheelchair-person-1500"
+          definitionId = "axioval:definition.free-floor-rectangle"
+          name = text("Wheelchair user and another person can meet", "Begegnung eines Rollstuhlnutzers mit einer anderen Person")
+          description = text("Require a 1.50 m by 1.50 m unobstructed movement area where this encounter case is assigned.", "Fordert eine hindernisfreie Bewegungsfläche von 1,50 m × 1,50 m, wenn dieser Begegnungsfall zugewiesen ist.")
+          message = text("No exact 1.50 m × 1.50 m free encounter area was proven.", "Eine freie Begegnungsfläche von 1,50 m × 1,50 m wurde nicht exakt nachgewiesen.")
+          parameters {
+            ["width_metres"] = new Values.NumberValue { value = 1.5 }
+            ["length_metres"] = new Values.NumberValue { value = 1.5 }
+            ["height_metres"] = new Values.NumberValue { value = 2.0 }
+          }
+          applicability = scoped(isSpace, "movement-area.meeting-wheelchair-person")
+          tags { "din-18040-1"; "4.3.2"; "geometry" }
+        }
+        new RuleSets.RuleInstance {
+          id = "turning-maneuvering-1500"
+          definitionId = "axioval:definition.free-floor-rectangle"
+          name = text("Wheelchair turning and maneuvering", "Richtungswechsel und Rangiervorgänge")
+          description = text("Require a 1.50 m by 1.50 m unobstructed movement area where turning or maneuvering is assigned.", "Fordert eine hindernisfreie Bewegungsfläche von 1,50 m × 1,50 m, wenn Richtungswechsel oder Rangiervorgänge zugewiesen sind.")
+          message = text("No exact 1.50 m × 1.50 m turning area was proven.", "Eine freie Wendefläche von 1,50 m × 1,50 m wurde nicht exakt nachgewiesen.")
+          parameters {
+            ["width_metres"] = new Values.NumberValue { value = 1.5 }
+            ["length_metres"] = new Values.NumberValue { value = 1.5 }
+            ["height_metres"] = new Values.NumberValue { value = 2.0 }
+          }
+          applicability = scoped(isSpace, "movement-area.turning-maneuvering")
+          tags { "din-18040-1"; "4.3.2"; "geometry" }
+        }
+      }
+    }
+    new RuleSets.RuleFolder {
+      id = "routes-and-openings"
+      name = text("Routes and openings", "Wege und Öffnungen")
+      description = text("Straight route segments and accessible door apertures.", "Geradlinige Wegabschnitte und barrierefreie Türöffnungen.")
+      rules {
+        new RuleSets.RuleInstance {
+          id = "straight-route-1200"
+          definitionId = "axioval:definition.minimum-clear-route"
+          name = text("Straight route segment has 1.20 m clear width", "Geradliniger Wegabschnitt hat 1,20 m lichte Breite")
+          description = text("Apply only where neither a direction change nor an encounter is expected.", "Nur anwenden, wenn weder ein Richtungswechsel noch eine Begegnung zu erwarten ist.")
+          message = text("A continuous exact clear route width of 1.20 m was not proven.", "Eine durchgehend exakt lichte Wegbreite von 1,20 m wurde nicht nachgewiesen.")
+          parameters { ["width_metres"] = new Values.NumberValue { value = 1.2 } }
+          applicability = scoped(isRoute, "route.straight-no-direction-change-or-encounter")
+          tags { "din-18040-1"; "4.3.2"; "routing" }
+        }
+        new RuleSets.RuleInstance {
+          id = "accessible-door-clear-opening-900"
+          definitionId = "axioval:definition.minimum-clear-opening"
+          name = text("Accessible door has 0.90 m clear opening", "Barrierefreie Tür hat 0,90 m lichte Öffnung")
+          description = text("Check the passable aperture, not Qto_DoorBaseQuantities.Width or nominal leaf width.", "Prüft die passierbare Öffnung und nicht Qto_DoorBaseQuantities.Width oder die Nennbreite des Türblatts.")
+          message = text("An exact clear door opening of 0.90 m was not proven.", "Eine exakt lichte Türöffnung von 0,90 m wurde nicht nachgewiesen.")
+          parameters { ["width_metres"] = new Values.NumberValue { value = 0.9 } }
+          applicability = scoped(isDoor, "accessible-door")
+          tags { "din-18040-1"; "4.6"; "opening" }
+        }
+        new RuleSets.RuleInstance {
+          id = "accessible-door-intent"
+          definitionId = "axioval:definition.boolean-property-equals"
+          name = text("Accessible door carries accessibility intent", "Barrierefreie Tür trägt die Barrierefreiheitskennzeichnung")
+          description = text("Require Pset_DoorCommon.HandicapAccessible = TRUE on doors assigned to the accessible route.", "Fordert Pset_DoorCommon.HandicapAccessible = TRUE für Türen des barrierefreien Wegs.")
+          message = text("The exact accessible-door property was missing, conflicting, or false.", "Die exakte Eigenschaft für eine barrierefreie Tür fehlte, war widersprüchlich oder falsch.")
+          parameters {
+            ["property"] = new Values.PropertyReferenceValue { property = "axioval:ifc4.handicap-accessible"; propertySet = "axioval:ifc4.pset-door-common" }
+            ["expected"] = new Values.BooleanValue { value = true }
+          }
+          applicability = scoped(isDoor, "accessible-door")
+          tags { "ifc4"; "property"; "accessibility" }
+        }
+      }
+    }
+  }
+}

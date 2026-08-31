@@ -1,0 +1,155 @@
+amends "../../vendor/schema/schema/RuleSets.pkl"
+
+import "../../vendor/schema/schema/Types.pkl"
+import "../../vendor/schema/schema/Values.pkl"
+import "../../vendor/schema/schema/Selectors.pkl"
+import "../../vendor/schema/schema/RuleSets.pkl"
+
+local function text(en: String, de: String): Types.LocalizedText = new Types.LocalizedText { default = en; translations { ["de"] = de } }
+local function classified(classificationCode: String): Selectors.ClassificationSelector = new Selectors.ClassificationSelector { system = "Axioval fire-safety applicability profile"; code = classificationCode }
+local isWall = new Selectors.EntityTypeSelector { objectType = "axioval:fire.ifc4.wall" }
+local isSlab = new Selectors.EntityTypeSelector { objectType = "axioval:fire.ifc4.slab" }
+local isDoor = new Selectors.EntityTypeSelector { objectType = "axioval:fire.ifc4.door" }
+local isOpening = new Selectors.EntityTypeSelector { objectType = "axioval:fire.ifc4.opening" }
+local function scoped(typeSelector: Selectors.Selector, classificationCode: String): Selectors.AllOfSelector = new Selectors.AllOfSelector { operands { typeSelector; classified(classificationCode) } }
+
+package = new Types.PackageMetadata {
+  id = "axioval:specification.fire-safety"
+  version = "0.1.0"
+  name = "Fire safety / Brandschutz"
+  description = "Bilingual fire-safety coordination and geometry rules / Zweisprachige Regeln für Brandschutzkoordination und Geometrie."
+  repository = "https://github.com/axioval/specifications"
+  license = "AGPL-3.0-or-later"
+  authors { "Axioval contributors" }
+}
+
+definitionPackages { "axioval:specification.fire-safety.definitions" }
+
+root = new RuleSets.RuleFolder {
+  id = "fire-safety"
+  name = text("Fire safety", "Brandschutz")
+  description = text("Model coordination rules; project law and the approved fire-safety concept remain authoritative.", "Regeln zur Modellkoordination; Projektbaurecht und genehmigtes Brandschutzkonzept bleiben maßgeblich.")
+  folders {
+    new RuleSets.RuleFolder {
+      id = "compartment-boundaries"
+      name = text("Compartment boundaries", "Brandabschnittsgrenzen")
+      description = text("Continuity and declared compartmentation of assigned walls and slabs.", "Durchgängigkeit und ausgewiesene Brandabschnittsbildung zugewiesener Wände und Decken.")
+      rules {
+        new RuleSets.RuleInstance {
+          id = "wall-boundary-continuity"
+          definitionId = "axioval:fire.definition.continuous-separation-surface"
+          name = text("Fire-compartment walls form a continuous boundary", "Brandabschnittswände bilden eine durchgängige Grenze")
+          description = text("Require exact surface continuity; protected openings are handled explicitly.", "Fordert exakte Flächendurchgängigkeit; geschützte Öffnungen werden ausdrücklich berücksichtigt.")
+          message = text("The wall boundary contains an unprotected gap or lacks complete geometry evidence.", "Die Wandgrenze enthält eine ungeschützte Lücke oder besitzt keinen vollständigen Geometrienachweis.")
+          applicability = scoped(isWall, "fire-compartment-boundary")
+          tags { "fire-safety"; "geometry"; "compartment" }
+        }
+        new RuleSets.RuleInstance {
+          id = "slab-boundary-continuity"
+          definitionId = "axioval:fire.definition.continuous-separation-surface"
+          name = text("Fire-compartment slabs form a continuous boundary", "Brandabschnittsdecken bilden eine durchgängige Grenze")
+          description = text("Require exact surface continuity across the assigned slab boundary.", "Fordert exakte Flächendurchgängigkeit über die zugewiesene Deckengrenze.")
+          message = text("The slab boundary contains an unprotected gap or lacks complete geometry evidence.", "Die Deckengrenze enthält eine ungeschützte Lücke oder besitzt keinen vollständigen Geometrienachweis.")
+          applicability = scoped(isSlab, "fire-compartment-boundary")
+          tags { "fire-safety"; "geometry"; "compartment" }
+        }
+        new RuleSets.RuleInstance {
+          id = "wall-declared-compartmentation"
+          definitionId = "axioval:fire.definition.boolean-property-equals"
+          name = text("Compartment walls declare compartmentation", "Brandabschnittswände sind als brandabschnittsbildend gekennzeichnet")
+          message = text("Pset_WallCommon.Compartmentation is missing, conflicting, or false.", "Pset_WallCommon.Compartmentation fehlt, ist widersprüchlich oder falsch.")
+          parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.compartmentation"; propertySet = "axioval:fire.ifc4.pset-wall-common" }; ["expected"] = new Values.BooleanValue { value = true } }
+          applicability = scoped(isWall, "fire-compartment-boundary")
+          tags { "ifc4"; "fire-safety"; "property" }
+        }
+        new RuleSets.RuleInstance {
+          id = "slab-declared-compartmentation"
+          definitionId = "axioval:fire.definition.boolean-property-equals"
+          name = text("Compartment slabs declare compartmentation", "Brandabschnittsdecken sind als brandabschnittsbildend gekennzeichnet")
+          message = text("Pset_SlabCommon.Compartmentation is missing, conflicting, or false.", "Pset_SlabCommon.Compartmentation fehlt, ist widersprüchlich oder falsch.")
+          parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.compartmentation"; propertySet = "axioval:fire.ifc4.pset-slab-common" }; ["expected"] = new Values.BooleanValue { value = true } }
+          applicability = scoped(isSlab, "fire-compartment-boundary")
+          tags { "ifc4"; "fire-safety"; "property" }
+        }
+      }
+    }
+    new RuleSets.RuleFolder {
+      id = "doors-and-penetrations"
+      name = text("Doors and penetrations", "Türen und Durchführungen")
+      description = text("Rated doors and protected compartment penetrations.", "Feuerwiderstandsfähige Türen und geschützte Brandabschnittsdurchführungen.")
+      rules {
+        new RuleSets.RuleInstance {
+          id = "rated-door-has-fire-rating"
+          definitionId = "axioval:fire.definition.property-exists"
+          name = text("Rated door has an exact fire rating", "Feuerschutztür besitzt einen exakten Feuerwiderstandsnachweis")
+          message = text("Pset_DoorCommon.FireRating is missing or conflicting.", "Pset_DoorCommon.FireRating fehlt oder ist widersprüchlich.")
+          parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.fire-rating"; propertySet = "axioval:fire.ifc4.pset-door-common" } }
+          applicability = scoped(isDoor, "rated-fire-door")
+          tags { "ifc4"; "fire-door"; "property" }
+        }
+        new RuleSets.RuleInstance {
+          id = "fire-exit-door-marked"
+          definitionId = "axioval:fire.definition.boolean-property-equals"
+          name = text("Fire-exit door is marked as a fire exit", "Notausgangstür ist als Notausgang gekennzeichnet")
+          message = text("Pset_DoorCommon.FireExit is missing, conflicting, or false.", "Pset_DoorCommon.FireExit fehlt, ist widersprüchlich oder falsch.")
+          parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.fire-exit"; propertySet = "axioval:fire.ifc4.pset-door-common" }; ["expected"] = new Values.BooleanValue { value = true } }
+          applicability = scoped(isDoor, "fire-exit-door")
+          tags { "ifc4"; "fire-exit"; "property" }
+        }
+        new RuleSets.RuleInstance {
+          id = "fire-door-self-closing"
+          definitionId = "axioval:fire.definition.boolean-property-equals"
+          name = text("Assigned fire door is self-closing", "Zugewiesene Feuerschutztür ist selbstschließend")
+          message = text("Pset_DoorCommon.SelfClosing is missing, conflicting, or false.", "Pset_DoorCommon.SelfClosing fehlt, ist widersprüchlich oder falsch.")
+          parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.self-closing"; propertySet = "axioval:fire.ifc4.pset-door-common" }; ["expected"] = new Values.BooleanValue { value = true } }
+          applicability = scoped(isDoor, "self-closing-fire-door")
+          tags { "ifc4"; "fire-door"; "property" }
+        }
+        new RuleSets.RuleInstance {
+          id = "smoke-control-door-marked"
+          definitionId = "axioval:fire.definition.boolean-property-equals"
+          name = text("Assigned smoke-control door declares smoke stop", "Zugewiesene Rauchschutztür ist als Rauchschutz gekennzeichnet")
+          message = text("Pset_DoorCommon.SmokeStop is missing, conflicting, or false.", "Pset_DoorCommon.SmokeStop fehlt, ist widersprüchlich oder falsch.")
+          parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.smoke-stop"; propertySet = "axioval:fire.ifc4.pset-door-common" }; ["expected"] = new Values.BooleanValue { value = true } }
+          applicability = scoped(isDoor, "smoke-control-door")
+          tags { "ifc4"; "smoke-control"; "property" }
+        }
+        new RuleSets.RuleInstance {
+          id = "compartment-opening-protected"
+          definitionId = "axioval:fire.definition.boolean-property-equals"
+          name = text("Compartment penetration is protected", "Brandabschnittsdurchführung ist geschützt")
+          message = text("Pset_OpeningElementCommon.ProtectedOpening is missing, conflicting, or false.", "Pset_OpeningElementCommon.ProtectedOpening fehlt, ist widersprüchlich oder falsch.")
+          parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.protected-opening"; propertySet = "axioval:fire.ifc4.pset-opening-common" }; ["expected"] = new Values.BooleanValue { value = true } }
+          applicability = scoped(isOpening, "fire-compartment-penetration")
+          tags { "ifc4"; "penetration"; "property" }
+        }
+        new RuleSets.RuleInstance {
+          id = "penetration-rating-matches-host"
+          definitionId = "axioval:fire.definition.rating-not-less-than-host"
+          name = text("Penetration rating is not less than its host", "Feuerwiderstand der Durchführung ist nicht geringer als der des Bauteils")
+          message = text("The penetration-to-host relation or compatible parsed ratings could not be proven.", "Die Beziehung zwischen Durchführung und Bauteil oder kompatible aufgelöste Feuerwiderstände konnten nicht nachgewiesen werden.")
+          parameters { ["element_property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.fire-rating" }; ["host_property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.fire-rating" } }
+          applicability = scoped(isOpening, "rated-fire-compartment-penetration")
+          tags { "fire-rating"; "relation"; "fail-closed" }
+        }
+      }
+    }
+    new RuleSets.RuleFolder {
+      id = "example-project-policy"
+      name = text("Example project policy", "Beispielhafte Projektvorgabe")
+      description = text("Values must be replaced when the applicable regulation or approved concept differs.", "Werte müssen ersetzt werden, wenn die anzuwendende Vorschrift oder das genehmigte Konzept abweicht.")
+      rules {
+        new RuleSets.RuleInstance {
+          id = "example-escape-route-1200x2000"
+          definitionId = "axioval:fire.definition.minimum-clear-route-envelope"
+          name = text("Example escape-route envelope 1.20 m × 2.00 m", "Beispielhafter Rettungswegquerschnitt 1,20 m × 2,00 m")
+          description = text("Example project value, not a universal German legal threshold.", "Beispielhafte Projektvorgabe, kein allgemeingültiger deutscher Rechtsgrenzwert.")
+          message = text("The configured 1.20 m × 2.00 m continuous route envelope was not proven.", "Der konfigurierte durchgehend freie Wegquerschnitt von 1,20 m × 2,00 m wurde nicht nachgewiesen.")
+          parameters { ["width_metres"] = new Values.NumberValue { value = 1.2 }; ["height_metres"] = new Values.NumberValue { value = 2.0 } }
+          applicability = classified("project-policy.escape-route-1200x2000")
+          tags { "example-policy"; "escape-route"; "geometry" }
+        }
+      }
+    }
+  }
+}

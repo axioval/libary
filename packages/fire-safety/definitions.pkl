@@ -1,0 +1,63 @@
+amends "../../vendor/schema/schema/Definitions.pkl"
+
+import "../../vendor/schema/schema/Types.pkl"
+import "../../vendor/schema/schema/Definitions.pkl"
+
+local function text(en: String, de: String): Types.LocalizedText = new Types.LocalizedText {
+  default = en
+  translations { ["de"] = de }
+}
+local ifc4 = "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+
+package = new Types.PackageMetadata {
+  id = "axioval:specification.fire-safety.definitions"
+  version = "0.1.0"
+  name = "Fire safety / Brandschutz"
+  description = "English and German fire-safety definitions / Englisch- und deutschsprachige Brandschutzdefinitionen."
+  repository = "https://github.com/axioval/specifications"
+  license = "AGPL-3.0-or-later"
+  authors { "Axioval contributors" }
+}
+
+objectTypes {
+  ["axioval:fire.ifc4.wall"] = new Definitions.ObjectTypeDefinition { id = "axioval:fire.ifc4.wall"; name = text("Wall", "Wand"); description = text("An IFC wall occurrence.", "Ein IFC-Wandvorkommen."); externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "IfcWall" } } }
+  ["axioval:fire.ifc4.slab"] = new Definitions.ObjectTypeDefinition { id = "axioval:fire.ifc4.slab"; name = text("Slab", "Decke oder Platte"); description = text("An IFC slab occurrence.", "Ein IFC-Platten- oder Deckenvorkommen."); externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "IfcSlab" } } }
+  ["axioval:fire.ifc4.door"] = new Definitions.ObjectTypeDefinition { id = "axioval:fire.ifc4.door"; name = text("Door", "Tür"); description = text("An IFC door occurrence.", "Ein IFC-Türvorkommen."); externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "IfcDoor" } } }
+  ["axioval:fire.ifc4.opening"] = new Definitions.ObjectTypeDefinition { id = "axioval:fire.ifc4.opening"; name = text("Opening", "Öffnung"); description = text("An IFC opening element.", "Ein IFC-Öffnungselement."); externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "IfcOpeningElement" } } }
+}
+
+properties {
+  ["axioval:fire.ifc4.fire-rating"] = new Definitions.PropertyDefinition { id = "axioval:fire.ifc4.fire-rating"; name = text("Fire rating", "Feuerwiderstandsklasse"); description = text("Published IFC FireRating label.", "Veröffentlichte IFC-Eigenschaft FireRating."); valueKind = "string"; externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "FireRating" } } }
+  ["axioval:fire.ifc4.compartmentation"] = new Definitions.PropertyDefinition { id = "axioval:fire.ifc4.compartmentation"; name = text("Compartmentation", "Brandabschnittsbildung"); description = text("Whether the element is designed for compartmentation.", "Ob das Bauteil der Brandabschnittsbildung dient."); valueKind = "boolean"; externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "Compartmentation" } } }
+  ["axioval:fire.ifc4.protected-opening"] = new Definitions.PropertyDefinition { id = "axioval:fire.ifc4.protected-opening"; name = text("Protected opening", "Geschützte Öffnung"); description = text("IFC protected-opening intent.", "IFC-Kennzeichnung einer geschützten Öffnung."); valueKind = "boolean"; externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "ProtectedOpening" } } }
+  ["axioval:fire.ifc4.fire-exit"] = new Definitions.PropertyDefinition { id = "axioval:fire.ifc4.fire-exit"; name = text("Fire exit", "Notausgang"); description = text("IFC fire-exit intent.", "IFC-Kennzeichnung eines Notausgangs."); valueKind = "boolean"; externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "FireExit" } } }
+  ["axioval:fire.ifc4.self-closing"] = new Definitions.PropertyDefinition { id = "axioval:fire.ifc4.self-closing"; name = text("Self-closing", "Selbstschließend"); description = text("IFC self-closing intent.", "IFC-Kennzeichnung einer selbstschließenden Tür."); valueKind = "boolean"; externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "SelfClosing" } } }
+  ["axioval:fire.ifc4.smoke-stop"] = new Definitions.PropertyDefinition { id = "axioval:fire.ifc4.smoke-stop"; name = text("Smoke stop", "Rauchschutz"); description = text("IFC smoke-stop intent.", "IFC-Kennzeichnung des Rauchschutzes."); valueKind = "boolean"; externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "SmokeStop" } } }
+}
+
+propertySets {
+  ["axioval:fire.ifc4.pset-wall-common"] = new Definitions.PropertySetDefinition { id = "axioval:fire.ifc4.pset-wall-common"; name = text("Wall common properties", "Allgemeine Wandeigenschaften"); description = text("IFC4 Pset_WallCommon.", "IFC4 Pset_WallCommon."); externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "Pset_WallCommon" } } }
+  ["axioval:fire.ifc4.pset-slab-common"] = new Definitions.PropertySetDefinition { id = "axioval:fire.ifc4.pset-slab-common"; name = text("Slab common properties", "Allgemeine Platteneigenschaften"); description = text("IFC4 Pset_SlabCommon.", "IFC4 Pset_SlabCommon."); externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "Pset_SlabCommon" } } }
+  ["axioval:fire.ifc4.pset-door-common"] = new Definitions.PropertySetDefinition { id = "axioval:fire.ifc4.pset-door-common"; name = text("Door common properties", "Allgemeine Türeigenschaften"); description = text("IFC4 Pset_DoorCommon.", "IFC4 Pset_DoorCommon."); externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "Pset_DoorCommon" } } }
+  ["axioval:fire.ifc4.pset-opening-common"] = new Definitions.PropertySetDefinition { id = "axioval:fire.ifc4.pset-opening-common"; name = text("Opening common properties", "Allgemeine Öffnungseigenschaften"); description = text("IFC4 Pset_OpeningElementCommon.", "IFC4 Pset_OpeningElementCommon."); externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "Pset_OpeningElementCommon" } } }
+}
+
+definitions {
+  ["axioval:fire.definition.boolean-property-equals"] = new Definitions.RuleDefinition {
+    id = "axioval:fire.definition.boolean-property-equals"; name = text("Boolean property equals", "Boolesche Eigenschaft entspricht"); description = text("Require an exact canonical boolean value.", "Fordert einen exakt aufgelösten kanonischen booleschen Wert."); capability = "axioval:capability.property-value-equals"; tags { "property"; "fail-closed" }
+    parameters { ["property"] = new Definitions.ParameterDefinition { id = "property"; name = text("Property", "Eigenschaft"); kind = "propertyReference"; referencedValueKind = "boolean" }; ["expected"] = new Definitions.ParameterDefinition { id = "expected"; name = text("Expected", "Erwartet"); kind = "boolean" } }
+  }
+  ["axioval:fire.definition.property-exists"] = new Definitions.RuleDefinition {
+    id = "axioval:fire.definition.property-exists"; name = text("Required property exists", "Erforderliche Eigenschaft ist vorhanden"); description = text("Require exact, non-conflicting property evidence.", "Fordert einen exakten, widerspruchsfreien Eigenschaftsnachweis."); capability = "axioval:capability.property-exists"; tags { "property"; "fail-closed" }
+    parameters { ["property"] = new Definitions.ParameterDefinition { id = "property"; name = text("Property", "Eigenschaft"); kind = "propertyReference" } }
+  }
+  ["axioval:fire.definition.continuous-separation-surface"] = new Definitions.RuleDefinition { id = "axioval:fire.definition.continuous-separation-surface"; name = text("Continuous compartment boundary", "Durchgängige Brandabschnittsgrenze"); description = text("Require an exact continuous separating surface with no unprotected geometric gaps.", "Fordert eine exakt durchgängige Trennfläche ohne ungeschützte geometrische Lücken."); capability = "axioval:capability.continuous-separation-surface"; tags { "geometry"; "topology"; "fail-closed" } }
+  ["axioval:fire.definition.rating-not-less-than-host"] = new Definitions.RuleDefinition {
+    id = "axioval:fire.definition.rating-not-less-than-host"; name = text("Penetration rating not less than host", "Feuerwiderstand der Durchführung nicht geringer als beim Bauteil"); description = text("Compare parsed rating semantics across a penetration and its exact host relation.", "Vergleicht aufgelöste Feuerwiderstandsangaben über die exakte Beziehung zwischen Durchführung und Bauteil."); capability = "axioval:capability.fire-rating-not-less-than-host"; tags { "relation"; "property"; "fail-closed" }
+    parameters { ["element_property"] = new Definitions.ParameterDefinition { id = "element_property"; name = text("Penetration property", "Eigenschaft der Durchführung"); kind = "propertyReference"; referencedValueKind = "string" }; ["host_property"] = new Definitions.ParameterDefinition { id = "host_property"; name = text("Host property", "Eigenschaft des Bauteils"); kind = "propertyReference"; referencedValueKind = "string" } }
+  }
+  ["axioval:fire.definition.minimum-clear-route-envelope"] = new Definitions.RuleDefinition {
+    id = "axioval:fire.definition.minimum-clear-route-envelope"; name = text("Minimum clear route envelope", "Lichter Mindestwegquerschnitt"); description = text("Require a continuous exact route envelope with configured width and height.", "Fordert einen durchgehend exakt freien Wegquerschnitt mit festgelegter Breite und Höhe."); capability = "axioval:capability.minimum-clear-route-envelope"; tags { "geometry"; "routing"; "fail-closed" }
+    parameters { ["width_metres"] = new Definitions.ParameterDefinition { id = "width_metres"; name = text("Width in metres", "Breite in Metern"); kind = "number" }; ["height_metres"] = new Definitions.ParameterDefinition { id = "height_metres"; name = text("Height in metres", "Höhe in Metern"); kind = "number" } }
+  }
+}

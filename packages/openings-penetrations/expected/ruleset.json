@@ -1,0 +1,309 @@
+{
+  "definitionPackages": [
+    "axioval:specification.openings-penetrations.definitions"
+  ],
+  "package": {
+    "authors": [
+      "Axioval contributors"
+    ],
+    "description": "Bilingual coordination rules / Zweisprachige Koordinationsregeln.",
+    "id": "axioval:specification.openings-penetrations",
+    "license": "AGPL-3.0-or-later",
+    "name": "Openings and penetrations / Schlitz- und Durchbruchsplanung",
+    "repository": "https://github.com/axioval/specifications",
+    "version": "0.1.0"
+  },
+  "root": {
+    "description": {
+      "default": "Geometry and relationship coordination checks.",
+      "translations": {
+        "de": "Geometrie- und Beziehungsprüfungen für die Koordination."
+      }
+    },
+    "folders": [],
+    "id": "openings-penetrations",
+    "name": {
+      "default": "Openings and penetrations",
+      "translations": {
+        "de": "Schlitz- und Durchbruchsplanung"
+      }
+    },
+    "rules": [
+      {
+        "applicability": {
+          "kind": "allOf",
+          "operands": [
+            {
+              "includeSubtypes": true,
+              "kind": "entityType",
+              "objectType": "axioval:ifc4.opening-element"
+            },
+            {
+              "code": "reserved-opening",
+              "includeDescendants": false,
+              "kind": "classification",
+              "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+            }
+          ]
+        },
+        "definitionId": "axioval:template.opening-fully-cuts-host",
+        "enabled": true,
+        "id": "opening-cuts-host",
+        "message": {
+          "default": "Reserved opening does not fully cut the associated host.",
+          "translations": {
+            "de": "Die reservierte Öffnung durchdringt das zugeordnete Bauteil nicht vollständig."
+          }
+        },
+        "name": {
+          "default": "Opening fully cuts its host",
+          "translations": {
+            "de": "Öffnung durchdringt ihr Bauteil vollständig"
+          }
+        },
+        "parameters": {},
+        "severity": "error",
+        "tags": [
+          "geometry",
+          "host"
+        ]
+      },
+      {
+        "applicability": {
+          "kind": "allOf",
+          "operands": [
+            {
+              "includeSubtypes": true,
+              "kind": "entityType",
+              "objectType": "axioval:ifc4.opening-element"
+            },
+            {
+              "code": "service-penetration",
+              "includeDescendants": false,
+              "kind": "classification",
+              "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+            }
+          ]
+        },
+        "definitionId": "axioval:template.service-contained-in-opening",
+        "enabled": true,
+        "id": "service-fits-with-25mm-allowance",
+        "message": {
+          "default": "Service envelope plus project allowance is not contained in the opening.",
+          "translations": {
+            "de": "TGA-Hüllkörper zuzüglich Projektzugabe liegt nicht vollständig in der Öffnung."
+          }
+        },
+        "name": {
+          "default": "Service fits with 25 mm allowance",
+          "translations": {
+            "de": "TGA-Element passt mit 25 mm Montagezugabe"
+          }
+        },
+        "parameters": {
+          "end_clearance_metres": {
+            "type": "number",
+            "value": 0.025
+          },
+          "side_clearance_metres": {
+            "type": "number",
+            "value": 0.025
+          }
+        },
+        "severity": "error",
+        "tags": [
+          "geometry",
+          "allowance",
+          "project-policy"
+        ]
+      },
+      {
+        "applicability": {
+          "kind": "allOf",
+          "operands": [
+            {
+              "includeSubtypes": true,
+              "kind": "entityType",
+              "objectType": "axioval:ifc4.opening-element"
+            },
+            {
+              "code": "service-penetration",
+              "includeDescendants": false,
+              "kind": "classification",
+              "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+            }
+          ]
+        },
+        "definitionId": "axioval:template.no-host-clash-outside-opening",
+        "enabled": true,
+        "id": "no-host-clash-outside-opening",
+        "message": {
+          "default": "Service intersects the host outside the reserved opening.",
+          "translations": {
+            "de": "Das TGA-Element schneidet das Bauteil außerhalb der reservierten Öffnung."
+          }
+        },
+        "name": {
+          "default": "No host clash outside opening",
+          "translations": {
+            "de": "Keine Bauteilkollision außerhalb der Öffnung"
+          }
+        },
+        "parameters": {},
+        "severity": "error",
+        "tags": [
+          "geometry",
+          "clash"
+        ]
+      },
+      {
+        "applicability": {
+          "kind": "allOf",
+          "operands": [
+            {
+              "includeSubtypes": true,
+              "kind": "entityType",
+              "objectType": "axioval:ifc4.opening-element"
+            },
+            {
+              "code": "reserved-opening",
+              "includeDescendants": false,
+              "kind": "classification",
+              "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+            }
+          ]
+        },
+        "definitionId": "axioval:template.opening-quantities-match-geometry",
+        "enabled": true,
+        "id": "opening-quantities-match-geometry",
+        "message": {
+          "default": "Published IFC4 opening dimensions differ from exact geometry by more than 5 mm.",
+          "translations": {
+            "de": "Veröffentlichte IFC4-Öffnungsmaße weichen um mehr als 5 mm von der exakten Geometrie ab."
+          }
+        },
+        "name": {
+          "default": "Opening quantities match geometry",
+          "translations": {
+            "de": "Öffnungsmengen stimmen mit Geometrie überein"
+          }
+        },
+        "parameters": {
+          "depth": {
+            "property": "axioval:ifc4.opening.depth",
+            "propertySet": "axioval:ifc4.qto-opening-base",
+            "type": "propertyReference"
+          },
+          "height": {
+            "property": "axioval:ifc4.opening.height",
+            "propertySet": "axioval:ifc4.qto-opening-base",
+            "type": "propertyReference"
+          },
+          "tolerance_metres": {
+            "type": "number",
+            "value": 0.005
+          },
+          "width": {
+            "property": "axioval:ifc4.opening.width",
+            "propertySet": "axioval:ifc4.qto-opening-base",
+            "type": "propertyReference"
+          }
+        },
+        "severity": "error",
+        "tags": [
+          "geometry",
+          "qto"
+        ]
+      },
+      {
+        "applicability": {
+          "kind": "allOf",
+          "operands": [
+            {
+              "includeSubtypes": true,
+              "kind": "entityType",
+              "objectType": "axioval:ifc4.opening-element"
+            },
+            {
+              "code": "reserved-opening",
+              "includeDescendants": false,
+              "kind": "classification",
+              "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+            }
+          ]
+        },
+        "definitionId": "axioval:template.opening-has-service-or-fill",
+        "enabled": true,
+        "id": "opening-has-service-or-fill",
+        "message": {
+          "default": "Reserved opening has neither an associated service nor a filling element.",
+          "translations": {
+            "de": "Die reservierte Öffnung hat weder ein zugeordnetes TGA-Element noch ein Füllelement."
+          }
+        },
+        "name": {
+          "default": "Opening has service or filling",
+          "translations": {
+            "de": "Öffnung hat TGA-Element oder Füllung"
+          }
+        },
+        "parameters": {},
+        "severity": "error",
+        "tags": [
+          "relationship",
+          "orphan"
+        ]
+      },
+      {
+        "applicability": {
+          "kind": "allOf",
+          "operands": [
+            {
+              "includeSubtypes": true,
+              "kind": "entityType",
+              "objectType": "axioval:ifc4.opening-element"
+            },
+            {
+              "code": "fire-compartment-penetration",
+              "includeDescendants": false,
+              "kind": "classification",
+              "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+            }
+          ]
+        },
+        "definitionId": "axioval:template.boolean-property-equals",
+        "enabled": true,
+        "id": "fire-boundary-opening-protected",
+        "message": {
+          "default": "Fire-boundary opening is not marked ProtectedOpening=true.",
+          "translations": {
+            "de": "Öffnung in der Brandabschnittsgrenze ist nicht mit ProtectedOpening=true gekennzeichnet."
+          }
+        },
+        "name": {
+          "default": "Fire-boundary opening marked protected",
+          "translations": {
+            "de": "Öffnung in Brandabschnittsgrenze als geschützt gekennzeichnet"
+          }
+        },
+        "parameters": {
+          "expected": {
+            "type": "boolean",
+            "value": true
+          },
+          "property": {
+            "property": "axioval:ifc4.opening.protected",
+            "propertySet": "axioval:ifc4.pset-opening-common",
+            "type": "propertyReference"
+          }
+        },
+        "severity": "error",
+        "tags": [
+          "fire-safety",
+          "property"
+        ]
+      }
+    ]
+  },
+  "schemaVersion": "0.1.0"
+}

@@ -1,0 +1,521 @@
+{
+  "definitions": {
+    "axioval:fire.definition.boolean-property-equals": {
+      "capability": "axioval:capability.property-value-equals",
+      "description": {
+        "default": "Require an exact canonical boolean value.",
+        "translations": {
+          "de": "Fordert einen exakt aufgelösten kanonischen booleschen Wert."
+        }
+      },
+      "id": "axioval:fire.definition.boolean-property-equals",
+      "name": {
+        "default": "Boolean property equals",
+        "translations": {
+          "de": "Boolesche Eigenschaft entspricht"
+        }
+      },
+      "parameters": {
+        "expected": {
+          "allowedValues": [],
+          "id": "expected",
+          "kind": "boolean",
+          "name": {
+            "default": "Expected",
+            "translations": {
+              "de": "Erwartet"
+            }
+          },
+          "required": true
+        },
+        "property": {
+          "allowedValues": [],
+          "id": "property",
+          "kind": "propertyReference",
+          "name": {
+            "default": "Property",
+            "translations": {
+              "de": "Eigenschaft"
+            }
+          },
+          "referencedValueKind": "boolean",
+          "required": true
+        }
+      },
+      "tags": [
+        "property",
+        "fail-closed"
+      ]
+    },
+    "axioval:fire.definition.continuous-separation-surface": {
+      "capability": "axioval:capability.continuous-separation-surface",
+      "description": {
+        "default": "Require an exact continuous separating surface with no unprotected geometric gaps.",
+        "translations": {
+          "de": "Fordert eine exakt durchgängige Trennfläche ohne ungeschützte geometrische Lücken."
+        }
+      },
+      "id": "axioval:fire.definition.continuous-separation-surface",
+      "name": {
+        "default": "Continuous compartment boundary",
+        "translations": {
+          "de": "Durchgängige Brandabschnittsgrenze"
+        }
+      },
+      "parameters": {},
+      "tags": [
+        "geometry",
+        "topology",
+        "fail-closed"
+      ]
+    },
+    "axioval:fire.definition.minimum-clear-route-envelope": {
+      "capability": "axioval:capability.minimum-clear-route-envelope",
+      "description": {
+        "default": "Require a continuous exact route envelope with configured width and height.",
+        "translations": {
+          "de": "Fordert einen durchgehend exakt freien Wegquerschnitt mit festgelegter Breite und Höhe."
+        }
+      },
+      "id": "axioval:fire.definition.minimum-clear-route-envelope",
+      "name": {
+        "default": "Minimum clear route envelope",
+        "translations": {
+          "de": "Lichter Mindestwegquerschnitt"
+        }
+      },
+      "parameters": {
+        "height_metres": {
+          "allowedValues": [],
+          "id": "height_metres",
+          "kind": "number",
+          "name": {
+            "default": "Height in metres",
+            "translations": {
+              "de": "Höhe in Metern"
+            }
+          },
+          "required": true
+        },
+        "width_metres": {
+          "allowedValues": [],
+          "id": "width_metres",
+          "kind": "number",
+          "name": {
+            "default": "Width in metres",
+            "translations": {
+              "de": "Breite in Metern"
+            }
+          },
+          "required": true
+        }
+      },
+      "tags": [
+        "geometry",
+        "routing",
+        "fail-closed"
+      ]
+    },
+    "axioval:fire.definition.property-exists": {
+      "capability": "axioval:capability.property-exists",
+      "description": {
+        "default": "Require exact, non-conflicting property evidence.",
+        "translations": {
+          "de": "Fordert einen exakten, widerspruchsfreien Eigenschaftsnachweis."
+        }
+      },
+      "id": "axioval:fire.definition.property-exists",
+      "name": {
+        "default": "Required property exists",
+        "translations": {
+          "de": "Erforderliche Eigenschaft ist vorhanden"
+        }
+      },
+      "parameters": {
+        "property": {
+          "allowedValues": [],
+          "id": "property",
+          "kind": "propertyReference",
+          "name": {
+            "default": "Property",
+            "translations": {
+              "de": "Eigenschaft"
+            }
+          },
+          "required": true
+        }
+      },
+      "tags": [
+        "property",
+        "fail-closed"
+      ]
+    },
+    "axioval:fire.definition.rating-not-less-than-host": {
+      "capability": "axioval:capability.fire-rating-not-less-than-host",
+      "description": {
+        "default": "Compare parsed rating semantics across a penetration and its exact host relation.",
+        "translations": {
+          "de": "Vergleicht aufgelöste Feuerwiderstandsangaben über die exakte Beziehung zwischen Durchführung und Bauteil."
+        }
+      },
+      "id": "axioval:fire.definition.rating-not-less-than-host",
+      "name": {
+        "default": "Penetration rating not less than host",
+        "translations": {
+          "de": "Feuerwiderstand der Durchführung nicht geringer als beim Bauteil"
+        }
+      },
+      "parameters": {
+        "element_property": {
+          "allowedValues": [],
+          "id": "element_property",
+          "kind": "propertyReference",
+          "name": {
+            "default": "Penetration property",
+            "translations": {
+              "de": "Eigenschaft der Durchführung"
+            }
+          },
+          "referencedValueKind": "string",
+          "required": true
+        },
+        "host_property": {
+          "allowedValues": [],
+          "id": "host_property",
+          "kind": "propertyReference",
+          "name": {
+            "default": "Host property",
+            "translations": {
+              "de": "Eigenschaft des Bauteils"
+            }
+          },
+          "referencedValueKind": "string",
+          "required": true
+        }
+      },
+      "tags": [
+        "relation",
+        "property",
+        "fail-closed"
+      ]
+    }
+  },
+  "objectTypes": {
+    "axioval:fire.ifc4.door": {
+      "description": {
+        "default": "An IFC door occurrence.",
+        "translations": {
+          "de": "Ein IFC-Türvorkommen."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "IfcDoor",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.door",
+      "name": {
+        "default": "Door",
+        "translations": {
+          "de": "Tür"
+        }
+      }
+    },
+    "axioval:fire.ifc4.opening": {
+      "description": {
+        "default": "An IFC opening element.",
+        "translations": {
+          "de": "Ein IFC-Öffnungselement."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "IfcOpeningElement",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.opening",
+      "name": {
+        "default": "Opening",
+        "translations": {
+          "de": "Öffnung"
+        }
+      }
+    },
+    "axioval:fire.ifc4.slab": {
+      "description": {
+        "default": "An IFC slab occurrence.",
+        "translations": {
+          "de": "Ein IFC-Platten- oder Deckenvorkommen."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "IfcSlab",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.slab",
+      "name": {
+        "default": "Slab",
+        "translations": {
+          "de": "Decke oder Platte"
+        }
+      }
+    },
+    "axioval:fire.ifc4.wall": {
+      "description": {
+        "default": "An IFC wall occurrence.",
+        "translations": {
+          "de": "Ein IFC-Wandvorkommen."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "IfcWall",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.wall",
+      "name": {
+        "default": "Wall",
+        "translations": {
+          "de": "Wand"
+        }
+      }
+    }
+  },
+  "package": {
+    "authors": [
+      "Axioval contributors"
+    ],
+    "description": "English and German fire-safety definitions / Englisch- und deutschsprachige Brandschutzdefinitionen.",
+    "id": "axioval:specification.fire-safety.definitions",
+    "license": "AGPL-3.0-or-later",
+    "name": "Fire safety / Brandschutz",
+    "repository": "https://github.com/axioval/specifications",
+    "version": "0.1.0"
+  },
+  "properties": {
+    "axioval:fire.ifc4.compartmentation": {
+      "description": {
+        "default": "Whether the element is designed for compartmentation.",
+        "translations": {
+          "de": "Ob das Bauteil der Brandabschnittsbildung dient."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "Compartmentation",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.compartmentation",
+      "name": {
+        "default": "Compartmentation",
+        "translations": {
+          "de": "Brandabschnittsbildung"
+        }
+      },
+      "valueKind": "boolean"
+    },
+    "axioval:fire.ifc4.fire-exit": {
+      "description": {
+        "default": "IFC fire-exit intent.",
+        "translations": {
+          "de": "IFC-Kennzeichnung eines Notausgangs."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "FireExit",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.fire-exit",
+      "name": {
+        "default": "Fire exit",
+        "translations": {
+          "de": "Notausgang"
+        }
+      },
+      "valueKind": "boolean"
+    },
+    "axioval:fire.ifc4.fire-rating": {
+      "description": {
+        "default": "Published IFC FireRating label.",
+        "translations": {
+          "de": "Veröffentlichte IFC-Eigenschaft FireRating."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "FireRating",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.fire-rating",
+      "name": {
+        "default": "Fire rating",
+        "translations": {
+          "de": "Feuerwiderstandsklasse"
+        }
+      },
+      "valueKind": "string"
+    },
+    "axioval:fire.ifc4.protected-opening": {
+      "description": {
+        "default": "IFC protected-opening intent.",
+        "translations": {
+          "de": "IFC-Kennzeichnung einer geschützten Öffnung."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "ProtectedOpening",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.protected-opening",
+      "name": {
+        "default": "Protected opening",
+        "translations": {
+          "de": "Geschützte Öffnung"
+        }
+      },
+      "valueKind": "boolean"
+    },
+    "axioval:fire.ifc4.self-closing": {
+      "description": {
+        "default": "IFC self-closing intent.",
+        "translations": {
+          "de": "IFC-Kennzeichnung einer selbstschließenden Tür."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "SelfClosing",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.self-closing",
+      "name": {
+        "default": "Self-closing",
+        "translations": {
+          "de": "Selbstschließend"
+        }
+      },
+      "valueKind": "boolean"
+    },
+    "axioval:fire.ifc4.smoke-stop": {
+      "description": {
+        "default": "IFC smoke-stop intent.",
+        "translations": {
+          "de": "IFC-Kennzeichnung des Rauchschutzes."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "SmokeStop",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.smoke-stop",
+      "name": {
+        "default": "Smoke stop",
+        "translations": {
+          "de": "Rauchschutz"
+        }
+      },
+      "valueKind": "boolean"
+    }
+  },
+  "propertySets": {
+    "axioval:fire.ifc4.pset-door-common": {
+      "description": {
+        "default": "IFC4 Pset_DoorCommon.",
+        "translations": {
+          "de": "IFC4 Pset_DoorCommon."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "Pset_DoorCommon",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.pset-door-common",
+      "name": {
+        "default": "Door common properties",
+        "translations": {
+          "de": "Allgemeine Türeigenschaften"
+        }
+      }
+    },
+    "axioval:fire.ifc4.pset-opening-common": {
+      "description": {
+        "default": "IFC4 Pset_OpeningElementCommon.",
+        "translations": {
+          "de": "IFC4 Pset_OpeningElementCommon."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "Pset_OpeningElementCommon",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.pset-opening-common",
+      "name": {
+        "default": "Opening common properties",
+        "translations": {
+          "de": "Allgemeine Öffnungseigenschaften"
+        }
+      }
+    },
+    "axioval:fire.ifc4.pset-slab-common": {
+      "description": {
+        "default": "IFC4 Pset_SlabCommon.",
+        "translations": {
+          "de": "IFC4 Pset_SlabCommon."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "Pset_SlabCommon",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.pset-slab-common",
+      "name": {
+        "default": "Slab common properties",
+        "translations": {
+          "de": "Allgemeine Platteneigenschaften"
+        }
+      }
+    },
+    "axioval:fire.ifc4.pset-wall-common": {
+      "description": {
+        "default": "IFC4 Pset_WallCommon.",
+        "translations": {
+          "de": "IFC4 Pset_WallCommon."
+        }
+      },
+      "externalNames": [
+        {
+          "name": "Pset_WallCommon",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:fire.ifc4.pset-wall-common",
+      "name": {
+        "default": "Wall common properties",
+        "translations": {
+          "de": "Allgemeine Wandeigenschaften"
+        }
+      }
+    }
+  },
+  "schemaVersion": "0.1.0"
+}

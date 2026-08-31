@@ -1,0 +1,12 @@
+{
+  "$schema": "../../vendor/schema/schema/registry-manifest.schema.json",
+  "manifestVersion": "0.1.0",
+  "kind": "ruleset",
+  "id": "axioval:specification.fire-safety",
+  "version": "0.1.0",
+  "schemaVersion": "0.1.0",
+  "entrypoint": "ruleset.pkl",
+  "definitionEntrypoints": ["definitions.pkl"],
+  "description": "Bilingual fire-safety coordination and geometry rules.",
+  "license": "AGPL-3.0-or-later"
+}

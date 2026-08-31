@@ -1,0 +1,416 @@
+{
+  "definitionPackages": [
+    "axioval:specification.accessibility-din-18040-1.definitions"
+  ],
+  "package": {
+    "authors": [
+      "Axioval contributors"
+    ],
+    "description": "English and German DIN 18040-1 focused geometric requirements / Englisch- und deutschsprachige geometrische Anforderungen mit Schwerpunkt DIN 18040-1.",
+    "id": "axioval:specification.accessibility-din-18040-1",
+    "license": "AGPL-3.0-or-later",
+    "name": "Accessibility / Barrierefreiheit — DIN 18040-1",
+    "repository": "https://github.com/axioval/specifications",
+    "version": "0.1.0"
+  },
+  "root": {
+    "description": {
+      "default": "DIN 18040-1 focused movement and opening checks.",
+      "translations": {
+        "de": "Prüfungen für Bewegungsflächen und Öffnungen mit Schwerpunkt DIN 18040-1."
+      }
+    },
+    "folders": [
+      {
+        "description": {
+          "default": "Encounter, turning, and maneuvering cases from DIN 18040-1 clause 4.3.2.",
+          "translations": {
+            "de": "Begegnungs-, Richtungswechsel- und Rangiervorgänge nach DIN 18040-1 Abschnitt 4.3.2."
+          }
+        },
+        "folders": [],
+        "id": "movement-areas",
+        "name": {
+          "default": "Movement areas",
+          "translations": {
+            "de": "Bewegungsflächen"
+          }
+        },
+        "rules": [
+          {
+            "applicability": {
+              "kind": "allOf",
+              "operands": [
+                {
+                  "includeSubtypes": true,
+                  "kind": "entityType",
+                  "objectType": "axioval:ifc4.space"
+                },
+                {
+                  "code": "movement-area.meeting-two-wheelchairs",
+                  "includeDescendants": false,
+                  "kind": "classification",
+                  "system": "DIN 18040-1:2010-10 / Axioval applicability profile"
+                }
+              ]
+            },
+            "definitionId": "axioval:definition.free-floor-rectangle",
+            "description": {
+              "default": "Require a 1.80 m by 1.80 m unobstructed movement area where this encounter case is assigned.",
+              "translations": {
+                "de": "Fordert eine hindernisfreie Bewegungsfläche von 1,80 m × 1,80 m, wenn dieser Begegnungsfall zugewiesen ist."
+              }
+            },
+            "enabled": true,
+            "id": "meeting-two-wheelchairs-1800",
+            "message": {
+              "default": "No exact 1.80 m × 1.80 m free movement area was proven.",
+              "translations": {
+                "de": "Eine freie Bewegungsfläche von 1,80 m × 1,80 m wurde nicht exakt nachgewiesen."
+              }
+            },
+            "name": {
+              "default": "Two wheelchair users can meet",
+              "translations": {
+                "de": "Begegnung zweier Rollstuhlnutzer"
+              }
+            },
+            "parameters": {
+              "height_metres": {
+                "type": "number",
+                "value": 2.0
+              },
+              "length_metres": {
+                "type": "number",
+                "value": 1.8
+              },
+              "width_metres": {
+                "type": "number",
+                "value": 1.8
+              }
+            },
+            "severity": "error",
+            "tags": [
+              "din-18040-1",
+              "4.3.2",
+              "geometry"
+            ]
+          },
+          {
+            "applicability": {
+              "kind": "allOf",
+              "operands": [
+                {
+                  "includeSubtypes": true,
+                  "kind": "entityType",
+                  "objectType": "axioval:ifc4.space"
+                },
+                {
+                  "code": "movement-area.meeting-wheelchair-person",
+                  "includeDescendants": false,
+                  "kind": "classification",
+                  "system": "DIN 18040-1:2010-10 / Axioval applicability profile"
+                }
+              ]
+            },
+            "definitionId": "axioval:definition.free-floor-rectangle",
+            "description": {
+              "default": "Require a 1.50 m by 1.50 m unobstructed movement area where this encounter case is assigned.",
+              "translations": {
+                "de": "Fordert eine hindernisfreie Bewegungsfläche von 1,50 m × 1,50 m, wenn dieser Begegnungsfall zugewiesen ist."
+              }
+            },
+            "enabled": true,
+            "id": "meeting-wheelchair-person-1500",
+            "message": {
+              "default": "No exact 1.50 m × 1.50 m free encounter area was proven.",
+              "translations": {
+                "de": "Eine freie Begegnungsfläche von 1,50 m × 1,50 m wurde nicht exakt nachgewiesen."
+              }
+            },
+            "name": {
+              "default": "Wheelchair user and another person can meet",
+              "translations": {
+                "de": "Begegnung eines Rollstuhlnutzers mit einer anderen Person"
+              }
+            },
+            "parameters": {
+              "height_metres": {
+                "type": "number",
+                "value": 2.0
+              },
+              "length_metres": {
+                "type": "number",
+                "value": 1.5
+              },
+              "width_metres": {
+                "type": "number",
+                "value": 1.5
+              }
+            },
+            "severity": "error",
+            "tags": [
+              "din-18040-1",
+              "4.3.2",
+              "geometry"
+            ]
+          },
+          {
+            "applicability": {
+              "kind": "allOf",
+              "operands": [
+                {
+                  "includeSubtypes": true,
+                  "kind": "entityType",
+                  "objectType": "axioval:ifc4.space"
+                },
+                {
+                  "code": "movement-area.turning-maneuvering",
+                  "includeDescendants": false,
+                  "kind": "classification",
+                  "system": "DIN 18040-1:2010-10 / Axioval applicability profile"
+                }
+              ]
+            },
+            "definitionId": "axioval:definition.free-floor-rectangle",
+            "description": {
+              "default": "Require a 1.50 m by 1.50 m unobstructed movement area where turning or maneuvering is assigned.",
+              "translations": {
+                "de": "Fordert eine hindernisfreie Bewegungsfläche von 1,50 m × 1,50 m, wenn Richtungswechsel oder Rangiervorgänge zugewiesen sind."
+              }
+            },
+            "enabled": true,
+            "id": "turning-maneuvering-1500",
+            "message": {
+              "default": "No exact 1.50 m × 1.50 m turning area was proven.",
+              "translations": {
+                "de": "Eine freie Wendefläche von 1,50 m × 1,50 m wurde nicht exakt nachgewiesen."
+              }
+            },
+            "name": {
+              "default": "Wheelchair turning and maneuvering",
+              "translations": {
+                "de": "Richtungswechsel und Rangiervorgänge"
+              }
+            },
+            "parameters": {
+              "height_metres": {
+                "type": "number",
+                "value": 2.0
+              },
+              "length_metres": {
+                "type": "number",
+                "value": 1.5
+              },
+              "width_metres": {
+                "type": "number",
+                "value": 1.5
+              }
+            },
+            "severity": "error",
+            "tags": [
+              "din-18040-1",
+              "4.3.2",
+              "geometry"
+            ]
+          }
+        ]
+      },
+      {
+        "description": {
+          "default": "Straight route segments and accessible door apertures.",
+          "translations": {
+            "de": "Geradlinige Wegabschnitte und barrierefreie Türöffnungen."
+          }
+        },
+        "folders": [],
+        "id": "routes-and-openings",
+        "name": {
+          "default": "Routes and openings",
+          "translations": {
+            "de": "Wege und Öffnungen"
+          }
+        },
+        "rules": [
+          {
+            "applicability": {
+              "kind": "allOf",
+              "operands": [
+                {
+                  "kind": "anyOf",
+                  "operands": [
+                    {
+                      "includeSubtypes": true,
+                      "kind": "entityType",
+                      "objectType": "axioval:ifc4.space"
+                    },
+                    {
+                      "includeSubtypes": true,
+                      "kind": "entityType",
+                      "objectType": "axioval:ifc4.ramp"
+                    }
+                  ]
+                },
+                {
+                  "code": "route.straight-no-direction-change-or-encounter",
+                  "includeDescendants": false,
+                  "kind": "classification",
+                  "system": "DIN 18040-1:2010-10 / Axioval applicability profile"
+                }
+              ]
+            },
+            "definitionId": "axioval:definition.minimum-clear-route",
+            "description": {
+              "default": "Apply only where neither a direction change nor an encounter is expected.",
+              "translations": {
+                "de": "Nur anwenden, wenn weder ein Richtungswechsel noch eine Begegnung zu erwarten ist."
+              }
+            },
+            "enabled": true,
+            "id": "straight-route-1200",
+            "message": {
+              "default": "A continuous exact clear route width of 1.20 m was not proven.",
+              "translations": {
+                "de": "Eine durchgehend exakt lichte Wegbreite von 1,20 m wurde nicht nachgewiesen."
+              }
+            },
+            "name": {
+              "default": "Straight route segment has 1.20 m clear width",
+              "translations": {
+                "de": "Geradliniger Wegabschnitt hat 1,20 m lichte Breite"
+              }
+            },
+            "parameters": {
+              "width_metres": {
+                "type": "number",
+                "value": 1.2
+              }
+            },
+            "severity": "error",
+            "tags": [
+              "din-18040-1",
+              "4.3.2",
+              "routing"
+            ]
+          },
+          {
+            "applicability": {
+              "kind": "allOf",
+              "operands": [
+                {
+                  "includeSubtypes": true,
+                  "kind": "entityType",
+                  "objectType": "axioval:ifc4.door"
+                },
+                {
+                  "code": "accessible-door",
+                  "includeDescendants": false,
+                  "kind": "classification",
+                  "system": "DIN 18040-1:2010-10 / Axioval applicability profile"
+                }
+              ]
+            },
+            "definitionId": "axioval:definition.minimum-clear-opening",
+            "description": {
+              "default": "Check the passable aperture, not Qto_DoorBaseQuantities.Width or nominal leaf width.",
+              "translations": {
+                "de": "Prüft die passierbare Öffnung und nicht Qto_DoorBaseQuantities.Width oder die Nennbreite des Türblatts."
+              }
+            },
+            "enabled": true,
+            "id": "accessible-door-clear-opening-900",
+            "message": {
+              "default": "An exact clear door opening of 0.90 m was not proven.",
+              "translations": {
+                "de": "Eine exakt lichte Türöffnung von 0,90 m wurde nicht nachgewiesen."
+              }
+            },
+            "name": {
+              "default": "Accessible door has 0.90 m clear opening",
+              "translations": {
+                "de": "Barrierefreie Tür hat 0,90 m lichte Öffnung"
+              }
+            },
+            "parameters": {
+              "width_metres": {
+                "type": "number",
+                "value": 0.9
+              }
+            },
+            "severity": "error",
+            "tags": [
+              "din-18040-1",
+              "4.6",
+              "opening"
+            ]
+          },
+          {
+            "applicability": {
+              "kind": "allOf",
+              "operands": [
+                {
+                  "includeSubtypes": true,
+                  "kind": "entityType",
+                  "objectType": "axioval:ifc4.door"
+                },
+                {
+                  "code": "accessible-door",
+                  "includeDescendants": false,
+                  "kind": "classification",
+                  "system": "DIN 18040-1:2010-10 / Axioval applicability profile"
+                }
+              ]
+            },
+            "definitionId": "axioval:definition.boolean-property-equals",
+            "description": {
+              "default": "Require Pset_DoorCommon.HandicapAccessible = TRUE on doors assigned to the accessible route.",
+              "translations": {
+                "de": "Fordert Pset_DoorCommon.HandicapAccessible = TRUE für Türen des barrierefreien Wegs."
+              }
+            },
+            "enabled": true,
+            "id": "accessible-door-intent",
+            "message": {
+              "default": "The exact accessible-door property was missing, conflicting, or false.",
+              "translations": {
+                "de": "Die exakte Eigenschaft für eine barrierefreie Tür fehlte, war widersprüchlich oder falsch."
+              }
+            },
+            "name": {
+              "default": "Accessible door carries accessibility intent",
+              "translations": {
+                "de": "Barrierefreie Tür trägt die Barrierefreiheitskennzeichnung"
+              }
+            },
+            "parameters": {
+              "expected": {
+                "type": "boolean",
+                "value": true
+              },
+              "property": {
+                "property": "axioval:ifc4.handicap-accessible",
+                "propertySet": "axioval:ifc4.pset-door-common",
+                "type": "propertyReference"
+              }
+            },
+            "severity": "error",
+            "tags": [
+              "ifc4",
+              "property",
+              "accessibility"
+            ]
+          }
+        ]
+      }
+    ],
+    "id": "accessibility-din-18040-1",
+    "name": {
+      "default": "Accessibility",
+      "translations": {
+        "de": "Barrierefreiheit"
+      }
+    },
+    "rules": []
+  },
+  "schemaVersion": "0.1.0"
+}

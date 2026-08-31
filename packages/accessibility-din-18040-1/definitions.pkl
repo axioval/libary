@@ -1,0 +1,106 @@
+amends "../../vendor/schema/schema/Definitions.pkl"
+
+import "../../vendor/schema/schema/Types.pkl"
+import "../../vendor/schema/schema/Definitions.pkl"
+
+local function text(en: String, de: String): Types.LocalizedText = new Types.LocalizedText {
+  default = en
+  translations { ["de"] = de }
+}
+local ifc4 = "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+
+package = new Types.PackageMetadata {
+  id = "axioval:specification.accessibility-din-18040-1.definitions"
+  version = "0.1.0"
+  name = "Accessibility / Barrierefreiheit — DIN 18040-1"
+  description = "English and German reusable accessibility rule definitions / Wiederverwendbare barrierefreie Regeldefinitionen."
+  repository = "https://github.com/axioval/specifications"
+  license = "AGPL-3.0-or-later"
+  authors { "Axioval contributors" }
+}
+
+objectTypes {
+  ["axioval:ifc4.space"] = new Definitions.ObjectTypeDefinition {
+    id = "axioval:ifc4.space"
+    name = text("Space", "Raum")
+    description = text("An IFC spatial area.", "Ein räumlicher IFC-Bereich.")
+    externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "IfcSpace" } }
+  }
+  ["axioval:ifc4.door"] = new Definitions.ObjectTypeDefinition {
+    id = "axioval:ifc4.door"
+    name = text("Door", "Tür")
+    description = text("An IFC door occurrence.", "Ein IFC-Türvorkommen.")
+    externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "IfcDoor" } }
+  }
+  ["axioval:ifc4.ramp"] = new Definitions.ObjectTypeDefinition {
+    id = "axioval:ifc4.ramp"
+    name = text("Ramp", "Rampe")
+    description = text("An IFC ramp occurrence.", "Ein IFC-Rampenvorkommen.")
+    externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "IfcRamp" } }
+  }
+}
+
+properties {
+  ["axioval:ifc4.handicap-accessible"] = new Definitions.PropertyDefinition {
+    id = "axioval:ifc4.handicap-accessible"
+    name = text("Accessible", "Barrierefrei")
+    description = text("IFC accessibility intent flag.", "IFC-Kennzeichen für die vorgesehene Barrierefreiheit.")
+    valueKind = "boolean"
+    externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "HandicapAccessible" } }
+  }
+}
+
+propertySets {
+  ["axioval:ifc4.pset-door-common"] = new Definitions.PropertySetDefinition {
+    id = "axioval:ifc4.pset-door-common"
+    name = text("Door common properties", "Allgemeine Türeigenschaften")
+    description = text("IFC4 Pset_DoorCommon.", "IFC4 Pset_DoorCommon.")
+    externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "Pset_DoorCommon" } }
+  }
+}
+
+definitions {
+  ["axioval:definition.free-floor-rectangle"] = new Definitions.RuleDefinition {
+    id = "axioval:definition.free-floor-rectangle"
+    name = text("Free rectangular movement area", "Freie rechteckige Bewegungsfläche")
+    description = text("Require an exact unobstructed floor rectangle inside each selected spatial scope.", "Fordert in jedem ausgewählten räumlichen Bereich eine exakt nachgewiesene, hindernisfreie rechteckige Bodenfläche.")
+    capability = "axioval:capability.free-floor-rectangle"
+    tags { "geometry"; "accessibility"; "fail-closed" }
+    parameters {
+      ["width_metres"] = new Definitions.ParameterDefinition { id = "width_metres"; name = text("Width in metres", "Breite in Metern"); kind = "number" }
+      ["length_metres"] = new Definitions.ParameterDefinition { id = "length_metres"; name = text("Length in metres", "Länge in Metern"); kind = "number" }
+      ["height_metres"] = new Definitions.ParameterDefinition { id = "height_metres"; name = text("Conservative evaluation height in metres", "Konservative Prüfhöhe in Metern"); kind = "number" }
+    }
+  }
+  ["axioval:definition.minimum-clear-route"] = new Definitions.RuleDefinition {
+    id = "axioval:definition.minimum-clear-route"
+    name = text("Minimum continuous clear route", "Durchgehend freie Mindestwegbreite")
+    description = text("Require an exact continuous route with the configured clear width.", "Fordert einen exakt nachgewiesenen durchgehenden Weg mit der festgelegten lichten Breite.")
+    capability = "axioval:capability.minimum-clear-route"
+    tags { "geometry"; "routing"; "fail-closed" }
+    parameters {
+      ["width_metres"] = new Definitions.ParameterDefinition { id = "width_metres"; name = text("Clear width in metres", "Lichte Breite in Metern"); kind = "number" }
+    }
+  }
+  ["axioval:definition.minimum-clear-opening"] = new Definitions.RuleDefinition {
+    id = "axioval:definition.minimum-clear-opening"
+    name = text("Minimum clear opening", "Lichte Mindestöffnung")
+    description = text("Require the exact passable aperture, not the nominal element width, to meet the threshold.", "Fordert, dass die exakt passierbare Öffnung und nicht die Nennbreite des Bauteils den Grenzwert erfüllt.")
+    capability = "axioval:capability.minimum-clear-opening"
+    tags { "geometry"; "opening"; "fail-closed" }
+    parameters {
+      ["width_metres"] = new Definitions.ParameterDefinition { id = "width_metres"; name = text("Clear width in metres", "Lichte Breite in Metern"); kind = "number" }
+    }
+  }
+  ["axioval:definition.boolean-property-equals"] = new Definitions.RuleDefinition {
+    id = "axioval:definition.boolean-property-equals"
+    name = text("Boolean property equals", "Boolesche Eigenschaft entspricht")
+    description = text("Require an exact canonical boolean property value.", "Fordert einen exakt aufgelösten kanonischen booleschen Eigenschaftswert.")
+    capability = "axioval:capability.property-value-equals"
+    tags { "property"; "fail-closed" }
+    parameters {
+      ["property"] = new Definitions.ParameterDefinition { id = "property"; name = text("Property", "Eigenschaft"); kind = "propertyReference"; referencedValueKind = "boolean" }
+      ["expected"] = new Definitions.ParameterDefinition { id = "expected"; name = text("Expected value", "Erwarteter Wert"); kind = "boolean" }
+    }
+  }
+}

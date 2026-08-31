@@ -1,0 +1,35 @@
+amends "../../vendor/schema/schema/RuleSets.pkl"
+import "../../vendor/schema/schema/Types.pkl"
+import "../../vendor/schema/schema/Values.pkl"
+import "../../vendor/schema/schema/Selectors.pkl"
+import "../../vendor/schema/schema/RuleSets.pkl"
+local function text(en: String, de: String): Types.LocalizedText = new Types.LocalizedText { default = en; translations { ["de"] = de } }
+local function classified(classificationCode: String): Selectors.ClassificationSelector = new Selectors.ClassificationSelector { system = "Axioval opening coordination / Schlitz- und Durchbruchsplanung"; code = classificationCode }
+local isOpening = new Selectors.EntityTypeSelector { objectType = "axioval:ifc4.opening-element" }
+local function scoped(classificationCode: String): Selectors.AllOfSelector = new Selectors.AllOfSelector { operands { isOpening; classified(classificationCode) } }
+package = new Types.PackageMetadata { id = "axioval:specification.openings-penetrations"; version = "0.1.0"; name = "Openings and penetrations / Schlitz- und Durchbruchsplanung"; description = "Bilingual coordination rules / Zweisprachige Koordinationsregeln."; repository = "https://github.com/axioval/specifications"; license = "AGPL-3.0-or-later"; authors { "Axioval contributors" } }
+definitionPackages { "axioval:specification.openings-penetrations.definitions" }
+root = new RuleSets.RuleFolder {
+  id = "openings-penetrations"
+  name = text("Openings and penetrations", "Schlitz- und Durchbruchsplanung")
+  description = text("Geometry and relationship coordination checks.", "Geometrie- und Beziehungsprüfungen für die Koordination.")
+  rules {
+    new RuleSets.RuleInstance { id = "opening-cuts-host"; definitionId = "axioval:template.opening-fully-cuts-host"; name = text("Opening fully cuts its host", "Öffnung durchdringt ihr Bauteil vollständig"); message = text("Reserved opening does not fully cut the associated host.", "Die reservierte Öffnung durchdringt das zugeordnete Bauteil nicht vollständig."); applicability = scoped("reserved-opening"); tags { "geometry"; "host" } }
+    new RuleSets.RuleInstance { id = "service-fits-with-25mm-allowance"; definitionId = "axioval:template.service-contained-in-opening"; name = text("Service fits with 25 mm allowance", "TGA-Element passt mit 25 mm Montagezugabe"); message = text("Service envelope plus project allowance is not contained in the opening.", "TGA-Hüllkörper zuzüglich Projektzugabe liegt nicht vollständig in der Öffnung."); parameters {
+      ["side_clearance_metres"] = new Values.NumberValue { value = 0.025 }
+      ["end_clearance_metres"] = new Values.NumberValue { value = 0.025 }
+    }; applicability = scoped("service-penetration"); tags { "geometry"; "allowance"; "project-policy" } }
+    new RuleSets.RuleInstance { id = "no-host-clash-outside-opening"; definitionId = "axioval:template.no-host-clash-outside-opening"; name = text("No host clash outside opening", "Keine Bauteilkollision außerhalb der Öffnung"); message = text("Service intersects the host outside the reserved opening.", "Das TGA-Element schneidet das Bauteil außerhalb der reservierten Öffnung."); applicability = scoped("service-penetration"); tags { "geometry"; "clash" } }
+    new RuleSets.RuleInstance { id = "opening-quantities-match-geometry"; definitionId = "axioval:template.opening-quantities-match-geometry"; name = text("Opening quantities match geometry", "Öffnungsmengen stimmen mit Geometrie überein"); message = text("Published IFC4 opening dimensions differ from exact geometry by more than 5 mm.", "Veröffentlichte IFC4-Öffnungsmaße weichen um mehr als 5 mm von der exakten Geometrie ab."); parameters {
+      ["width"] = new Values.PropertyReferenceValue { property = "axioval:ifc4.opening.width"; propertySet = "axioval:ifc4.qto-opening-base" }
+      ["height"] = new Values.PropertyReferenceValue { property = "axioval:ifc4.opening.height"; propertySet = "axioval:ifc4.qto-opening-base" }
+      ["depth"] = new Values.PropertyReferenceValue { property = "axioval:ifc4.opening.depth"; propertySet = "axioval:ifc4.qto-opening-base" }
+      ["tolerance_metres"] = new Values.NumberValue { value = 0.005 }
+    }; applicability = scoped("reserved-opening"); tags { "geometry"; "qto" } }
+    new RuleSets.RuleInstance { id = "opening-has-service-or-fill"; definitionId = "axioval:template.opening-has-service-or-fill"; name = text("Opening has service or filling", "Öffnung hat TGA-Element oder Füllung"); message = text("Reserved opening has neither an associated service nor a filling element.", "Die reservierte Öffnung hat weder ein zugeordnetes TGA-Element noch ein Füllelement."); applicability = scoped("reserved-opening"); tags { "relationship"; "orphan" } }
+    new RuleSets.RuleInstance { id = "fire-boundary-opening-protected"; definitionId = "axioval:template.boolean-property-equals"; name = text("Fire-boundary opening marked protected", "Öffnung in Brandabschnittsgrenze als geschützt gekennzeichnet"); message = text("Fire-boundary opening is not marked ProtectedOpening=true.", "Öffnung in der Brandabschnittsgrenze ist nicht mit ProtectedOpening=true gekennzeichnet."); parameters {
+      ["property"] = new Values.PropertyReferenceValue { property = "axioval:ifc4.opening.protected"; propertySet = "axioval:ifc4.pset-opening-common" }
+      ["expected"] = new Values.BooleanValue { value = true }
+    }; applicability = scoped("fire-compartment-penetration"); severity = "error"; tags { "fire-safety"; "property" } }
+  }
+}
