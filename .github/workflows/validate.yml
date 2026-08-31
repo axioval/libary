@@ -19,4 +19,4 @@ jobs:
         with:
           pkl-version: 0.32.1
       - run: ./scripts/check.sh
-      - run: npx --yes markdownlint-cli2@0.18.1
+      - run: npx --yes markdownlint-cli2@0.18.1 "**/*.md" "#vendor/**"
