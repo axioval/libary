@@ -15,7 +15,7 @@ package = new Types.PackageMetadata {
   version = "0.1.0"
   name = text("Accessibility definitions — DIN 18040-1", "Definitionen zur Barrierefreiheit — DIN 18040-1")
   description = text("Reusable accessibility rule definitions.", "Wiederverwendbare Regeldefinitionen zur Barrierefreiheit.")
-  repository = "https://github.com/axioval/specifications"
+  repository = "https://github.com/axioval/libary"
   license = "AGPL-3.0-or-later"
   authors { "Axioval contributors" }
 }

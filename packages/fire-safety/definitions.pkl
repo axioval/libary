@@ -15,7 +15,7 @@ package = new Types.PackageMetadata {
   version = "0.1.0"
   name = text("Fire-safety definitions", "Brandschutzdefinitionen")
   description = text("Reusable fire-safety definitions.", "Wiederverwendbare Brandschutzdefinitionen.")
-  repository = "https://github.com/axioval/specifications"
+  repository = "https://github.com/axioval/libary"
   license = "AGPL-3.0-or-later"
   authors { "Axioval contributors" }
 }

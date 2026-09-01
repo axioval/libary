@@ -1,13 +1,13 @@
 # Axioval specifications
 
-This repository owns concrete, vendor-neutral rule definition packages and rulesets. It consumes the canonical Axioval schema from `vendor/schema` and must not add executable package code or privileged trust.
+This repository owns concrete, vendor-neutral rule definition packages and rulesets. It consumes the canonical Axioval MCS schema from `vendor/schema` and must not add executable package code or privileged trust.
 
 ## Layout
 
 - `packages/` contains independently installable discipline rulesets. Every package has its own manifest, definitions, rules, and generated JSON snapshots.
-- `scripts/` validates all packages with the pinned schema binder.
-- `tests/` enforces localization, source citation, repository structure, and fail-closed authoring contracts.
-- `vendor/schema` is a pinned Git submodule. Do not copy schema modules into this repository.
+- `scripts/` validates all packages with the pinned MCS binder and atomically builds verified `.mcs` release artifacts plus `SHA256SUMS`.
+- `tests/` enforces localization, source citation, repository structure, fail-closed authoring contracts, and release-artifact discovery.
+- `vendor/schema` is the intentionally stable checkout path for the pinned `axioval/mcs` submodule. Do not copy schema modules into this repository.
 
 ## Rules
 

@@ -19,4 +19,13 @@ jobs:
         with:
           pkl-version: 0.32.1
       - run: ./scripts/check.sh
+      - run: python3 scripts/build_mcs.py
+      - name: Upload MCS packages
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: mcs-${{ github.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
       - run: npx --yes markdownlint-cli2@0.18.1 "**/*.md" "#vendor/**"

@@ -13,8 +13,17 @@ The packages contain concrete policy data, not executable code. Geometric checks
 ## Use
 
 ```bash
-git clone --recurse-submodules https://github.com/axioval/specifications.git
+git clone --recurse-submodules https://github.com/axioval/libary.git
 PATH="$HOME/.local/bin:$PATH" ./scripts/check.sh
+python3 scripts/build_mcs.py
 ```
+
+The builder writes one deterministic, verified `.mcs` archive per package plus
+`dist/SHA256SUMS`. CI keeps these as short-lived artifacts. A release tag must be
+exactly `v<SemVer>`, and that version must equal every package manifest version.
+The release workflow creates or resumes a draft, uploads the complete asset set,
+attests the listed checksums, and only then publishes the immutable
+[GitHub Release](https://github.com/axioval/libary/releases). Generated archives
+are never committed.
 
 See each package README for scope, model prerequisites, and standards references.
