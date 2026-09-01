@@ -224,6 +224,36 @@
           "de": "Öffnungselement"
         }
       }
+    },
+    "axioval:ifc4.slab": {
+      "externalNames": [
+        {
+          "name": "IfcSlab",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.slab",
+      "name": {
+        "default": "Slab",
+        "translations": {
+          "de": "Decke oder Bodenplatte"
+        }
+      }
+    },
+    "axioval:ifc4.wall": {
+      "externalNames": [
+        {
+          "name": "IfcWall",
+          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
+      "id": "axioval:ifc4.wall",
+      "name": {
+        "default": "Wall",
+        "translations": {
+          "de": "Wand"
+        }
+      }
     }
   },
   "package": {

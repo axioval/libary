@@ -62,6 +62,7 @@
               }
             },
             "enabled": true,
+            "explanatoryImages": [],
             "id": "meeting-two-wheelchairs-1800",
             "message": {
               "default": "No exact 1.80 m × 1.80 m free movement area was proven.",
@@ -89,6 +90,7 @@
                 "value": 1.8
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "din-18040-1",
@@ -121,6 +123,7 @@
               }
             },
             "enabled": true,
+            "explanatoryImages": [],
             "id": "meeting-wheelchair-person-1500",
             "message": {
               "default": "No exact 1.50 m × 1.50 m free encounter area was proven.",
@@ -148,6 +151,7 @@
                 "value": 1.5
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "din-18040-1",
@@ -180,6 +184,7 @@
               }
             },
             "enabled": true,
+            "explanatoryImages": [],
             "id": "turning-maneuvering-1500",
             "message": {
               "default": "No exact 1.50 m × 1.50 m turning area was proven.",
@@ -207,6 +212,7 @@
                 "value": 1.5
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "din-18040-1",
@@ -267,6 +273,7 @@
               }
             },
             "enabled": true,
+            "explanatoryImages": [],
             "id": "straight-route-1200",
             "message": {
               "default": "A continuous exact clear route width of 1.20 m was not proven.",
@@ -286,6 +293,7 @@
                 "value": 1.2
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "din-18040-1",
@@ -318,6 +326,7 @@
               }
             },
             "enabled": true,
+            "explanatoryImages": [],
             "id": "accessible-door-clear-opening-900",
             "message": {
               "default": "An exact clear door opening of 0.90 m was not proven.",
@@ -337,6 +346,7 @@
                 "value": 0.9
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "din-18040-1",
@@ -369,6 +379,7 @@
               }
             },
             "enabled": true,
+            "explanatoryImages": [],
             "id": "accessible-door-intent",
             "message": {
               "default": "The exact accessible-door property was missing, conflicting, or false.",
@@ -393,6 +404,7 @@
                 "type": "propertyReference"
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "ifc4",

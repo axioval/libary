@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title description">
+  <title id="title">Target groups for opening and penetration coordination</title>
+  <desc id="description">A wall or slab is penetrated, a pipe penetrates it, and an opening reserves the required clear space.</desc>
+  <rect width="1200" height="680" rx="28" fill="#f8fafc"/>
+  <text x="64" y="72" fill="#0f172a" font-family="system-ui, sans-serif" font-size="34" font-weight="700">Schlitz- und Durchbruchsplanung</text>
+  <text x="64" y="108" fill="#475569" font-family="system-ui, sans-serif" font-size="22">Targetable applicability groups / Adressierbare Anwendbarkeitsgruppen</text>
+
+  <rect x="64" y="150" width="330" height="450" rx="22" fill="#e2e8f0" stroke="#64748b" stroke-width="3"/>
+  <circle cx="105" cy="193" r="17" fill="#475569"/>
+  <text x="105" y="200" text-anchor="middle" fill="white" font-family="system-ui, sans-serif" font-size="18" font-weight="700">1</text>
+  <text x="137" y="198" fill="#0f172a" font-family="system-ui, sans-serif" font-size="23" font-weight="700">Durchdrungene Bauteile</text>
+  <text x="137" y="228" fill="#475569" font-family="system-ui, sans-serif" font-size="19">Penetrated elements</text>
+  <path d="M112 290 H346 V520 H112 Z" fill="#cbd5e1" stroke="#475569" stroke-width="4"/>
+  <path d="M112 290 L158 254 H392 L346 290 Z" fill="#e2e8f0" stroke="#475569" stroke-width="4"/>
+  <path d="M346 290 L392 254 V484 L346 520 Z" fill="#94a3b8" stroke="#475569" stroke-width="4"/>
+  <ellipse cx="346" cy="402" rx="53" ry="67" fill="#f8fafc" stroke="#475569" stroke-width="4" stroke-dasharray="10 8"/>
+  <text x="229" y="563" text-anchor="middle" fill="#334155" font-family="system-ui, sans-serif" font-size="20">Wand, Decke / Wall, slab</text>
+
+  <rect x="435" y="150" width="330" height="450" rx="22" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+  <circle cx="476" cy="193" r="17" fill="#2563eb"/>
+  <text x="476" y="200" text-anchor="middle" fill="white" font-family="system-ui, sans-serif" font-size="18" font-weight="700">2</text>
+  <text x="508" y="198" fill="#0f172a" font-family="system-ui, sans-serif" font-size="23" font-weight="700">Durchdringende Elemente</text>
+  <text x="508" y="228" fill="#475569" font-family="system-ui, sans-serif" font-size="19">Penetrating elements</text>
+  <path d="M487 421 H714" stroke="#1d4ed8" stroke-width="78" stroke-linecap="round"/>
+  <path d="M487 421 H714" stroke="#93c5fd" stroke-width="54" stroke-linecap="round"/>
+  <ellipse cx="487" cy="421" rx="27" ry="38" fill="#bfdbfe" stroke="#1d4ed8" stroke-width="4"/>
+  <path d="M520 322 H680" stroke="#1d4ed8" stroke-width="4" stroke-dasharray="12 8"/>
+  <path d="M520 322 L544 309 V335 Z" fill="#1d4ed8"/>
+  <path d="M680 322 L656 309 V335 Z" fill="#1d4ed8"/>
+  <text x="600" y="300" text-anchor="middle" fill="#1e40af" font-family="system-ui, sans-serif" font-size="19">Rohr + Hüllkörper / Pipe + envelope</text>
+  <text x="600" y="563" text-anchor="middle" fill="#1e40af" font-family="system-ui, sans-serif" font-size="20">TGA-Element / Service</text>
+
+  <rect x="806" y="150" width="330" height="450" rx="22" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+  <circle cx="847" cy="193" r="17" fill="#16a34a"/>
+  <text x="847" y="200" text-anchor="middle" fill="white" font-family="system-ui, sans-serif" font-size="18" font-weight="700">3</text>
+  <text x="879" y="198" fill="#0f172a" font-family="system-ui, sans-serif" font-size="23" font-weight="700">Öffnungen</text>
+  <text x="879" y="228" fill="#475569" font-family="system-ui, sans-serif" font-size="19">Openings</text>
+  <rect x="862" y="291" width="218" height="223" rx="42" fill="#f0fdf4" stroke="#15803d" stroke-width="5" stroke-dasharray="13 9"/>
+  <ellipse cx="971" cy="402" rx="61" ry="77" fill="#bbf7d0" stroke="#15803d" stroke-width="5"/>
+  <path d="M915 402 H1027" stroke="#166534" stroke-width="42" stroke-linecap="round"/>
+  <text x="971" y="563" text-anchor="middle" fill="#166534" font-family="system-ui, sans-serif" font-size="20">Schlitz oder Durchbruch</text>
+
+  <path d="M394 375 H425" stroke="#0f172a" stroke-width="4"/>
+  <path d="M425 375 L411 365 V385 Z" fill="#0f172a"/>
+  <path d="M765 375 H796" stroke="#0f172a" stroke-width="4"/>
+  <path d="M796 375 L782 365 V385 Z" fill="#0f172a"/>
+  <text x="600" y="642" text-anchor="middle" fill="#334155" font-family="system-ui, sans-serif" font-size="20">Requirements target one or more group IDs / Anforderungen adressieren eine oder mehrere Gruppen-IDs</text>
+</svg>

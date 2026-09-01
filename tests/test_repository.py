@@ -11,6 +11,13 @@ class RepositoryContracts(unittest.TestCase):
     def snapshots(self):
         return sorted((ROOT / "packages").glob("*/expected/*.json"))
 
+    def flatten_rules(self, folder):
+        return folder["rules"] + [
+            rule
+            for child in folder["folders"]
+            for rule in self.flatten_rules(child)
+        ]
+
     def test_three_disciplines_are_independent_packages(self):
         packages = {
             path.parent.name for path in (ROOT / "packages").glob("*/axioval.json")
@@ -61,6 +68,72 @@ class RepositoryContracts(unittest.TestCase):
             text = readme.read_text()
             self.assertIn("## Sources", text)
             self.assertNotIn(forbidden, text)
+
+    def test_openings_rules_have_targetable_groups_requirements_and_image(self):
+        ruleset = json.loads(
+            (
+                ROOT
+                / "packages/openings-penetrations/expected/ruleset.json"
+            ).read_text()
+        )
+        rules = self.flatten_rules(ruleset["root"])
+        expected_groups = {
+            "opening-cuts-host": {"openings", "penetrated-elements"},
+            "service-fits-with-25mm-allowance": {
+                "openings",
+                "penetrating-elements",
+            },
+            "no-host-clash-outside-opening": {
+                "openings",
+                "penetrated-elements",
+                "penetrating-elements",
+            },
+            "opening-quantities-match-geometry": {"openings"},
+            "opening-has-service-or-fill": {
+                "filling-elements",
+                "openings",
+                "penetrating-elements",
+            },
+            "fire-boundary-opening-protected": {
+                "openings",
+                "penetrated-elements",
+            },
+        }
+        # Each current openings requirement addresses every role in its rule scope.
+        expected_requirement_targets = expected_groups
+        self.assertEqual({rule["id"] for rule in rules}, set(expected_groups))
+        seen_groups = set()
+        for rule in rules:
+            with self.subTest(rule=rule["id"]):
+                groups = rule["applicability"]["groups"]
+                self.assertEqual(set(groups), expected_groups[rule["id"]])
+                self.assertEqual(len(rule["requirements"]), 1)
+                for group_id, group in groups.items():
+                    self.assertEqual(group_id, group["id"])
+                    self.assertIn("de", group["name"]["translations"])
+                    seen_groups.add(group_id)
+                for requirement in rule["requirements"]:
+                    self.assertIn("de", requirement["statement"]["translations"])
+                    self.assertEqual(
+                        set(requirement["targetGroups"]),
+                        expected_requirement_targets[rule["id"]],
+                    )
+                self.assertTrue(rule["explanatoryImages"])
+                image = rule["explanatoryImages"][0]
+                self.assertEqual(
+                    image["path"], "assets/opening-coordination-groups.svg"
+                )
+                self.assertIn("de", image["alternativeText"]["translations"])
+                self.assertIn("de", image["caption"]["translations"])
+        self.assertEqual(
+            seen_groups,
+            {
+                "filling-elements",
+                "openings",
+                "penetrated-elements",
+                "penetrating-elements",
+            },
+        )
 
     def test_schema_is_pinned_not_copied(self):
         self.assertTrue((ROOT / ".gitmodules").is_file())

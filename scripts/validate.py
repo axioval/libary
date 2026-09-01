@@ -128,7 +128,12 @@ def main() -> None:
             validate_definition_document(value, str(module.relative_to(ROOT)))
             definitions.append(value)
             snapshot(module, value, args.update)
-        bind_ruleset(rules, definitions, str(rules_module.relative_to(ROOT)))
+        bind_ruleset(
+            rules,
+            definitions,
+            str(rules_module.relative_to(ROOT)),
+            asset_root=manifest_path.parent,
+        )
         snapshot(rules_module, rules, args.update)
 
     subprocess.run(

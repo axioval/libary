@@ -11,6 +11,8 @@ local function container(conceptId: String, en: String, de: String, ifcName: Str
 objectTypes {
   ["axioval:ifc4.opening-element"] = objectType("axioval:ifc4.opening-element", "Opening element", "Öffnungselement", "IfcOpeningElement")
   ["axioval:ifc4.distribution-element"] = objectType("axioval:ifc4.distribution-element", "Distribution element", "TGA-Element", "IfcDistributionElement")
+  ["axioval:ifc4.wall"] = objectType("axioval:ifc4.wall", "Wall", "Wand", "IfcWall")
+  ["axioval:ifc4.slab"] = objectType("axioval:ifc4.slab", "Slab", "Decke oder Bodenplatte", "IfcSlab")
 }
 properties {
   ["axioval:ifc4.opening.width"] = lengthQuantity("axioval:ifc4.opening.width", "Opening width", "Öffnungsbreite", "Width")

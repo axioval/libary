@@ -15,6 +15,10 @@ This repository owns concrete, vendor-neutral rule definition packages and rules
 - Requirements from standards are parameterized and cited. Do not reproduce copyrighted normative prose.
 - Geometry rules name trusted capability IDs and concrete dimensions. Missing runtime capabilities or evidence must fail closed.
 - IFC concepts use IFC4 ADD2 TC1 names verified against the buildingSMART PSD/QTO catalog.
+- Multi-population rules use named applicability groups; every requirement targets
+  existing group IDs in the same rule.
+- Explanatory images stay inside their package, include English and German
+  alternative text/captions, and pass the pinned schema's content checks.
 - A rule package is policy data only. It never executes package-supplied code.
 
 ## Validation

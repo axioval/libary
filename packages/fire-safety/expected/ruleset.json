@@ -62,6 +62,7 @@
               }
             },
             "enabled": true,
+            "explanatoryImages": [],
             "id": "wall-boundary-continuity",
             "message": {
               "default": "The wall boundary contains an unprotected gap or lacks complete geometry evidence.",
@@ -76,6 +77,7 @@
               }
             },
             "parameters": {},
+            "requirements": [],
             "severity": "error",
             "tags": [
               "fire-safety",
@@ -108,6 +110,7 @@
               }
             },
             "enabled": true,
+            "explanatoryImages": [],
             "id": "slab-boundary-continuity",
             "message": {
               "default": "The slab boundary contains an unprotected gap or lacks complete geometry evidence.",
@@ -122,6 +125,7 @@
               }
             },
             "parameters": {},
+            "requirements": [],
             "severity": "error",
             "tags": [
               "fire-safety",
@@ -148,6 +152,7 @@
             },
             "definitionId": "axioval:fire.definition.boolean-property-equals",
             "enabled": true,
+            "explanatoryImages": [],
             "id": "wall-declared-compartmentation",
             "message": {
               "default": "Pset_WallCommon.Compartmentation is missing, conflicting, or false.",
@@ -172,6 +177,7 @@
                 "type": "propertyReference"
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "ifc4",
@@ -198,6 +204,7 @@
             },
             "definitionId": "axioval:fire.definition.boolean-property-equals",
             "enabled": true,
+            "explanatoryImages": [],
             "id": "slab-declared-compartmentation",
             "message": {
               "default": "Pset_SlabCommon.Compartmentation is missing, conflicting, or false.",
@@ -222,6 +229,7 @@
                 "type": "propertyReference"
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "ifc4",
@@ -266,6 +274,7 @@
             },
             "definitionId": "axioval:fire.definition.property-exists",
             "enabled": true,
+            "explanatoryImages": [],
             "id": "rated-door-has-fire-rating",
             "message": {
               "default": "Pset_DoorCommon.FireRating is missing or conflicting.",
@@ -286,6 +295,7 @@
                 "type": "propertyReference"
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "ifc4",
@@ -312,6 +322,7 @@
             },
             "definitionId": "axioval:fire.definition.boolean-property-equals",
             "enabled": true,
+            "explanatoryImages": [],
             "id": "fire-exit-door-marked",
             "message": {
               "default": "Pset_DoorCommon.FireExit is missing, conflicting, or false.",
@@ -336,6 +347,7 @@
                 "type": "propertyReference"
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "ifc4",
@@ -362,6 +374,7 @@
             },
             "definitionId": "axioval:fire.definition.boolean-property-equals",
             "enabled": true,
+            "explanatoryImages": [],
             "id": "fire-door-self-closing",
             "message": {
               "default": "Pset_DoorCommon.SelfClosing is missing, conflicting, or false.",
@@ -386,6 +399,7 @@
                 "type": "propertyReference"
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "ifc4",
@@ -412,6 +426,7 @@
             },
             "definitionId": "axioval:fire.definition.boolean-property-equals",
             "enabled": true,
+            "explanatoryImages": [],
             "id": "smoke-control-door-marked",
             "message": {
               "default": "Pset_DoorCommon.SmokeStop is missing, conflicting, or false.",
@@ -436,6 +451,7 @@
                 "type": "propertyReference"
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "ifc4",
@@ -462,6 +478,7 @@
             },
             "definitionId": "axioval:fire.definition.boolean-property-equals",
             "enabled": true,
+            "explanatoryImages": [],
             "id": "compartment-opening-protected",
             "message": {
               "default": "Pset_OpeningElementCommon.ProtectedOpening is missing, conflicting, or false.",
@@ -486,6 +503,7 @@
                 "type": "propertyReference"
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "ifc4",
@@ -512,6 +530,7 @@
             },
             "definitionId": "axioval:fire.definition.rating-not-less-than-host",
             "enabled": true,
+            "explanatoryImages": [],
             "id": "penetration-rating-matches-host",
             "message": {
               "default": "The penetration-to-host relation or compatible parsed ratings could not be proven.",
@@ -535,6 +554,7 @@
                 "type": "propertyReference"
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "fire-rating",
@@ -575,6 +595,7 @@
               }
             },
             "enabled": true,
+            "explanatoryImages": [],
             "id": "example-escape-route-1200x2000",
             "message": {
               "default": "The configured 1.20 m × 2.00 m continuous route envelope was not proven.",
@@ -598,6 +619,7 @@
                 "value": 1.2
               }
             },
+            "requirements": [],
             "severity": "error",
             "tags": [
               "example-policy",

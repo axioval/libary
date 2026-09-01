@@ -31,23 +31,79 @@
     "rules": [
       {
         "applicability": {
-          "kind": "allOf",
-          "operands": [
-            {
-              "includeSubtypes": true,
-              "kind": "entityType",
-              "objectType": "axioval:ifc4.opening-element"
+          "groups": {
+            "openings": {
+              "id": "openings",
+              "name": {
+                "default": "Openings",
+                "translations": {
+                  "de": "Öffnungen"
+                }
+              },
+              "selector": {
+                "kind": "allOf",
+                "operands": [
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.opening-element"
+                  },
+                  {
+                    "code": "reserved-opening",
+                    "includeDescendants": false,
+                    "kind": "classification",
+                    "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+                  }
+                ]
+              }
             },
-            {
-              "code": "reserved-opening",
-              "includeDescendants": false,
-              "kind": "classification",
-              "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+            "penetrated-elements": {
+              "id": "penetrated-elements",
+              "name": {
+                "default": "Penetrated elements",
+                "translations": {
+                  "de": "Durchdrungene Bauteile"
+                }
+              },
+              "selector": {
+                "kind": "anyOf",
+                "operands": [
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.wall"
+                  },
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.slab"
+                  }
+                ]
+              }
             }
-          ]
+          }
         },
         "definitionId": "axioval:template.opening-fully-cuts-host",
         "enabled": true,
+        "explanatoryImages": [
+          {
+            "alternativeText": {
+              "default": "A penetrated wall or slab, a penetrating service, and the opening that reserves clear space.",
+              "translations": {
+                "de": "Ein durchdrungenes Wand- oder Deckenbauteil, ein durchdringendes TGA-Element und die Öffnung, die den Freiraum reserviert."
+              }
+            },
+            "caption": {
+              "default": "Requirements target the independently selected groups by ID.",
+              "translations": {
+                "de": "Anforderungen adressieren die unabhängig ausgewählten Gruppen über ihre ID."
+              }
+            },
+            "id": "opening-coordination-groups",
+            "mediaType": "image/svg+xml",
+            "path": "assets/opening-coordination-groups.svg"
+          }
+        ],
         "id": "opening-cuts-host",
         "message": {
           "default": "Reserved opening does not fully cut the associated host.",
@@ -62,6 +118,21 @@
           }
         },
         "parameters": {},
+        "requirements": [
+          {
+            "id": "opening-cuts-penetrated-element",
+            "statement": {
+              "default": "Each opening fully cuts its associated penetrated element.",
+              "translations": {
+                "de": "Jede Öffnung durchdringt das zugeordnete durchdrungene Bauteil vollständig."
+              }
+            },
+            "targetGroups": [
+              "openings",
+              "penetrated-elements"
+            ]
+          }
+        ],
         "severity": "error",
         "tags": [
           "geometry",
@@ -70,23 +141,80 @@
       },
       {
         "applicability": {
-          "kind": "allOf",
-          "operands": [
-            {
-              "includeSubtypes": true,
-              "kind": "entityType",
-              "objectType": "axioval:ifc4.opening-element"
+          "groups": {
+            "openings": {
+              "id": "openings",
+              "name": {
+                "default": "Openings",
+                "translations": {
+                  "de": "Öffnungen"
+                }
+              },
+              "selector": {
+                "kind": "allOf",
+                "operands": [
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.opening-element"
+                  },
+                  {
+                    "code": "service-penetration",
+                    "includeDescendants": false,
+                    "kind": "classification",
+                    "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+                  }
+                ]
+              }
             },
-            {
-              "code": "service-penetration",
-              "includeDescendants": false,
-              "kind": "classification",
-              "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+            "penetrating-elements": {
+              "id": "penetrating-elements",
+              "name": {
+                "default": "Penetrating elements",
+                "translations": {
+                  "de": "Durchdringende Bauteile"
+                }
+              },
+              "selector": {
+                "kind": "allOf",
+                "operands": [
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.distribution-element"
+                  },
+                  {
+                    "code": "service-penetration",
+                    "includeDescendants": false,
+                    "kind": "classification",
+                    "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+                  }
+                ]
+              }
             }
-          ]
+          }
         },
         "definitionId": "axioval:template.service-contained-in-opening",
         "enabled": true,
+        "explanatoryImages": [
+          {
+            "alternativeText": {
+              "default": "A penetrated wall or slab, a penetrating service, and the opening that reserves clear space.",
+              "translations": {
+                "de": "Ein durchdrungenes Wand- oder Deckenbauteil, ein durchdringendes TGA-Element und die Öffnung, die den Freiraum reserviert."
+              }
+            },
+            "caption": {
+              "default": "Requirements target the independently selected groups by ID.",
+              "translations": {
+                "de": "Anforderungen adressieren die unabhängig ausgewählten Gruppen über ihre ID."
+              }
+            },
+            "id": "opening-coordination-groups",
+            "mediaType": "image/svg+xml",
+            "path": "assets/opening-coordination-groups.svg"
+          }
+        ],
         "id": "service-fits-with-25mm-allowance",
         "message": {
           "default": "Service envelope plus project allowance is not contained in the opening.",
@@ -110,6 +238,21 @@
             "value": 0.025
           }
         },
+        "requirements": [
+          {
+            "id": "service-envelope-fits-opening",
+            "statement": {
+              "default": "Each penetrating element and its project allowances fit within its associated opening.",
+              "translations": {
+                "de": "Jedes durchdringende Bauteil passt mit den Projektzugaben in die zugeordnete Öffnung."
+              }
+            },
+            "targetGroups": [
+              "penetrating-elements",
+              "openings"
+            ]
+          }
+        ],
         "severity": "error",
         "tags": [
           "geometry",
@@ -119,23 +262,104 @@
       },
       {
         "applicability": {
-          "kind": "allOf",
-          "operands": [
-            {
-              "includeSubtypes": true,
-              "kind": "entityType",
-              "objectType": "axioval:ifc4.opening-element"
+          "groups": {
+            "openings": {
+              "id": "openings",
+              "name": {
+                "default": "Openings",
+                "translations": {
+                  "de": "Öffnungen"
+                }
+              },
+              "selector": {
+                "kind": "allOf",
+                "operands": [
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.opening-element"
+                  },
+                  {
+                    "code": "service-penetration",
+                    "includeDescendants": false,
+                    "kind": "classification",
+                    "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+                  }
+                ]
+              }
             },
-            {
-              "code": "service-penetration",
-              "includeDescendants": false,
-              "kind": "classification",
-              "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+            "penetrated-elements": {
+              "id": "penetrated-elements",
+              "name": {
+                "default": "Penetrated elements",
+                "translations": {
+                  "de": "Durchdrungene Bauteile"
+                }
+              },
+              "selector": {
+                "kind": "anyOf",
+                "operands": [
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.wall"
+                  },
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.slab"
+                  }
+                ]
+              }
+            },
+            "penetrating-elements": {
+              "id": "penetrating-elements",
+              "name": {
+                "default": "Penetrating elements",
+                "translations": {
+                  "de": "Durchdringende Bauteile"
+                }
+              },
+              "selector": {
+                "kind": "allOf",
+                "operands": [
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.distribution-element"
+                  },
+                  {
+                    "code": "service-penetration",
+                    "includeDescendants": false,
+                    "kind": "classification",
+                    "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+                  }
+                ]
+              }
             }
-          ]
+          }
         },
         "definitionId": "axioval:template.no-host-clash-outside-opening",
         "enabled": true,
+        "explanatoryImages": [
+          {
+            "alternativeText": {
+              "default": "A penetrated wall or slab, a penetrating service, and the opening that reserves clear space.",
+              "translations": {
+                "de": "Ein durchdrungenes Wand- oder Deckenbauteil, ein durchdringendes TGA-Element und die Öffnung, die den Freiraum reserviert."
+              }
+            },
+            "caption": {
+              "default": "Requirements target the independently selected groups by ID.",
+              "translations": {
+                "de": "Anforderungen adressieren die unabhängig ausgewählten Gruppen über ihre ID."
+              }
+            },
+            "id": "opening-coordination-groups",
+            "mediaType": "image/svg+xml",
+            "path": "assets/opening-coordination-groups.svg"
+          }
+        ],
         "id": "no-host-clash-outside-opening",
         "message": {
           "default": "Service intersects the host outside the reserved opening.",
@@ -150,6 +374,22 @@
           }
         },
         "parameters": {},
+        "requirements": [
+          {
+            "id": "penetration-intersection-contained",
+            "statement": {
+              "default": "Penetrating elements intersect penetrated elements only inside associated openings.",
+              "translations": {
+                "de": "Durchdringende Bauteile schneiden durchdrungene Bauteile nur innerhalb zugeordneter Öffnungen."
+              }
+            },
+            "targetGroups": [
+              "penetrating-elements",
+              "penetrated-elements",
+              "openings"
+            ]
+          }
+        ],
         "severity": "error",
         "tags": [
           "geometry",
@@ -158,23 +398,55 @@
       },
       {
         "applicability": {
-          "kind": "allOf",
-          "operands": [
-            {
-              "includeSubtypes": true,
-              "kind": "entityType",
-              "objectType": "axioval:ifc4.opening-element"
-            },
-            {
-              "code": "reserved-opening",
-              "includeDescendants": false,
-              "kind": "classification",
-              "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+          "groups": {
+            "openings": {
+              "id": "openings",
+              "name": {
+                "default": "Openings",
+                "translations": {
+                  "de": "Öffnungen"
+                }
+              },
+              "selector": {
+                "kind": "allOf",
+                "operands": [
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.opening-element"
+                  },
+                  {
+                    "code": "reserved-opening",
+                    "includeDescendants": false,
+                    "kind": "classification",
+                    "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+                  }
+                ]
+              }
             }
-          ]
+          }
         },
         "definitionId": "axioval:template.opening-quantities-match-geometry",
         "enabled": true,
+        "explanatoryImages": [
+          {
+            "alternativeText": {
+              "default": "A penetrated wall or slab, a penetrating service, and the opening that reserves clear space.",
+              "translations": {
+                "de": "Ein durchdrungenes Wand- oder Deckenbauteil, ein durchdringendes TGA-Element und die Öffnung, die den Freiraum reserviert."
+              }
+            },
+            "caption": {
+              "default": "Requirements target the independently selected groups by ID.",
+              "translations": {
+                "de": "Anforderungen adressieren die unabhängig ausgewählten Gruppen über ihre ID."
+              }
+            },
+            "id": "opening-coordination-groups",
+            "mediaType": "image/svg+xml",
+            "path": "assets/opening-coordination-groups.svg"
+          }
+        ],
         "id": "opening-quantities-match-geometry",
         "message": {
           "default": "Published IFC4 opening dimensions differ from exact geometry by more than 5 mm.",
@@ -209,6 +481,20 @@
             "type": "propertyReference"
           }
         },
+        "requirements": [
+          {
+            "id": "opening-quantities-match",
+            "statement": {
+              "default": "Each opening's published dimensions match its exact geometry within 5 mm.",
+              "translations": {
+                "de": "Die veröffentlichten Maße jeder Öffnung stimmen innerhalb von 5 mm mit ihrer exakten Geometrie überein."
+              }
+            },
+            "targetGroups": [
+              "openings"
+            ]
+          }
+        ],
         "severity": "error",
         "tags": [
           "geometry",
@@ -217,23 +503,95 @@
       },
       {
         "applicability": {
-          "kind": "allOf",
-          "operands": [
-            {
-              "includeSubtypes": true,
-              "kind": "entityType",
-              "objectType": "axioval:ifc4.opening-element"
+          "groups": {
+            "filling-elements": {
+              "id": "filling-elements",
+              "name": {
+                "default": "Filling elements",
+                "translations": {
+                  "de": "Füllelemente"
+                }
+              },
+              "selector": {
+                "code": "opening-fill",
+                "includeDescendants": false,
+                "kind": "classification",
+                "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+              }
             },
-            {
-              "code": "reserved-opening",
-              "includeDescendants": false,
-              "kind": "classification",
-              "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+            "openings": {
+              "id": "openings",
+              "name": {
+                "default": "Openings",
+                "translations": {
+                  "de": "Öffnungen"
+                }
+              },
+              "selector": {
+                "kind": "allOf",
+                "operands": [
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.opening-element"
+                  },
+                  {
+                    "code": "reserved-opening",
+                    "includeDescendants": false,
+                    "kind": "classification",
+                    "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+                  }
+                ]
+              }
+            },
+            "penetrating-elements": {
+              "id": "penetrating-elements",
+              "name": {
+                "default": "Penetrating elements",
+                "translations": {
+                  "de": "Durchdringende Bauteile"
+                }
+              },
+              "selector": {
+                "kind": "allOf",
+                "operands": [
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.distribution-element"
+                  },
+                  {
+                    "code": "service-penetration",
+                    "includeDescendants": false,
+                    "kind": "classification",
+                    "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+                  }
+                ]
+              }
             }
-          ]
+          }
         },
         "definitionId": "axioval:template.opening-has-service-or-fill",
         "enabled": true,
+        "explanatoryImages": [
+          {
+            "alternativeText": {
+              "default": "A penetrated wall or slab, a penetrating service, and the opening that reserves clear space.",
+              "translations": {
+                "de": "Ein durchdrungenes Wand- oder Deckenbauteil, ein durchdringendes TGA-Element und die Öffnung, die den Freiraum reserviert."
+              }
+            },
+            "caption": {
+              "default": "Requirements target the independently selected groups by ID.",
+              "translations": {
+                "de": "Anforderungen adressieren die unabhängig ausgewählten Gruppen über ihre ID."
+              }
+            },
+            "id": "opening-coordination-groups",
+            "mediaType": "image/svg+xml",
+            "path": "assets/opening-coordination-groups.svg"
+          }
+        ],
         "id": "opening-has-service-or-fill",
         "message": {
           "default": "Reserved opening has neither an associated service nor a filling element.",
@@ -248,6 +606,22 @@
           }
         },
         "parameters": {},
+        "requirements": [
+          {
+            "id": "opening-has-associated-content",
+            "statement": {
+              "default": "Each opening has an associated penetrating element or filling element.",
+              "translations": {
+                "de": "Jede Öffnung hat ein zugeordnetes durchdringendes Bauteil oder Füllelement."
+              }
+            },
+            "targetGroups": [
+              "openings",
+              "penetrating-elements",
+              "filling-elements"
+            ]
+          }
+        ],
         "severity": "error",
         "tags": [
           "relationship",
@@ -256,23 +630,90 @@
       },
       {
         "applicability": {
-          "kind": "allOf",
-          "operands": [
-            {
-              "includeSubtypes": true,
-              "kind": "entityType",
-              "objectType": "axioval:ifc4.opening-element"
+          "groups": {
+            "openings": {
+              "id": "openings",
+              "name": {
+                "default": "Openings",
+                "translations": {
+                  "de": "Öffnungen"
+                }
+              },
+              "selector": {
+                "kind": "allOf",
+                "operands": [
+                  {
+                    "includeSubtypes": true,
+                    "kind": "entityType",
+                    "objectType": "axioval:ifc4.opening-element"
+                  },
+                  {
+                    "code": "fire-compartment-penetration",
+                    "includeDescendants": false,
+                    "kind": "classification",
+                    "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+                  }
+                ]
+              }
             },
-            {
-              "code": "fire-compartment-penetration",
-              "includeDescendants": false,
-              "kind": "classification",
-              "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+            "penetrated-elements": {
+              "id": "penetrated-elements",
+              "name": {
+                "default": "Penetrated fire boundaries",
+                "translations": {
+                  "de": "Durchdrungene Brandabschnittsgrenzen"
+                }
+              },
+              "selector": {
+                "kind": "allOf",
+                "operands": [
+                  {
+                    "kind": "anyOf",
+                    "operands": [
+                      {
+                        "includeSubtypes": true,
+                        "kind": "entityType",
+                        "objectType": "axioval:ifc4.wall"
+                      },
+                      {
+                        "includeSubtypes": true,
+                        "kind": "entityType",
+                        "objectType": "axioval:ifc4.slab"
+                      }
+                    ]
+                  },
+                  {
+                    "code": "fire-compartment-boundary",
+                    "includeDescendants": false,
+                    "kind": "classification",
+                    "system": "Axioval opening coordination / Schlitz- und Durchbruchsplanung"
+                  }
+                ]
+              }
             }
-          ]
+          }
         },
         "definitionId": "axioval:template.boolean-property-equals",
         "enabled": true,
+        "explanatoryImages": [
+          {
+            "alternativeText": {
+              "default": "A penetrated wall or slab, a penetrating service, and the opening that reserves clear space.",
+              "translations": {
+                "de": "Ein durchdrungenes Wand- oder Deckenbauteil, ein durchdringendes TGA-Element und die Öffnung, die den Freiraum reserviert."
+              }
+            },
+            "caption": {
+              "default": "Requirements target the independently selected groups by ID.",
+              "translations": {
+                "de": "Anforderungen adressieren die unabhängig ausgewählten Gruppen über ihre ID."
+              }
+            },
+            "id": "opening-coordination-groups",
+            "mediaType": "image/svg+xml",
+            "path": "assets/opening-coordination-groups.svg"
+          }
+        ],
         "id": "fire-boundary-opening-protected",
         "message": {
           "default": "Fire-boundary opening is not marked ProtectedOpening=true.",
@@ -297,6 +738,21 @@
             "type": "propertyReference"
           }
         },
+        "requirements": [
+          {
+            "id": "fire-boundary-opening-is-protected",
+            "statement": {
+              "default": "Each opening in a penetrated fire boundary is marked as protected.",
+              "translations": {
+                "de": "Jede Öffnung in einer durchdrungenen Brandabschnittsgrenze ist als geschützt gekennzeichnet."
+              }
+            },
+            "targetGroups": [
+              "openings",
+              "penetrated-elements"
+            ]
+          }
+        ],
         "severity": "error",
         "tags": [
           "fire-safety",
