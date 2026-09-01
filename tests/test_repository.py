@@ -13,9 +13,7 @@ class RepositoryContracts(unittest.TestCase):
 
     def flatten_rules(self, folder):
         return folder["rules"] + [
-            rule
-            for child in folder["folders"]
-            for rule in self.flatten_rules(child)
+            rule for child in folder["folders"] for rule in self.flatten_rules(child)
         ]
 
     def test_three_disciplines_are_independent_packages(self):
@@ -66,15 +64,105 @@ class RepositoryContracts(unittest.TestCase):
         forbidden = "Ausreichend groß ist eine Fläche von"
         for readme in sorted((ROOT / "packages").glob("*/README.md")):
             text = readme.read_text()
-            self.assertIn("## Sources", text)
+            self.assertIn("## Structured provenance", text)
             self.assertNotIn(forbidden, text)
+
+    def test_documents_have_localized_metadata_and_owned_sources(self):
+        for path in self.snapshots():
+            document = json.loads(path.read_text())
+            with self.subTest(document=path.relative_to(ROOT)):
+                for field in ("name", "description"):
+                    text = document["package"][field]
+                    self.assertTrue(text["default"].strip())
+                    self.assertTrue(text["translations"]["de"].strip())
+                self.assertTrue(document["sources"])
+                for source_id, source in document["sources"].items():
+                    self.assertEqual(source_id, source["id"])
+
+    def test_every_rule_has_structured_provenance(self):
+        for path in sorted((ROOT / "packages").glob("*/expected/ruleset.json")):
+            document = json.loads(path.read_text())
+            for rule in self.flatten_rules(document["root"]):
+                requirement_citations = any(
+                    requirement["citations"] for requirement in rule["requirements"]
+                )
+                with self.subTest(package=path.parent.parent.name, rule=rule["id"]):
+                    self.assertTrue(
+                        rule["citations"]
+                        or rule["parameterCitations"]
+                        or requirement_citations
+                    )
+
+    def test_accessibility_parameter_provenance_is_exact(self):
+        document = json.loads(
+            (
+                ROOT / "packages/accessibility-din-18040-1/expected/ruleset.json"
+            ).read_text()
+        )
+        rules = {rule["id"]: rule for rule in self.flatten_rules(document["root"])}
+        din = "urn:din:18040-1:2010-10"
+        policy = "axioval:accessibility.project-profile"
+        for rule_id in (
+            "meeting-two-wheelchairs-1800",
+            "meeting-wheelchair-person-1500",
+            "turning-maneuvering-1500",
+        ):
+            citations = rules[rule_id]["parameterCitations"]
+            by_parameters = {
+                tuple(item["parameterIds"]): item["citation"] for item in citations
+            }
+            self.assertEqual(
+                by_parameters[("width_metres", "length_metres")]["sourceId"], din
+            )
+            self.assertEqual(
+                by_parameters[("width_metres", "length_metres")]["locators"],
+                [{"kind": "clause", "value": "4.3.2"}],
+            )
+            self.assertEqual(by_parameters[("height_metres",)]["sourceId"], policy)
+        door = rules["accessible-door-clear-opening-900"]
+        self.assertNotIn("4.6", door["tags"])
+        citation = door["parameterCitations"][0]["citation"]
+        self.assertEqual(citation["sourceId"], din)
+        self.assertEqual(
+            citation["locators"],
+            [
+                {"kind": "clause", "value": "4.3.3.2"},
+                {"kind": "table", "value": "1"},
+                {"kind": "item", "value": "row 1"},
+            ],
+        )
+        intent = rules["accessible-door-intent"]["parameterCitations"]
+        self.assertEqual(len(intent), 1)
+        self.assertEqual(intent[0]["parameterIds"], ["property", "expected"])
+        self.assertEqual(intent[0]["citation"]["sourceId"], policy)
+
+    def test_fire_rules_remain_project_policy(self):
+        document = json.loads(
+            (ROOT / "packages/fire-safety/expected/ruleset.json").read_text()
+        )
+        rules = self.flatten_rules(document["root"])
+        policy = "axioval:fire-safety.project-policy"
+        for rule in rules:
+            with self.subTest(rule=rule["id"]):
+                sources = {item["sourceId"] for item in rule["citations"]}
+                sources.update(
+                    item["citation"]["sourceId"] for item in rule["parameterCitations"]
+                )
+                self.assertEqual(sources, {policy})
+        route = next(
+            rule for rule in rules if rule["id"] == "example-escape-route-1200x2000"
+        )
+        self.assertEqual(route["citations"], [])
+        self.assertEqual(len(route["parameterCitations"]), 1)
+        self.assertEqual(
+            route["parameterCitations"][0]["parameterIds"],
+            ["width_metres", "height_metres"],
+        )
+        self.assertEqual(route["parameterCitations"][0]["citation"]["sourceId"], policy)
 
     def test_openings_rules_have_targetable_groups_requirements_and_image(self):
         ruleset = json.loads(
-            (
-                ROOT
-                / "packages/openings-penetrations/expected/ruleset.json"
-            ).read_text()
+            (ROOT / "packages/openings-penetrations/expected/ruleset.json").read_text()
         )
         rules = self.flatten_rules(ruleset["root"])
         expected_groups = {
@@ -118,6 +206,11 @@ class RepositoryContracts(unittest.TestCase):
                         set(requirement["targetGroups"]),
                         expected_requirement_targets[rule["id"]],
                     )
+                    self.assertTrue(requirement["citations"])
+                    self.assertEqual(
+                        {item["sourceId"] for item in requirement["citations"]},
+                        {"axioval:openings.project-policy"},
+                    )
                 self.assertTrue(rule["explanatoryImages"])
                 image = rule["explanatoryImages"][0]
                 self.assertEqual(
@@ -125,6 +218,50 @@ class RepositoryContracts(unittest.TestCase):
                 )
                 self.assertIn("de", image["alternativeText"]["translations"])
                 self.assertIn("de", image["caption"]["translations"])
+        service = next(
+            rule for rule in rules if rule["id"] == "service-fits-with-25mm-allowance"
+        )
+        service_sources = {
+            tuple(item["parameterIds"]): item["citation"]["sourceId"]
+            for item in service["parameterCitations"]
+        }
+        self.assertEqual(
+            service_sources,
+            {
+                ("side_clearance_metres",): "axioval:openings.project-policy",
+                ("end_clearance_metres",): "axioval:openings.project-policy",
+            },
+        )
+        quantity = next(
+            rule for rule in rules if rule["id"] == "opening-quantities-match-geometry"
+        )
+        quantity_sources = {
+            tuple(item["parameterIds"]): item["citation"]["sourceId"]
+            for item in quantity["parameterCitations"]
+        }
+        self.assertEqual(
+            quantity_sources,
+            {
+                ("width",): "urn:buildingsmart:ifc:IFC4-ADD2-TC1",
+                ("height",): "urn:buildingsmart:ifc:IFC4-ADD2-TC1",
+                ("depth",): "urn:buildingsmart:ifc:IFC4-ADD2-TC1",
+                ("tolerance_metres",): "axioval:openings.project-policy",
+            },
+        )
+        protected = next(
+            rule for rule in rules if rule["id"] == "fire-boundary-opening-protected"
+        )
+        protected_sources = {
+            tuple(item["parameterIds"]): item["citation"]["sourceId"]
+            for item in protected["parameterCitations"]
+        }
+        self.assertEqual(
+            protected_sources,
+            {
+                ("property",): "urn:buildingsmart:ifc:IFC4-ADD2-TC1",
+                ("expected",): "axioval:openings.project-policy",
+            },
+        )
         self.assertEqual(
             seen_groups,
             {

@@ -2,6 +2,7 @@
   "definitions": {
     "axioval:definition.boolean-property-equals": {
       "capability": "axioval:capability.property-value-equals",
+      "citations": [],
       "description": {
         "default": "Require an exact canonical boolean property value.",
         "translations": {
@@ -18,6 +19,7 @@
       "parameters": {
         "expected": {
           "allowedValues": [],
+          "citations": [],
           "id": "expected",
           "kind": "boolean",
           "name": {
@@ -30,6 +32,7 @@
         },
         "property": {
           "allowedValues": [],
+          "citations": [],
           "id": "property",
           "kind": "propertyReference",
           "name": {
@@ -49,6 +52,7 @@
     },
     "axioval:definition.free-floor-rectangle": {
       "capability": "axioval:capability.free-floor-rectangle",
+      "citations": [],
       "description": {
         "default": "Require an exact unobstructed floor rectangle inside each selected spatial scope.",
         "translations": {
@@ -65,6 +69,7 @@
       "parameters": {
         "height_metres": {
           "allowedValues": [],
+          "citations": [],
           "id": "height_metres",
           "kind": "number",
           "name": {
@@ -77,6 +82,7 @@
         },
         "length_metres": {
           "allowedValues": [],
+          "citations": [],
           "id": "length_metres",
           "kind": "number",
           "name": {
@@ -89,6 +95,7 @@
         },
         "width_metres": {
           "allowedValues": [],
+          "citations": [],
           "id": "width_metres",
           "kind": "number",
           "name": {
@@ -108,6 +115,7 @@
     },
     "axioval:definition.minimum-clear-opening": {
       "capability": "axioval:capability.minimum-clear-opening",
+      "citations": [],
       "description": {
         "default": "Require the exact passable aperture, not the nominal element width, to meet the threshold.",
         "translations": {
@@ -124,6 +132,7 @@
       "parameters": {
         "width_metres": {
           "allowedValues": [],
+          "citations": [],
           "id": "width_metres",
           "kind": "number",
           "name": {
@@ -143,6 +152,7 @@
     },
     "axioval:definition.minimum-clear-route": {
       "capability": "axioval:capability.minimum-clear-route",
+      "citations": [],
       "description": {
         "default": "Require an exact continuous route with the configured clear width.",
         "translations": {
@@ -159,6 +169,7 @@
       "parameters": {
         "width_metres": {
           "allowedValues": [],
+          "citations": [],
           "id": "width_metres",
           "kind": "number",
           "name": {
@@ -179,6 +190,18 @@
   },
   "objectTypes": {
     "axioval:ifc4.door": {
+      "citations": [
+        {
+          "id": "ifc-door",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "IfcDoor"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "description": {
         "default": "An IFC door occurrence.",
         "translations": {
@@ -200,6 +223,18 @@
       }
     },
     "axioval:ifc4.ramp": {
+      "citations": [
+        {
+          "id": "ifc-ramp",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "IfcRamp"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "description": {
         "default": "An IFC ramp occurrence.",
         "translations": {
@@ -221,6 +256,18 @@
       }
     },
     "axioval:ifc4.space": {
+      "citations": [
+        {
+          "id": "ifc-space",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "IfcSpace"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "description": {
         "default": "An IFC spatial area.",
         "translations": {
@@ -246,15 +293,37 @@
     "authors": [
       "Axioval contributors"
     ],
-    "description": "English and German reusable accessibility rule definitions / Wiederverwendbare barrierefreie Regeldefinitionen.",
+    "description": {
+      "default": "Reusable accessibility rule definitions.",
+      "translations": {
+        "de": "Wiederverwendbare Regeldefinitionen zur Barrierefreiheit."
+      }
+    },
     "id": "axioval:specification.accessibility-din-18040-1.definitions",
     "license": "AGPL-3.0-or-later",
-    "name": "Accessibility / Barrierefreiheit — DIN 18040-1",
+    "name": {
+      "default": "Accessibility definitions — DIN 18040-1",
+      "translations": {
+        "de": "Definitionen zur Barrierefreiheit — DIN 18040-1"
+      }
+    },
     "repository": "https://github.com/axioval/specifications",
     "version": "0.1.0"
   },
   "properties": {
     "axioval:ifc4.handicap-accessible": {
+      "citations": [
+        {
+          "id": "ifc-handicap-accessible",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "HandicapAccessible"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "description": {
         "default": "IFC accessibility intent flag.",
         "translations": {
@@ -279,6 +348,18 @@
   },
   "propertySets": {
     "axioval:ifc4.pset-door-common": {
+      "citations": [
+        {
+          "id": "ifc-pset-door-common",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "Pset_DoorCommon"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "description": {
         "default": "IFC4 Pset_DoorCommon.",
         "translations": {
@@ -300,5 +381,20 @@
       }
     }
   },
-  "schemaVersion": "0.1.0"
+  "schemaVersion": "0.1.0",
+  "sources": {
+    "urn:buildingsmart:ifc:IFC4-ADD2-TC1": {
+      "designation": "IFC4 ADD2 TC1",
+      "id": "urn:buildingsmart:ifc:IFC4-ADD2-TC1",
+      "kind": "technicalSpecification",
+      "publisher": "buildingSMART International",
+      "title": {
+        "default": "Industry Foundation Classes IFC4 ADD2 TC1",
+        "translations": {
+          "de": "Industry Foundation Classes IFC4 ADD2 TC1"
+        }
+      },
+      "url": "https://technical.buildingsmart.org/standards/ifc/ifc-schema-specifications/"
+    }
+  }
 }

@@ -2,6 +2,7 @@
   "definitions": {
     "axioval:template.boolean-property-equals": {
       "capability": "axioval:capability.property-value-equals",
+      "citations": [],
       "id": "axioval:template.boolean-property-equals",
       "name": {
         "default": "Boolean property equals",
@@ -12,6 +13,7 @@
       "parameters": {
         "expected": {
           "allowedValues": [],
+          "citations": [],
           "id": "expected",
           "kind": "boolean",
           "name": {
@@ -24,6 +26,7 @@
         },
         "property": {
           "allowedValues": [],
+          "citations": [],
           "id": "property",
           "kind": "propertyReference",
           "name": {
@@ -43,6 +46,7 @@
     },
     "axioval:template.no-host-clash-outside-opening": {
       "capability": "axioval:capability.no-host-clash-outside-opening",
+      "citations": [],
       "id": "axioval:template.no-host-clash-outside-opening",
       "name": {
         "default": "No service-host clash outside opening",
@@ -58,6 +62,7 @@
     },
     "axioval:template.opening-fully-cuts-host": {
       "capability": "axioval:capability.opening-fully-cuts-host",
+      "citations": [],
       "id": "axioval:template.opening-fully-cuts-host",
       "name": {
         "default": "Opening fully cuts host",
@@ -73,6 +78,7 @@
     },
     "axioval:template.opening-has-service-or-fill": {
       "capability": "axioval:capability.opening-has-service-or-fill",
+      "citations": [],
       "id": "axioval:template.opening-has-service-or-fill",
       "name": {
         "default": "Opening has service or filling",
@@ -88,6 +94,7 @@
     },
     "axioval:template.opening-quantities-match-geometry": {
       "capability": "axioval:capability.opening-quantities-match-geometry",
+      "citations": [],
       "id": "axioval:template.opening-quantities-match-geometry",
       "name": {
         "default": "Opening quantities match geometry",
@@ -98,6 +105,7 @@
       "parameters": {
         "depth": {
           "allowedValues": [],
+          "citations": [],
           "id": "depth",
           "kind": "propertyReference",
           "name": {
@@ -111,6 +119,7 @@
         },
         "height": {
           "allowedValues": [],
+          "citations": [],
           "id": "height",
           "kind": "propertyReference",
           "name": {
@@ -124,6 +133,7 @@
         },
         "tolerance_metres": {
           "allowedValues": [],
+          "citations": [],
           "id": "tolerance_metres",
           "kind": "number",
           "name": {
@@ -136,6 +146,7 @@
         },
         "width": {
           "allowedValues": [],
+          "citations": [],
           "id": "width",
           "kind": "propertyReference",
           "name": {
@@ -155,6 +166,7 @@
     },
     "axioval:template.service-contained-in-opening": {
       "capability": "axioval:capability.service-contained-in-opening",
+      "citations": [],
       "id": "axioval:template.service-contained-in-opening",
       "name": {
         "default": "Service fits opening with allowance",
@@ -165,6 +177,7 @@
       "parameters": {
         "end_clearance_metres": {
           "allowedValues": [],
+          "citations": [],
           "id": "end_clearance_metres",
           "kind": "number",
           "name": {
@@ -177,6 +190,7 @@
         },
         "side_clearance_metres": {
           "allowedValues": [],
+          "citations": [],
           "id": "side_clearance_metres",
           "kind": "number",
           "name": {
@@ -196,6 +210,18 @@
   },
   "objectTypes": {
     "axioval:ifc4.distribution-element": {
+      "citations": [
+        {
+          "id": "ifc-mapping",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "IfcDistributionElement"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "externalNames": [
         {
           "name": "IfcDistributionElement",
@@ -211,6 +237,18 @@
       }
     },
     "axioval:ifc4.opening-element": {
+      "citations": [
+        {
+          "id": "ifc-mapping",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "IfcOpeningElement"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "externalNames": [
         {
           "name": "IfcOpeningElement",
@@ -226,6 +264,18 @@
       }
     },
     "axioval:ifc4.slab": {
+      "citations": [
+        {
+          "id": "ifc-mapping",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "IfcSlab"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "externalNames": [
         {
           "name": "IfcSlab",
@@ -241,6 +291,18 @@
       }
     },
     "axioval:ifc4.wall": {
+      "citations": [
+        {
+          "id": "ifc-mapping",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "IfcWall"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "externalNames": [
         {
           "name": "IfcWall",
@@ -260,15 +322,37 @@
     "authors": [
       "Axioval contributors"
     ],
-    "description": "Bilingual reusable definitions / Zweisprachige wiederverwendbare Definitionen.",
+    "description": {
+      "default": "Reusable opening and penetration definitions.",
+      "translations": {
+        "de": "Wiederverwendbare Definitionen für Schlitze und Durchbrüche."
+      }
+    },
     "id": "axioval:specification.openings-penetrations.definitions",
     "license": "AGPL-3.0-or-later",
-    "name": "Openings and penetrations / Schlitz- und Durchbruchsplanung",
+    "name": {
+      "default": "Openings and penetrations definitions",
+      "translations": {
+        "de": "Definitionen für die Schlitz- und Durchbruchsplanung"
+      }
+    },
     "repository": "https://github.com/axioval/specifications",
     "version": "0.1.0"
   },
   "properties": {
     "axioval:ifc4.opening.depth": {
+      "citations": [
+        {
+          "id": "ifc-mapping",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "Depth"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "externalNames": [
         {
           "name": "Depth",
@@ -286,6 +370,18 @@
       "valueKind": "quantity"
     },
     "axioval:ifc4.opening.height": {
+      "citations": [
+        {
+          "id": "ifc-mapping",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "Height"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "externalNames": [
         {
           "name": "Height",
@@ -303,6 +399,18 @@
       "valueKind": "quantity"
     },
     "axioval:ifc4.opening.protected": {
+      "citations": [
+        {
+          "id": "ifc-mapping",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "ProtectedOpening"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "externalNames": [
         {
           "name": "ProtectedOpening",
@@ -319,6 +427,18 @@
       "valueKind": "boolean"
     },
     "axioval:ifc4.opening.width": {
+      "citations": [
+        {
+          "id": "ifc-mapping",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "Width"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "externalNames": [
         {
           "name": "Width",
@@ -338,6 +458,18 @@
   },
   "propertySets": {
     "axioval:ifc4.pset-opening-common": {
+      "citations": [
+        {
+          "id": "ifc-mapping",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "Pset_OpeningElementCommon"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "externalNames": [
         {
           "name": "Pset_OpeningElementCommon",
@@ -353,6 +485,18 @@
       }
     },
     "axioval:ifc4.qto-opening-base": {
+      "citations": [
+        {
+          "id": "ifc-mapping",
+          "locators": [
+            {
+              "kind": "item",
+              "value": "Qto_OpeningElementBaseQuantities"
+            }
+          ],
+          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+        }
+      ],
       "externalNames": [
         {
           "name": "Qto_OpeningElementBaseQuantities",
@@ -368,5 +512,20 @@
       }
     }
   },
-  "schemaVersion": "0.1.0"
+  "schemaVersion": "0.1.0",
+  "sources": {
+    "urn:buildingsmart:ifc:IFC4-ADD2-TC1": {
+      "designation": "IFC4 ADD2 TC1",
+      "id": "urn:buildingsmart:ifc:IFC4-ADD2-TC1",
+      "kind": "technicalSpecification",
+      "publisher": "buildingSMART International",
+      "title": {
+        "default": "Industry Foundation Classes IFC4 ADD2 TC1",
+        "translations": {
+          "de": "Industry Foundation Classes IFC4 ADD2 TC1"
+        }
+      },
+      "url": "https://technical.buildingsmart.org/standards/ifc/ifc-schema-specifications/"
+    }
+  }
 }

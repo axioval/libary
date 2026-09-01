@@ -6,10 +6,20 @@
     "authors": [
       "Axioval contributors"
     ],
-    "description": "Bilingual fire-safety coordination and geometry rules / Zweisprachige Regeln für Brandschutzkoordination und Geometrie.",
+    "description": {
+      "default": "Fire-safety coordination and geometry rules.",
+      "translations": {
+        "de": "Regeln für Brandschutzkoordination und Geometrie."
+      }
+    },
     "id": "axioval:specification.fire-safety",
     "license": "AGPL-3.0-or-later",
-    "name": "Fire safety / Brandschutz",
+    "name": {
+      "default": "Fire safety",
+      "translations": {
+        "de": "Brandschutz"
+      }
+    },
     "repository": "https://github.com/axioval/specifications",
     "version": "0.1.0"
   },
@@ -54,6 +64,24 @@
                 }
               ]
             },
+            "citations": [
+              {
+                "id": "wall-boundary-continuity-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Compartment boundary continuity"
+                  }
+                ],
+                "note": {
+                  "default": "This is an editable example project requirement, not a regulatory compliance claim.",
+                  "translations": {
+                    "de": "Dies ist eine bearbeitbare beispielhafte Projektanforderung und keine Aussage zur Rechtskonformität."
+                  }
+                },
+                "sourceId": "axioval:fire-safety.project-policy"
+              }
+            ],
             "definitionId": "axioval:fire.definition.continuous-separation-surface",
             "description": {
               "default": "Require exact surface continuity; protected openings are handled explicitly.",
@@ -76,6 +104,7 @@
                 "de": "Brandabschnittswände bilden eine durchgängige Grenze"
               }
             },
+            "parameterCitations": [],
             "parameters": {},
             "requirements": [],
             "severity": "error",
@@ -102,6 +131,24 @@
                 }
               ]
             },
+            "citations": [
+              {
+                "id": "slab-boundary-continuity-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Compartment boundary continuity"
+                  }
+                ],
+                "note": {
+                  "default": "This is an editable example project requirement, not a regulatory compliance claim.",
+                  "translations": {
+                    "de": "Dies ist eine bearbeitbare beispielhafte Projektanforderung und keine Aussage zur Rechtskonformität."
+                  }
+                },
+                "sourceId": "axioval:fire-safety.project-policy"
+              }
+            ],
             "definitionId": "axioval:fire.definition.continuous-separation-surface",
             "description": {
               "default": "Require exact surface continuity across the assigned slab boundary.",
@@ -124,6 +171,7 @@
                 "de": "Brandabschnittsdecken bilden eine durchgängige Grenze"
               }
             },
+            "parameterCitations": [],
             "parameters": {},
             "requirements": [],
             "severity": "error",
@@ -150,6 +198,24 @@
                 }
               ]
             },
+            "citations": [
+              {
+                "id": "wall-declared-compartmentation-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Declared compartmentation"
+                  }
+                ],
+                "note": {
+                  "default": "This is an editable example project requirement, not a regulatory compliance claim.",
+                  "translations": {
+                    "de": "Dies ist eine bearbeitbare beispielhafte Projektanforderung und keine Aussage zur Rechtskonformität."
+                  }
+                },
+                "sourceId": "axioval:fire-safety.project-policy"
+              }
+            ],
             "definitionId": "axioval:fire.definition.boolean-property-equals",
             "enabled": true,
             "explanatoryImages": [],
@@ -166,6 +232,7 @@
                 "de": "Brandabschnittswände sind als brandabschnittsbildend gekennzeichnet"
               }
             },
+            "parameterCitations": [],
             "parameters": {
               "expected": {
                 "type": "boolean",
@@ -202,6 +269,24 @@
                 }
               ]
             },
+            "citations": [
+              {
+                "id": "slab-declared-compartmentation-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Declared compartmentation"
+                  }
+                ],
+                "note": {
+                  "default": "This is an editable example project requirement, not a regulatory compliance claim.",
+                  "translations": {
+                    "de": "Dies ist eine bearbeitbare beispielhafte Projektanforderung und keine Aussage zur Rechtskonformität."
+                  }
+                },
+                "sourceId": "axioval:fire-safety.project-policy"
+              }
+            ],
             "definitionId": "axioval:fire.definition.boolean-property-equals",
             "enabled": true,
             "explanatoryImages": [],
@@ -218,6 +303,7 @@
                 "de": "Brandabschnittsdecken sind als brandabschnittsbildend gekennzeichnet"
               }
             },
+            "parameterCitations": [],
             "parameters": {
               "expected": {
                 "type": "boolean",
@@ -272,6 +358,24 @@
                 }
               ]
             },
+            "citations": [
+              {
+                "id": "rated-door-has-fire-rating-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Rated doors"
+                  }
+                ],
+                "note": {
+                  "default": "This is an editable example project requirement, not a regulatory compliance claim.",
+                  "translations": {
+                    "de": "Dies ist eine bearbeitbare beispielhafte Projektanforderung und keine Aussage zur Rechtskonformität."
+                  }
+                },
+                "sourceId": "axioval:fire-safety.project-policy"
+              }
+            ],
             "definitionId": "axioval:fire.definition.property-exists",
             "enabled": true,
             "explanatoryImages": [],
@@ -288,6 +392,7 @@
                 "de": "Feuerschutztür besitzt einen exakten Feuerwiderstandsnachweis"
               }
             },
+            "parameterCitations": [],
             "parameters": {
               "property": {
                 "property": "axioval:fire.ifc4.fire-rating",
@@ -320,6 +425,24 @@
                 }
               ]
             },
+            "citations": [
+              {
+                "id": "fire-exit-door-marked-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Fire-exit doors"
+                  }
+                ],
+                "note": {
+                  "default": "This is an editable example project requirement, not a regulatory compliance claim.",
+                  "translations": {
+                    "de": "Dies ist eine bearbeitbare beispielhafte Projektanforderung und keine Aussage zur Rechtskonformität."
+                  }
+                },
+                "sourceId": "axioval:fire-safety.project-policy"
+              }
+            ],
             "definitionId": "axioval:fire.definition.boolean-property-equals",
             "enabled": true,
             "explanatoryImages": [],
@@ -336,6 +459,7 @@
                 "de": "Notausgangstür ist als Notausgang gekennzeichnet"
               }
             },
+            "parameterCitations": [],
             "parameters": {
               "expected": {
                 "type": "boolean",
@@ -372,6 +496,24 @@
                 }
               ]
             },
+            "citations": [
+              {
+                "id": "fire-door-self-closing-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Self-closing fire doors"
+                  }
+                ],
+                "note": {
+                  "default": "This is an editable example project requirement, not a regulatory compliance claim.",
+                  "translations": {
+                    "de": "Dies ist eine bearbeitbare beispielhafte Projektanforderung und keine Aussage zur Rechtskonformität."
+                  }
+                },
+                "sourceId": "axioval:fire-safety.project-policy"
+              }
+            ],
             "definitionId": "axioval:fire.definition.boolean-property-equals",
             "enabled": true,
             "explanatoryImages": [],
@@ -388,6 +530,7 @@
                 "de": "Zugewiesene Feuerschutztür ist selbstschließend"
               }
             },
+            "parameterCitations": [],
             "parameters": {
               "expected": {
                 "type": "boolean",
@@ -424,6 +567,24 @@
                 }
               ]
             },
+            "citations": [
+              {
+                "id": "smoke-control-door-marked-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Smoke-control doors"
+                  }
+                ],
+                "note": {
+                  "default": "This is an editable example project requirement, not a regulatory compliance claim.",
+                  "translations": {
+                    "de": "Dies ist eine bearbeitbare beispielhafte Projektanforderung und keine Aussage zur Rechtskonformität."
+                  }
+                },
+                "sourceId": "axioval:fire-safety.project-policy"
+              }
+            ],
             "definitionId": "axioval:fire.definition.boolean-property-equals",
             "enabled": true,
             "explanatoryImages": [],
@@ -440,6 +601,7 @@
                 "de": "Zugewiesene Rauchschutztür ist als Rauchschutz gekennzeichnet"
               }
             },
+            "parameterCitations": [],
             "parameters": {
               "expected": {
                 "type": "boolean",
@@ -476,6 +638,24 @@
                 }
               ]
             },
+            "citations": [
+              {
+                "id": "compartment-opening-protected-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Protected penetrations"
+                  }
+                ],
+                "note": {
+                  "default": "This is an editable example project requirement, not a regulatory compliance claim.",
+                  "translations": {
+                    "de": "Dies ist eine bearbeitbare beispielhafte Projektanforderung und keine Aussage zur Rechtskonformität."
+                  }
+                },
+                "sourceId": "axioval:fire-safety.project-policy"
+              }
+            ],
             "definitionId": "axioval:fire.definition.boolean-property-equals",
             "enabled": true,
             "explanatoryImages": [],
@@ -492,6 +672,7 @@
                 "de": "Brandabschnittsdurchführung ist geschützt"
               }
             },
+            "parameterCitations": [],
             "parameters": {
               "expected": {
                 "type": "boolean",
@@ -528,6 +709,24 @@
                 }
               ]
             },
+            "citations": [
+              {
+                "id": "penetration-rating-matches-host-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Penetration ratings"
+                  }
+                ],
+                "note": {
+                  "default": "This is an editable example project requirement, not a regulatory compliance claim.",
+                  "translations": {
+                    "de": "Dies ist eine bearbeitbare beispielhafte Projektanforderung und keine Aussage zur Rechtskonformität."
+                  }
+                },
+                "sourceId": "axioval:fire-safety.project-policy"
+              }
+            ],
             "definitionId": "axioval:fire.definition.rating-not-less-than-host",
             "enabled": true,
             "explanatoryImages": [],
@@ -544,6 +743,7 @@
                 "de": "Feuerwiderstand der Durchführung ist nicht geringer als der des Bauteils"
               }
             },
+            "parameterCitations": [],
             "parameters": {
               "element_property": {
                 "property": "axioval:fire.ifc4.fire-rating",
@@ -587,6 +787,7 @@
               "kind": "classification",
               "system": "Axioval fire-safety applicability profile"
             },
+            "citations": [],
             "definitionId": "axioval:fire.definition.minimum-clear-route-envelope",
             "description": {
               "default": "Example project value, not a universal German legal threshold.",
@@ -609,6 +810,30 @@
                 "de": "Beispielhafter Rettungswegquerschnitt 1,20 m × 2,00 m"
               }
             },
+            "parameterCitations": [
+              {
+                "citation": {
+                  "id": "example-escape-route-1200x2000-policy",
+                  "locators": [
+                    {
+                      "kind": "section",
+                      "value": "Example escape-route envelope"
+                    }
+                  ],
+                  "note": {
+                    "default": "This is an editable example project requirement, not a regulatory compliance claim.",
+                    "translations": {
+                      "de": "Dies ist eine bearbeitbare beispielhafte Projektanforderung und keine Aussage zur Rechtskonformität."
+                    }
+                  },
+                  "sourceId": "axioval:fire-safety.project-policy"
+                },
+                "parameterIds": [
+                  "width_metres",
+                  "height_metres"
+                ]
+              }
+            ],
             "parameters": {
               "height_metres": {
                 "type": "number",
@@ -639,5 +864,19 @@
     },
     "rules": []
   },
-  "schemaVersion": "0.1.0"
+  "schemaVersion": "0.1.0",
+  "sources": {
+    "axioval:fire-safety.project-policy": {
+      "designation": "Axioval fire-safety example project policy",
+      "id": "axioval:fire-safety.project-policy",
+      "kind": "projectPolicy",
+      "publisher": "Axioval",
+      "title": {
+        "default": "Fire-safety example project policy",
+        "translations": {
+          "de": "Beispielhafte Projektvorgabe Brandschutz"
+        }
+      }
+    }
+  }
 }

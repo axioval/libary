@@ -3,7 +3,10 @@ import "../../vendor/schema/schema/Types.pkl"
 import "../../vendor/schema/schema/Values.pkl"
 import "../../vendor/schema/schema/Selectors.pkl"
 import "../../vendor/schema/schema/RuleSets.pkl"
+import "../../vendor/schema/schema/Citations.pkl"
 local function text(en: String, de: String): Types.LocalizedText = new Types.LocalizedText { default = en; translations { ["de"] = de } }
+local function policyCitation(citationId: String, section: String): Citations.Citation = new Citations.Citation { id = citationId; sourceId = "axioval:openings.project-policy"; locators { new Citations.Locator { kind = "section"; value = section } }; note = text("Editable example project policy; not a statutory value.", "Bearbeitbare beispielhafte Projektvorgabe; kein gesetzlicher Wert.") }
+local function ifcCitation(citationId: String, item: String): Citations.Citation = new Citations.Citation { id = citationId; sourceId = "urn:buildingsmart:ifc:IFC4-ADD2-TC1"; locators { new Citations.Locator { kind = "item"; value = item } } }
 local function classified(classificationCode: String): Selectors.ClassificationSelector = new Selectors.ClassificationSelector { system = "Axioval opening coordination / Schlitz- und Durchbruchsplanung"; code = classificationCode }
 local isOpening = new Selectors.EntityTypeSelector { objectType = "axioval:ifc4.opening-element" }
 local isPenetratingElement = new Selectors.EntityTypeSelector { objectType = "axioval:ifc4.distribution-element" }
@@ -32,7 +35,11 @@ local coordinationImage = new RuleSets.ExplanatoryImage {
   alternativeText = text("A penetrated wall or slab, a penetrating service, and the opening that reserves clear space.", "Ein durchdrungenes Wand- oder Deckenbauteil, ein durchdringendes TGA-Element und die Öffnung, die den Freiraum reserviert.")
   caption = text("Requirements target the independently selected groups by ID.", "Anforderungen adressieren die unabhängig ausgewählten Gruppen über ihre ID.")
 }
-package = new Types.PackageMetadata { id = "axioval:specification.openings-penetrations"; version = "0.1.0"; name = "Openings and penetrations / Schlitz- und Durchbruchsplanung"; description = "Bilingual coordination rules / Zweisprachige Koordinationsregeln."; repository = "https://github.com/axioval/specifications"; license = "AGPL-3.0-or-later"; authors { "Axioval contributors" } }
+package = new Types.PackageMetadata { id = "axioval:specification.openings-penetrations"; version = "0.1.0"; name = text("Openings and penetrations", "Schlitz- und Durchbruchsplanung"); description = text("Opening and penetration coordination rules.", "Regeln für die Schlitz- und Durchbruchskoordination."); repository = "https://github.com/axioval/specifications"; license = "AGPL-3.0-or-later"; authors { "Axioval contributors" } }
+sources {
+  ["axioval:openings.project-policy"] = new Citations.Source { id = "axioval:openings.project-policy"; kind = "projectPolicy"; designation = "Axioval openings example project policy"; title = text("Openings example project policy", "Beispielhafte Projektvorgabe für Schlitze und Durchbrüche"); publisher = "Axioval" }
+  ["urn:buildingsmart:ifc:IFC4-ADD2-TC1"] = new Citations.Source { id = "urn:buildingsmart:ifc:IFC4-ADD2-TC1"; kind = "technicalSpecification"; designation = "IFC4 ADD2 TC1"; title = text("Industry Foundation Classes IFC4 ADD2 TC1", "Industry Foundation Classes IFC4 ADD2 TC1"); publisher = "buildingSMART International"; url = "https://technical.buildingsmart.org/standards/ifc/ifc-schema-specifications/" }
+}
 definitionPackages { "axioval:specification.openings-penetrations.definitions" }
 root = new RuleSets.RuleFolder {
   id = "openings-penetrations"
@@ -50,6 +57,7 @@ root = new RuleSets.RuleFolder {
           id = "opening-cuts-penetrated-element"
           statement = text("Each opening fully cuts its associated penetrated element.", "Jede Öffnung durchdringt das zugeordnete durchdrungene Bauteil vollständig.")
           targetGroups { "openings"; "penetrated-elements" }
+          citations { policyCitation("opening-cuts-penetrated-element-policy", "Host cutting") }
         }
       }
       explanatoryImages { coordinationImage }
@@ -65,11 +73,22 @@ root = new RuleSets.RuleFolder {
         ["end_clearance_metres"] = new Values.NumberValue { value = 0.025 }
       }
       applicability = serviceAndOpenings
+      parameterCitations {
+        new Citations.ParameterCitation {
+          parameterIds { "side_clearance_metres" }
+          citation = policyCitation("side-clearance-policy", "Installation allowance")
+        }
+        new Citations.ParameterCitation {
+          parameterIds { "end_clearance_metres" }
+          citation = policyCitation("end-clearance-policy", "Installation allowance")
+        }
+      }
       requirements {
         new RuleSets.Requirement {
           id = "service-envelope-fits-opening"
           statement = text("Each penetrating element and its project allowances fit within its associated opening.", "Jedes durchdringende Bauteil passt mit den Projektzugaben in die zugeordnete Öffnung.")
           targetGroups { "penetrating-elements"; "openings" }
+          citations { policyCitation("service-envelope-fits-opening-policy", "Installation allowance") }
         }
       }
       explanatoryImages { coordinationImage }
@@ -86,6 +105,7 @@ root = new RuleSets.RuleFolder {
           id = "penetration-intersection-contained"
           statement = text("Penetrating elements intersect penetrated elements only inside associated openings.", "Durchdringende Bauteile schneiden durchdrungene Bauteile nur innerhalb zugeordneter Öffnungen.")
           targetGroups { "penetrating-elements"; "penetrated-elements"; "openings" }
+          citations { policyCitation("penetration-intersection-contained-policy", "Clash containment") }
         }
       }
       explanatoryImages { coordinationImage }
@@ -103,11 +123,30 @@ root = new RuleSets.RuleFolder {
         ["tolerance_metres"] = new Values.NumberValue { value = 0.005 }
       }
       applicability = openingsOnly("reserved-opening")
+      parameterCitations {
+        new Citations.ParameterCitation {
+          parameterIds { "width" }
+          citation = ifcCitation("opening-width-ifc", "Qto_OpeningElementBaseQuantities.Width")
+        }
+        new Citations.ParameterCitation {
+          parameterIds { "height" }
+          citation = ifcCitation("opening-height-ifc", "Qto_OpeningElementBaseQuantities.Height")
+        }
+        new Citations.ParameterCitation {
+          parameterIds { "depth" }
+          citation = ifcCitation("opening-depth-ifc", "Qto_OpeningElementBaseQuantities.Depth")
+        }
+        new Citations.ParameterCitation {
+          parameterIds { "tolerance_metres" }
+          citation = policyCitation("quantity-tolerance-policy", "Quantity tolerance")
+        }
+      }
       requirements {
         new RuleSets.Requirement {
           id = "opening-quantities-match"
           statement = text("Each opening's published dimensions match its exact geometry within 5 mm.", "Die veröffentlichten Maße jeder Öffnung stimmen innerhalb von 5 mm mit ihrer exakten Geometrie überein.")
           targetGroups { "openings" }
+          citations { policyCitation("opening-quantities-match-policy", "Quantity tolerance") }
         }
       }
       explanatoryImages { coordinationImage }
@@ -124,6 +163,7 @@ root = new RuleSets.RuleFolder {
           id = "opening-has-associated-content"
           statement = text("Each opening has an associated penetrating element or filling element.", "Jede Öffnung hat ein zugeordnetes durchdringendes Bauteil oder Füllelement.")
           targetGroups { "openings"; "penetrating-elements"; "filling-elements" }
+          citations { policyCitation("opening-has-associated-content-policy", "Opening associations") }
         }
       }
       explanatoryImages { coordinationImage }
@@ -139,11 +179,22 @@ root = new RuleSets.RuleFolder {
         ["expected"] = new Values.BooleanValue { value = true }
       }
       applicability = fireGroups
+      parameterCitations {
+        new Citations.ParameterCitation {
+          parameterIds { "property" }
+          citation = ifcCitation("protected-opening-ifc", "Pset_OpeningElementCommon.ProtectedOpening")
+        }
+        new Citations.ParameterCitation {
+          parameterIds { "expected" }
+          citation = policyCitation("protected-opening-policy", "Protected fire-boundary openings")
+        }
+      }
       requirements {
         new RuleSets.Requirement {
           id = "fire-boundary-opening-is-protected"
           statement = text("Each opening in a penetrated fire boundary is marked as protected.", "Jede Öffnung in einer durchdrungenen Brandabschnittsgrenze ist als geschützt gekennzeichnet.")
           targetGroups { "openings"; "penetrated-elements" }
+          citations { policyCitation("fire-boundary-opening-is-protected-policy", "Protected fire-boundary openings") }
         }
       }
       explanatoryImages { coordinationImage }

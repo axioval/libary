@@ -37,9 +37,20 @@ Gruppenselektoren beschreiben nur den Umfang. Sie leiten keine Beziehungen ab
 und führen keine Geometrie aus. Diese Semantik bleibt bei der deklarierten,
 vertrauenswürdigen Fähigkeit der jeweiligen Definition.
 
-## Sources
+## Structured provenance / Strukturierte Herkunft
 
-- [buildingSMART IFC 4 ADD2 TC1](https://technical.buildingsmart.org/standards/ifc/ifc-schema-specifications/), `Pset_OpeningElementCommon`.
-- [buildingSMART IFC 4 ADD2 TC1](https://technical.buildingsmart.org/standards/ifc/ifc-schema-specifications/), `Qto_OpeningElementBaseQuantities`.
+- Rule requirements cite an editable Axioval `projectPolicy` source.
+- The 25 mm side/end allowances and 5 mm quantity tolerance cite that policy at
+  the exact parameters; they are not statutory or standards-derived values.
+- IFC quantity and protected-opening property parameters cite the document-owned
+  buildingSMART IFC4 ADD2 TC1 source. Definition mappings carry their own IFC
+  citations in `definitions.pkl`.
 
-The package cites identifiers and models requirements; it does not republish normative text.
+Die Anforderungen verweisen auf eine bearbeitbare Axioval-Projektvorgabe. Die
+25-mm-Zugaben und die 5-mm-Toleranz sind ihren Parametern direkt zugeordnet und
+keine gesetzlichen oder normativen Werte. IFC-Mengen- und Eigenschaftsparameter
+verweisen auf die dokumenteigene buildingSMART-Quelle.
+
+Citations model provenance only: they neither execute relationships or geometry
+nor assert legal force, conformance, or compliance. The package stores
+bibliographic identifiers and locators; it does not republish normative text.

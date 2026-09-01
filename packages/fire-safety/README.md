@@ -8,11 +8,23 @@ The package checks model evidence and coordination invariants. It is not a compl
 
 The included 1.20 m × 2.00 m escape-route envelope is an **example project policy** selected by an explicit classification code. Replace it where the applicable regulation or fire-safety concept requires another value.
 
-## Sources
+## Structured provenance
 
-- [buildingSMART IFC 4 ADD2 TC1](https://technical.buildingsmart.org/standards/ifc/ifc-schema-specifications/): `Pset_WallCommon`, `Pset_SlabCommon`, `Pset_DoorCommon`, `Pset_OpeningElementCommon`, and their published applicability.
-- Project-specific fire-safety concept and applicable German state/special-building regulations.
+- Every coordination rule cites the document-owned Axioval example
+  `projectPolicy` source. The 1.20 m × 2.00 m envelope is cited at its exact
+  width and height parameters.
+- IFC object, property, and property-set mappings cite the document-owned
+  buildingSMART IFC4 ADD2 TC1 source in `definitions.pkl`.
+- Replace the example policy source and values with the approved project
+  fire-safety concept and applicable requirements before project use.
+
+The citations record provenance only. They do not turn the package into a
+building-code ruleset and do not assert regulatory compliance.
 
 ## Deutsch
 
-Die Regeln prüfen Modellnachweise und Koordinationsinvarianten. Sie ersetzen weder das genehmigte Brandschutzkonzept noch die jeweils anzuwendende Landes- oder Sonderbauverordnung. Fehlende Nachweise gelten als nicht auswertbar und nicht als bestanden.
+Jede Koordinationsregel verweist auf die bearbeitbare beispielhafte
+Projektvorgabe. Die Fluchtwegbreite und -höhe sind ihren Parametern direkt
+zugeordnet. IFC-Zuordnungen verweisen in `definitions.pkl` auf buildingSMART.
+Diese Herkunftsangaben ersetzen weder Brandschutzkonzept noch Rechtsprüfung und
+begründen keine Konformitätsaussage.

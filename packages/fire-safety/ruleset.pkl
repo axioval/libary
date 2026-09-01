@@ -4,6 +4,7 @@ import "../../vendor/schema/schema/Types.pkl"
 import "../../vendor/schema/schema/Values.pkl"
 import "../../vendor/schema/schema/Selectors.pkl"
 import "../../vendor/schema/schema/RuleSets.pkl"
+import "../../vendor/schema/schema/Citations.pkl"
 
 local function text(en: String, de: String): Types.LocalizedText = new Types.LocalizedText { default = en; translations { ["de"] = de } }
 local function classified(classificationCode: String): Selectors.ClassificationSelector = new Selectors.ClassificationSelector { system = "Axioval fire-safety applicability profile"; code = classificationCode }
@@ -12,15 +13,31 @@ local isSlab = new Selectors.EntityTypeSelector { objectType = "axioval:fire.ifc
 local isDoor = new Selectors.EntityTypeSelector { objectType = "axioval:fire.ifc4.door" }
 local isOpening = new Selectors.EntityTypeSelector { objectType = "axioval:fire.ifc4.opening" }
 local function scoped(typeSelector: Selectors.Selector, classificationCode: String): Selectors.AllOfSelector = new Selectors.AllOfSelector { operands { typeSelector; classified(classificationCode) } }
+local function projectCitation(citationId: String, section: String): Citations.Citation = new Citations.Citation {
+  id = citationId
+  sourceId = "axioval:fire-safety.project-policy"
+  locators { new Citations.Locator { kind = "section"; value = section } }
+  note = text("This is an editable example project requirement, not a regulatory compliance claim.", "Dies ist eine bearbeitbare beispielhafte Projektanforderung und keine Aussage zur Rechtskonformität.")
+}
 
 package = new Types.PackageMetadata {
   id = "axioval:specification.fire-safety"
   version = "0.1.0"
-  name = "Fire safety / Brandschutz"
-  description = "Bilingual fire-safety coordination and geometry rules / Zweisprachige Regeln für Brandschutzkoordination und Geometrie."
+  name = text("Fire safety", "Brandschutz")
+  description = text("Fire-safety coordination and geometry rules.", "Regeln für Brandschutzkoordination und Geometrie.")
   repository = "https://github.com/axioval/specifications"
   license = "AGPL-3.0-or-later"
   authors { "Axioval contributors" }
+}
+
+sources {
+  ["axioval:fire-safety.project-policy"] = new Citations.Source {
+    id = "axioval:fire-safety.project-policy"
+    kind = "projectPolicy"
+    designation = "Axioval fire-safety example project policy"
+    title = text("Fire-safety example project policy", "Beispielhafte Projektvorgabe Brandschutz")
+    publisher = "Axioval"
+  }
 }
 
 definitionPackages { "axioval:specification.fire-safety.definitions" }
@@ -42,6 +59,7 @@ root = new RuleSets.RuleFolder {
           description = text("Require exact surface continuity; protected openings are handled explicitly.", "Fordert exakte Flächendurchgängigkeit; geschützte Öffnungen werden ausdrücklich berücksichtigt.")
           message = text("The wall boundary contains an unprotected gap or lacks complete geometry evidence.", "Die Wandgrenze enthält eine ungeschützte Lücke oder besitzt keinen vollständigen Geometrienachweis.")
           applicability = scoped(isWall, "fire-compartment-boundary")
+          citations { projectCitation("wall-boundary-continuity-policy", "Compartment boundary continuity") }
           tags { "fire-safety"; "geometry"; "compartment" }
         }
         new RuleSets.RuleInstance {
@@ -51,6 +69,7 @@ root = new RuleSets.RuleFolder {
           description = text("Require exact surface continuity across the assigned slab boundary.", "Fordert exakte Flächendurchgängigkeit über die zugewiesene Deckengrenze.")
           message = text("The slab boundary contains an unprotected gap or lacks complete geometry evidence.", "Die Deckengrenze enthält eine ungeschützte Lücke oder besitzt keinen vollständigen Geometrienachweis.")
           applicability = scoped(isSlab, "fire-compartment-boundary")
+          citations { projectCitation("slab-boundary-continuity-policy", "Compartment boundary continuity") }
           tags { "fire-safety"; "geometry"; "compartment" }
         }
         new RuleSets.RuleInstance {
@@ -60,6 +79,7 @@ root = new RuleSets.RuleFolder {
           message = text("Pset_WallCommon.Compartmentation is missing, conflicting, or false.", "Pset_WallCommon.Compartmentation fehlt, ist widersprüchlich oder falsch.")
           parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.compartmentation"; propertySet = "axioval:fire.ifc4.pset-wall-common" }; ["expected"] = new Values.BooleanValue { value = true } }
           applicability = scoped(isWall, "fire-compartment-boundary")
+          citations { projectCitation("wall-declared-compartmentation-policy", "Declared compartmentation") }
           tags { "ifc4"; "fire-safety"; "property" }
         }
         new RuleSets.RuleInstance {
@@ -69,6 +89,7 @@ root = new RuleSets.RuleFolder {
           message = text("Pset_SlabCommon.Compartmentation is missing, conflicting, or false.", "Pset_SlabCommon.Compartmentation fehlt, ist widersprüchlich oder falsch.")
           parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.compartmentation"; propertySet = "axioval:fire.ifc4.pset-slab-common" }; ["expected"] = new Values.BooleanValue { value = true } }
           applicability = scoped(isSlab, "fire-compartment-boundary")
+          citations { projectCitation("slab-declared-compartmentation-policy", "Declared compartmentation") }
           tags { "ifc4"; "fire-safety"; "property" }
         }
       }
@@ -85,6 +106,7 @@ root = new RuleSets.RuleFolder {
           message = text("Pset_DoorCommon.FireRating is missing or conflicting.", "Pset_DoorCommon.FireRating fehlt oder ist widersprüchlich.")
           parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.fire-rating"; propertySet = "axioval:fire.ifc4.pset-door-common" } }
           applicability = scoped(isDoor, "rated-fire-door")
+          citations { projectCitation("rated-door-has-fire-rating-policy", "Rated doors") }
           tags { "ifc4"; "fire-door"; "property" }
         }
         new RuleSets.RuleInstance {
@@ -94,6 +116,7 @@ root = new RuleSets.RuleFolder {
           message = text("Pset_DoorCommon.FireExit is missing, conflicting, or false.", "Pset_DoorCommon.FireExit fehlt, ist widersprüchlich oder falsch.")
           parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.fire-exit"; propertySet = "axioval:fire.ifc4.pset-door-common" }; ["expected"] = new Values.BooleanValue { value = true } }
           applicability = scoped(isDoor, "fire-exit-door")
+          citations { projectCitation("fire-exit-door-marked-policy", "Fire-exit doors") }
           tags { "ifc4"; "fire-exit"; "property" }
         }
         new RuleSets.RuleInstance {
@@ -103,6 +126,7 @@ root = new RuleSets.RuleFolder {
           message = text("Pset_DoorCommon.SelfClosing is missing, conflicting, or false.", "Pset_DoorCommon.SelfClosing fehlt, ist widersprüchlich oder falsch.")
           parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.self-closing"; propertySet = "axioval:fire.ifc4.pset-door-common" }; ["expected"] = new Values.BooleanValue { value = true } }
           applicability = scoped(isDoor, "self-closing-fire-door")
+          citations { projectCitation("fire-door-self-closing-policy", "Self-closing fire doors") }
           tags { "ifc4"; "fire-door"; "property" }
         }
         new RuleSets.RuleInstance {
@@ -112,6 +136,7 @@ root = new RuleSets.RuleFolder {
           message = text("Pset_DoorCommon.SmokeStop is missing, conflicting, or false.", "Pset_DoorCommon.SmokeStop fehlt, ist widersprüchlich oder falsch.")
           parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.smoke-stop"; propertySet = "axioval:fire.ifc4.pset-door-common" }; ["expected"] = new Values.BooleanValue { value = true } }
           applicability = scoped(isDoor, "smoke-control-door")
+          citations { projectCitation("smoke-control-door-marked-policy", "Smoke-control doors") }
           tags { "ifc4"; "smoke-control"; "property" }
         }
         new RuleSets.RuleInstance {
@@ -121,6 +146,7 @@ root = new RuleSets.RuleFolder {
           message = text("Pset_OpeningElementCommon.ProtectedOpening is missing, conflicting, or false.", "Pset_OpeningElementCommon.ProtectedOpening fehlt, ist widersprüchlich oder falsch.")
           parameters { ["property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.protected-opening"; propertySet = "axioval:fire.ifc4.pset-opening-common" }; ["expected"] = new Values.BooleanValue { value = true } }
           applicability = scoped(isOpening, "fire-compartment-penetration")
+          citations { projectCitation("compartment-opening-protected-policy", "Protected penetrations") }
           tags { "ifc4"; "penetration"; "property" }
         }
         new RuleSets.RuleInstance {
@@ -130,6 +156,7 @@ root = new RuleSets.RuleFolder {
           message = text("The penetration-to-host relation or compatible parsed ratings could not be proven.", "Die Beziehung zwischen Durchführung und Bauteil oder kompatible aufgelöste Feuerwiderstände konnten nicht nachgewiesen werden.")
           parameters { ["element_property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.fire-rating" }; ["host_property"] = new Values.PropertyReferenceValue { property = "axioval:fire.ifc4.fire-rating" } }
           applicability = scoped(isOpening, "rated-fire-compartment-penetration")
+          citations { projectCitation("penetration-rating-matches-host-policy", "Penetration ratings") }
           tags { "fire-rating"; "relation"; "fail-closed" }
         }
       }
@@ -147,6 +174,12 @@ root = new RuleSets.RuleFolder {
           message = text("The configured 1.20 m × 2.00 m continuous route envelope was not proven.", "Der konfigurierte durchgehend freie Wegquerschnitt von 1,20 m × 2,00 m wurde nicht nachgewiesen.")
           parameters { ["width_metres"] = new Values.NumberValue { value = 1.2 }; ["height_metres"] = new Values.NumberValue { value = 2.0 } }
           applicability = classified("project-policy.escape-route-1200x2000")
+          parameterCitations {
+            new Citations.ParameterCitation {
+              parameterIds { "width_metres"; "height_metres" }
+              citation = projectCitation("example-escape-route-1200x2000-policy", "Example escape-route envelope")
+            }
+          }
           tags { "example-policy"; "escape-route"; "geometry" }
         }
       }

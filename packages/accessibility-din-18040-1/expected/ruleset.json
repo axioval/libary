@@ -6,10 +6,20 @@
     "authors": [
       "Axioval contributors"
     ],
-    "description": "English and German DIN 18040-1 focused geometric requirements / Englisch- und deutschsprachige geometrische Anforderungen mit Schwerpunkt DIN 18040-1.",
+    "description": {
+      "default": "DIN 18040-1 focused geometric accessibility requirements.",
+      "translations": {
+        "de": "Geometrische Anforderungen an die Barrierefreiheit mit Schwerpunkt DIN 18040-1."
+      }
+    },
     "id": "axioval:specification.accessibility-din-18040-1",
     "license": "AGPL-3.0-or-later",
-    "name": "Accessibility / Barrierefreiheit — DIN 18040-1",
+    "name": {
+      "default": "Accessibility — DIN 18040-1",
+      "translations": {
+        "de": "Barrierefreiheit — DIN 18040-1"
+      }
+    },
     "repository": "https://github.com/axioval/specifications",
     "version": "0.1.0"
   },
@@ -54,6 +64,7 @@
                 }
               ]
             },
+            "citations": [],
             "definitionId": "axioval:definition.free-floor-rectangle",
             "description": {
               "default": "Require a 1.80 m by 1.80 m unobstructed movement area where this encounter case is assigned.",
@@ -76,6 +87,51 @@
                 "de": "Begegnung zweier Rollstuhlnutzer"
               }
             },
+            "parameterCitations": [
+              {
+                "citation": {
+                  "id": "meeting-dimensions",
+                  "locators": [
+                    {
+                      "kind": "clause",
+                      "value": "4.3.2"
+                    }
+                  ],
+                  "note": {
+                    "default": "The cited parameters reproduce the identified DIN dimensions.",
+                    "translations": {
+                      "de": "Die zitierten Parameter geben die angegebenen DIN-Abmessungen wieder."
+                    }
+                  },
+                  "sourceId": "urn:din:18040-1:2010-10"
+                },
+                "parameterIds": [
+                  "width_metres",
+                  "length_metres"
+                ]
+              },
+              {
+                "citation": {
+                  "id": "meeting-dimensions-height",
+                  "locators": [
+                    {
+                      "kind": "section",
+                      "value": "Conservative execution envelope"
+                    }
+                  ],
+                  "note": {
+                    "default": "The 2.00 m height is a conservative Axioval evaluation envelope, not a DIN threshold.",
+                    "translations": {
+                      "de": "Die Höhe von 2,00 m ist eine konservative Axioval-Auswertungshülle und kein DIN-Grenzwert."
+                    }
+                  },
+                  "sourceId": "axioval:accessibility.project-profile"
+                },
+                "parameterIds": [
+                  "height_metres"
+                ]
+              }
+            ],
             "parameters": {
               "height_metres": {
                 "type": "number",
@@ -115,6 +171,7 @@
                 }
               ]
             },
+            "citations": [],
             "definitionId": "axioval:definition.free-floor-rectangle",
             "description": {
               "default": "Require a 1.50 m by 1.50 m unobstructed movement area where this encounter case is assigned.",
@@ -137,6 +194,51 @@
                 "de": "Begegnung eines Rollstuhlnutzers mit einer anderen Person"
               }
             },
+            "parameterCitations": [
+              {
+                "citation": {
+                  "id": "encounter-dimensions",
+                  "locators": [
+                    {
+                      "kind": "clause",
+                      "value": "4.3.2"
+                    }
+                  ],
+                  "note": {
+                    "default": "The cited parameters reproduce the identified DIN dimensions.",
+                    "translations": {
+                      "de": "Die zitierten Parameter geben die angegebenen DIN-Abmessungen wieder."
+                    }
+                  },
+                  "sourceId": "urn:din:18040-1:2010-10"
+                },
+                "parameterIds": [
+                  "width_metres",
+                  "length_metres"
+                ]
+              },
+              {
+                "citation": {
+                  "id": "encounter-dimensions-height",
+                  "locators": [
+                    {
+                      "kind": "section",
+                      "value": "Conservative execution envelope"
+                    }
+                  ],
+                  "note": {
+                    "default": "The 2.00 m height is a conservative Axioval evaluation envelope, not a DIN threshold.",
+                    "translations": {
+                      "de": "Die Höhe von 2,00 m ist eine konservative Axioval-Auswertungshülle und kein DIN-Grenzwert."
+                    }
+                  },
+                  "sourceId": "axioval:accessibility.project-profile"
+                },
+                "parameterIds": [
+                  "height_metres"
+                ]
+              }
+            ],
             "parameters": {
               "height_metres": {
                 "type": "number",
@@ -176,6 +278,7 @@
                 }
               ]
             },
+            "citations": [],
             "definitionId": "axioval:definition.free-floor-rectangle",
             "description": {
               "default": "Require a 1.50 m by 1.50 m unobstructed movement area where turning or maneuvering is assigned.",
@@ -198,6 +301,51 @@
                 "de": "Richtungswechsel und Rangiervorgänge"
               }
             },
+            "parameterCitations": [
+              {
+                "citation": {
+                  "id": "turning-dimensions",
+                  "locators": [
+                    {
+                      "kind": "clause",
+                      "value": "4.3.2"
+                    }
+                  ],
+                  "note": {
+                    "default": "The cited parameters reproduce the identified DIN dimensions.",
+                    "translations": {
+                      "de": "Die zitierten Parameter geben die angegebenen DIN-Abmessungen wieder."
+                    }
+                  },
+                  "sourceId": "urn:din:18040-1:2010-10"
+                },
+                "parameterIds": [
+                  "width_metres",
+                  "length_metres"
+                ]
+              },
+              {
+                "citation": {
+                  "id": "turning-dimensions-height",
+                  "locators": [
+                    {
+                      "kind": "section",
+                      "value": "Conservative execution envelope"
+                    }
+                  ],
+                  "note": {
+                    "default": "The 2.00 m height is a conservative Axioval evaluation envelope, not a DIN threshold.",
+                    "translations": {
+                      "de": "Die Höhe von 2,00 m ist eine konservative Axioval-Auswertungshülle und kein DIN-Grenzwert."
+                    }
+                  },
+                  "sourceId": "axioval:accessibility.project-profile"
+                },
+                "parameterIds": [
+                  "height_metres"
+                ]
+              }
+            ],
             "parameters": {
               "height_metres": {
                 "type": "number",
@@ -265,6 +413,7 @@
                 }
               ]
             },
+            "citations": [],
             "definitionId": "axioval:definition.minimum-clear-route",
             "description": {
               "default": "Apply only where neither a direction change nor an encounter is expected.",
@@ -287,6 +436,29 @@
                 "de": "Geradliniger Wegabschnitt hat 1,20 m lichte Breite"
               }
             },
+            "parameterCitations": [
+              {
+                "citation": {
+                  "id": "straight-route-width",
+                  "locators": [
+                    {
+                      "kind": "clause",
+                      "value": "4.3.2"
+                    }
+                  ],
+                  "note": {
+                    "default": "The cited parameters reproduce the identified DIN dimensions.",
+                    "translations": {
+                      "de": "Die zitierten Parameter geben die angegebenen DIN-Abmessungen wieder."
+                    }
+                  },
+                  "sourceId": "urn:din:18040-1:2010-10"
+                },
+                "parameterIds": [
+                  "width_metres"
+                ]
+              }
+            ],
             "parameters": {
               "width_metres": {
                 "type": "number",
@@ -318,6 +490,7 @@
                 }
               ]
             },
+            "citations": [],
             "definitionId": "axioval:definition.minimum-clear-opening",
             "description": {
               "default": "Check the passable aperture, not Qto_DoorBaseQuantities.Width or nominal leaf width.",
@@ -340,6 +513,37 @@
                 "de": "Barrierefreie Tür hat 0,90 m lichte Öffnung"
               }
             },
+            "parameterCitations": [
+              {
+                "citation": {
+                  "id": "accessible-door-clear-width",
+                  "locators": [
+                    {
+                      "kind": "clause",
+                      "value": "4.3.3.2"
+                    },
+                    {
+                      "kind": "table",
+                      "value": "1"
+                    },
+                    {
+                      "kind": "item",
+                      "value": "row 1"
+                    }
+                  ],
+                  "note": {
+                    "default": "The cited parameters reproduce the identified DIN dimensions.",
+                    "translations": {
+                      "de": "Die zitierten Parameter geben die angegebenen DIN-Abmessungen wieder."
+                    }
+                  },
+                  "sourceId": "urn:din:18040-1:2010-10"
+                },
+                "parameterIds": [
+                  "width_metres"
+                ]
+              }
+            ],
             "parameters": {
               "width_metres": {
                 "type": "number",
@@ -350,7 +554,7 @@
             "severity": "error",
             "tags": [
               "din-18040-1",
-              "4.6",
+              "4.3.3.2",
               "opening"
             ]
           },
@@ -371,6 +575,7 @@
                 }
               ]
             },
+            "citations": [],
             "definitionId": "axioval:definition.boolean-property-equals",
             "description": {
               "default": "Require Pset_DoorCommon.HandicapAccessible = TRUE on doors assigned to the accessible route.",
@@ -393,6 +598,30 @@
                 "de": "Barrierefreie Tür trägt die Barrierefreiheitskennzeichnung"
               }
             },
+            "parameterCitations": [
+              {
+                "citation": {
+                  "id": "accessible-door-intent-policy",
+                  "locators": [
+                    {
+                      "kind": "section",
+                      "value": "Accessible-door modeling intent"
+                    }
+                  ],
+                  "note": {
+                    "default": "This parameter binding is an Axioval example modeling convention.",
+                    "translations": {
+                      "de": "Diese Parameterbindung ist eine beispielhafte Axioval-Modellierungskonvention."
+                    }
+                  },
+                  "sourceId": "axioval:accessibility.project-profile"
+                },
+                "parameterIds": [
+                  "property",
+                  "expected"
+                ]
+              }
+            ],
             "parameters": {
               "expected": {
                 "type": "boolean",
@@ -424,5 +653,34 @@
     },
     "rules": []
   },
-  "schemaVersion": "0.1.0"
+  "schemaVersion": "0.1.0",
+  "sources": {
+    "axioval:accessibility.project-profile": {
+      "designation": "Axioval accessibility example project profile",
+      "id": "axioval:accessibility.project-profile",
+      "kind": "projectPolicy",
+      "publisher": "Axioval",
+      "title": {
+        "default": "Accessibility example project profile",
+        "translations": {
+          "de": "Beispielhaftes Projektprofil Barrierefreiheit"
+        }
+      }
+    },
+    "urn:din:18040-1:2010-10": {
+      "designation": "DIN 18040-1:2010-10",
+      "edition": "2010-10",
+      "id": "urn:din:18040-1:2010-10",
+      "kind": "standard",
+      "publicationDate": "2010-10",
+      "publisher": "DIN",
+      "title": {
+        "default": "Accessible building — Part 1: Publicly accessible buildings",
+        "translations": {
+          "de": "Barrierefreies Bauen — Teil 1: Öffentlich zugängliche Gebäude"
+        }
+      },
+      "url": "https://www.dinmedia.de/en/standard/din-18040-1/133692028"
+    }
+  }
 }

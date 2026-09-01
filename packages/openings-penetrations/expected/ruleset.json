@@ -6,10 +6,20 @@
     "authors": [
       "Axioval contributors"
     ],
-    "description": "Bilingual coordination rules / Zweisprachige Koordinationsregeln.",
+    "description": {
+      "default": "Opening and penetration coordination rules.",
+      "translations": {
+        "de": "Regeln für die Schlitz- und Durchbruchskoordination."
+      }
+    },
     "id": "axioval:specification.openings-penetrations",
     "license": "AGPL-3.0-or-later",
-    "name": "Openings and penetrations / Schlitz- und Durchbruchsplanung",
+    "name": {
+      "default": "Openings and penetrations",
+      "translations": {
+        "de": "Schlitz- und Durchbruchsplanung"
+      }
+    },
     "repository": "https://github.com/axioval/specifications",
     "version": "0.1.0"
   },
@@ -83,6 +93,7 @@
             }
           }
         },
+        "citations": [],
         "definitionId": "axioval:template.opening-fully-cuts-host",
         "enabled": true,
         "explanatoryImages": [
@@ -117,9 +128,28 @@
             "de": "Öffnung durchdringt ihr Bauteil vollständig"
           }
         },
+        "parameterCitations": [],
         "parameters": {},
         "requirements": [
           {
+            "citations": [
+              {
+                "id": "opening-cuts-penetrated-element-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Host cutting"
+                  }
+                ],
+                "note": {
+                  "default": "Editable example project policy; not a statutory value.",
+                  "translations": {
+                    "de": "Bearbeitbare beispielhafte Projektvorgabe; kein gesetzlicher Wert."
+                  }
+                },
+                "sourceId": "axioval:openings.project-policy"
+              }
+            ],
             "id": "opening-cuts-penetrated-element",
             "statement": {
               "default": "Each opening fully cuts its associated penetrated element.",
@@ -194,6 +224,7 @@
             }
           }
         },
+        "citations": [],
         "definitionId": "axioval:template.service-contained-in-opening",
         "enabled": true,
         "explanatoryImages": [
@@ -228,6 +259,50 @@
             "de": "TGA-Element passt mit 25 mm Montagezugabe"
           }
         },
+        "parameterCitations": [
+          {
+            "citation": {
+              "id": "side-clearance-policy",
+              "locators": [
+                {
+                  "kind": "section",
+                  "value": "Installation allowance"
+                }
+              ],
+              "note": {
+                "default": "Editable example project policy; not a statutory value.",
+                "translations": {
+                  "de": "Bearbeitbare beispielhafte Projektvorgabe; kein gesetzlicher Wert."
+                }
+              },
+              "sourceId": "axioval:openings.project-policy"
+            },
+            "parameterIds": [
+              "side_clearance_metres"
+            ]
+          },
+          {
+            "citation": {
+              "id": "end-clearance-policy",
+              "locators": [
+                {
+                  "kind": "section",
+                  "value": "Installation allowance"
+                }
+              ],
+              "note": {
+                "default": "Editable example project policy; not a statutory value.",
+                "translations": {
+                  "de": "Bearbeitbare beispielhafte Projektvorgabe; kein gesetzlicher Wert."
+                }
+              },
+              "sourceId": "axioval:openings.project-policy"
+            },
+            "parameterIds": [
+              "end_clearance_metres"
+            ]
+          }
+        ],
         "parameters": {
           "end_clearance_metres": {
             "type": "number",
@@ -240,6 +315,24 @@
         },
         "requirements": [
           {
+            "citations": [
+              {
+                "id": "service-envelope-fits-opening-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Installation allowance"
+                  }
+                ],
+                "note": {
+                  "default": "Editable example project policy; not a statutory value.",
+                  "translations": {
+                    "de": "Bearbeitbare beispielhafte Projektvorgabe; kein gesetzlicher Wert."
+                  }
+                },
+                "sourceId": "axioval:openings.project-policy"
+              }
+            ],
             "id": "service-envelope-fits-opening",
             "statement": {
               "default": "Each penetrating element and its project allowances fit within its associated opening.",
@@ -339,6 +432,7 @@
             }
           }
         },
+        "citations": [],
         "definitionId": "axioval:template.no-host-clash-outside-opening",
         "enabled": true,
         "explanatoryImages": [
@@ -373,9 +467,28 @@
             "de": "Keine Bauteilkollision außerhalb der Öffnung"
           }
         },
+        "parameterCitations": [],
         "parameters": {},
         "requirements": [
           {
+            "citations": [
+              {
+                "id": "penetration-intersection-contained-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Clash containment"
+                  }
+                ],
+                "note": {
+                  "default": "Editable example project policy; not a statutory value.",
+                  "translations": {
+                    "de": "Bearbeitbare beispielhafte Projektvorgabe; kein gesetzlicher Wert."
+                  }
+                },
+                "sourceId": "axioval:openings.project-policy"
+              }
+            ],
             "id": "penetration-intersection-contained",
             "statement": {
               "default": "Penetrating elements intersect penetrated elements only inside associated openings.",
@@ -426,6 +539,7 @@
             }
           }
         },
+        "citations": [],
         "definitionId": "axioval:template.opening-quantities-match-geometry",
         "enabled": true,
         "explanatoryImages": [
@@ -460,6 +574,74 @@
             "de": "Öffnungsmengen stimmen mit Geometrie überein"
           }
         },
+        "parameterCitations": [
+          {
+            "citation": {
+              "id": "opening-width-ifc",
+              "locators": [
+                {
+                  "kind": "item",
+                  "value": "Qto_OpeningElementBaseQuantities.Width"
+                }
+              ],
+              "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+            },
+            "parameterIds": [
+              "width"
+            ]
+          },
+          {
+            "citation": {
+              "id": "opening-height-ifc",
+              "locators": [
+                {
+                  "kind": "item",
+                  "value": "Qto_OpeningElementBaseQuantities.Height"
+                }
+              ],
+              "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+            },
+            "parameterIds": [
+              "height"
+            ]
+          },
+          {
+            "citation": {
+              "id": "opening-depth-ifc",
+              "locators": [
+                {
+                  "kind": "item",
+                  "value": "Qto_OpeningElementBaseQuantities.Depth"
+                }
+              ],
+              "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+            },
+            "parameterIds": [
+              "depth"
+            ]
+          },
+          {
+            "citation": {
+              "id": "quantity-tolerance-policy",
+              "locators": [
+                {
+                  "kind": "section",
+                  "value": "Quantity tolerance"
+                }
+              ],
+              "note": {
+                "default": "Editable example project policy; not a statutory value.",
+                "translations": {
+                  "de": "Bearbeitbare beispielhafte Projektvorgabe; kein gesetzlicher Wert."
+                }
+              },
+              "sourceId": "axioval:openings.project-policy"
+            },
+            "parameterIds": [
+              "tolerance_metres"
+            ]
+          }
+        ],
         "parameters": {
           "depth": {
             "property": "axioval:ifc4.opening.depth",
@@ -483,6 +665,24 @@
         },
         "requirements": [
           {
+            "citations": [
+              {
+                "id": "opening-quantities-match-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Quantity tolerance"
+                  }
+                ],
+                "note": {
+                  "default": "Editable example project policy; not a statutory value.",
+                  "translations": {
+                    "de": "Bearbeitbare beispielhafte Projektvorgabe; kein gesetzlicher Wert."
+                  }
+                },
+                "sourceId": "axioval:openings.project-policy"
+              }
+            ],
             "id": "opening-quantities-match",
             "statement": {
               "default": "Each opening's published dimensions match its exact geometry within 5 mm.",
@@ -571,6 +771,7 @@
             }
           }
         },
+        "citations": [],
         "definitionId": "axioval:template.opening-has-service-or-fill",
         "enabled": true,
         "explanatoryImages": [
@@ -605,9 +806,28 @@
             "de": "Öffnung hat TGA-Element oder Füllung"
           }
         },
+        "parameterCitations": [],
         "parameters": {},
         "requirements": [
           {
+            "citations": [
+              {
+                "id": "opening-has-associated-content-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Opening associations"
+                  }
+                ],
+                "note": {
+                  "default": "Editable example project policy; not a statutory value.",
+                  "translations": {
+                    "de": "Bearbeitbare beispielhafte Projektvorgabe; kein gesetzlicher Wert."
+                  }
+                },
+                "sourceId": "axioval:openings.project-policy"
+              }
+            ],
             "id": "opening-has-associated-content",
             "statement": {
               "default": "Each opening has an associated penetrating element or filling element.",
@@ -693,6 +913,7 @@
             }
           }
         },
+        "citations": [],
         "definitionId": "axioval:template.boolean-property-equals",
         "enabled": true,
         "explanatoryImages": [
@@ -727,6 +948,44 @@
             "de": "Öffnung in Brandabschnittsgrenze als geschützt gekennzeichnet"
           }
         },
+        "parameterCitations": [
+          {
+            "citation": {
+              "id": "protected-opening-ifc",
+              "locators": [
+                {
+                  "kind": "item",
+                  "value": "Pset_OpeningElementCommon.ProtectedOpening"
+                }
+              ],
+              "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+            },
+            "parameterIds": [
+              "property"
+            ]
+          },
+          {
+            "citation": {
+              "id": "protected-opening-policy",
+              "locators": [
+                {
+                  "kind": "section",
+                  "value": "Protected fire-boundary openings"
+                }
+              ],
+              "note": {
+                "default": "Editable example project policy; not a statutory value.",
+                "translations": {
+                  "de": "Bearbeitbare beispielhafte Projektvorgabe; kein gesetzlicher Wert."
+                }
+              },
+              "sourceId": "axioval:openings.project-policy"
+            },
+            "parameterIds": [
+              "expected"
+            ]
+          }
+        ],
         "parameters": {
           "expected": {
             "type": "boolean",
@@ -740,6 +999,24 @@
         },
         "requirements": [
           {
+            "citations": [
+              {
+                "id": "fire-boundary-opening-is-protected-policy",
+                "locators": [
+                  {
+                    "kind": "section",
+                    "value": "Protected fire-boundary openings"
+                  }
+                ],
+                "note": {
+                  "default": "Editable example project policy; not a statutory value.",
+                  "translations": {
+                    "de": "Bearbeitbare beispielhafte Projektvorgabe; kein gesetzlicher Wert."
+                  }
+                },
+                "sourceId": "axioval:openings.project-policy"
+              }
+            ],
             "id": "fire-boundary-opening-is-protected",
             "statement": {
               "default": "Each opening in a penetrated fire boundary is marked as protected.",
@@ -761,5 +1038,32 @@
       }
     ]
   },
-  "schemaVersion": "0.1.0"
+  "schemaVersion": "0.1.0",
+  "sources": {
+    "axioval:openings.project-policy": {
+      "designation": "Axioval openings example project policy",
+      "id": "axioval:openings.project-policy",
+      "kind": "projectPolicy",
+      "publisher": "Axioval",
+      "title": {
+        "default": "Openings example project policy",
+        "translations": {
+          "de": "Beispielhafte Projektvorgabe für Schlitze und Durchbrüche"
+        }
+      }
+    },
+    "urn:buildingsmart:ifc:IFC4-ADD2-TC1": {
+      "designation": "IFC4 ADD2 TC1",
+      "id": "urn:buildingsmart:ifc:IFC4-ADD2-TC1",
+      "kind": "technicalSpecification",
+      "publisher": "buildingSMART International",
+      "title": {
+        "default": "Industry Foundation Classes IFC4 ADD2 TC1",
+        "translations": {
+          "de": "Industry Foundation Classes IFC4 ADD2 TC1"
+        }
+      },
+      "url": "https://technical.buildingsmart.org/standards/ifc/ifc-schema-specifications/"
+    }
+  }
 }

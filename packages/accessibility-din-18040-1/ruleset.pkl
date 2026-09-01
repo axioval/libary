@@ -4,6 +4,7 @@ import "../../vendor/schema/schema/Types.pkl"
 import "../../vendor/schema/schema/Values.pkl"
 import "../../vendor/schema/schema/Selectors.pkl"
 import "../../vendor/schema/schema/RuleSets.pkl"
+import "../../vendor/schema/schema/Citations.pkl"
 
 local function text(en: String, de: String): Types.LocalizedText = new Types.LocalizedText {
   default = en
@@ -28,11 +29,31 @@ local function scoped(typeSelector: Selectors.Selector, code: String): Selectors
 package = new Types.PackageMetadata {
   id = "axioval:specification.accessibility-din-18040-1"
   version = "0.1.0"
-  name = "Accessibility / Barrierefreiheit — DIN 18040-1"
-  description = "English and German DIN 18040-1 focused geometric requirements / Englisch- und deutschsprachige geometrische Anforderungen mit Schwerpunkt DIN 18040-1."
+  name = text("Accessibility — DIN 18040-1", "Barrierefreiheit — DIN 18040-1")
+  description = text("DIN 18040-1 focused geometric accessibility requirements.", "Geometrische Anforderungen an die Barrierefreiheit mit Schwerpunkt DIN 18040-1.")
   repository = "https://github.com/axioval/specifications"
   license = "AGPL-3.0-or-later"
   authors { "Axioval contributors" }
+}
+
+sources {
+  ["urn:din:18040-1:2010-10"] = new Citations.Source {
+    id = "urn:din:18040-1:2010-10"
+    kind = "standard"
+    designation = "DIN 18040-1:2010-10"
+    title = text("Accessible building — Part 1: Publicly accessible buildings", "Barrierefreies Bauen — Teil 1: Öffentlich zugängliche Gebäude")
+    publisher = "DIN"
+    edition = "2010-10"
+    publicationDate = "2010-10"
+    url = "https://www.dinmedia.de/en/standard/din-18040-1/133692028"
+  }
+  ["axioval:accessibility.project-profile"] = new Citations.Source {
+    id = "axioval:accessibility.project-profile"
+    kind = "projectPolicy"
+    designation = "Axioval accessibility example project profile"
+    title = text("Accessibility example project profile", "Beispielhaftes Projektprofil Barrierefreiheit")
+    publisher = "Axioval"
+  }
 }
 
 definitionPackages { "axioval:specification.accessibility-din-18040-1.definitions" }
@@ -59,6 +80,30 @@ root = new RuleSets.RuleFolder {
             ["height_metres"] = new Values.NumberValue { value = 2.0 }
           }
           applicability = scoped(isSpace, "movement-area.meeting-two-wheelchairs")
+          parameterCitations {
+            new Citations.ParameterCitation {
+              parameterIds { "width_metres"; "length_metres" }
+              citation = new Citations.Citation {
+                id = "meeting-dimensions"
+                sourceId = "urn:din:18040-1:2010-10"
+                locators {
+              new Citations.Locator { kind = "clause"; value = "4.3.2" }
+                }
+                note = text("The cited parameters reproduce the identified DIN dimensions.", "Die zitierten Parameter geben die angegebenen DIN-Abmessungen wieder.")
+              }
+            }
+            new Citations.ParameterCitation {
+              parameterIds { "height_metres" }
+              citation = new Citations.Citation {
+                id = "meeting-dimensions-height"
+                sourceId = "axioval:accessibility.project-profile"
+                locators {
+              new Citations.Locator { kind = "section"; value = "Conservative execution envelope" }
+                }
+                note = text("The 2.00 m height is a conservative Axioval evaluation envelope, not a DIN threshold.", "Die Höhe von 2,00 m ist eine konservative Axioval-Auswertungshülle und kein DIN-Grenzwert.")
+              }
+            }
+          }
           tags { "din-18040-1"; "4.3.2"; "geometry" }
         }
         new RuleSets.RuleInstance {
@@ -73,6 +118,30 @@ root = new RuleSets.RuleFolder {
             ["height_metres"] = new Values.NumberValue { value = 2.0 }
           }
           applicability = scoped(isSpace, "movement-area.meeting-wheelchair-person")
+          parameterCitations {
+            new Citations.ParameterCitation {
+              parameterIds { "width_metres"; "length_metres" }
+              citation = new Citations.Citation {
+                id = "encounter-dimensions"
+                sourceId = "urn:din:18040-1:2010-10"
+                locators {
+              new Citations.Locator { kind = "clause"; value = "4.3.2" }
+                }
+                note = text("The cited parameters reproduce the identified DIN dimensions.", "Die zitierten Parameter geben die angegebenen DIN-Abmessungen wieder.")
+              }
+            }
+            new Citations.ParameterCitation {
+              parameterIds { "height_metres" }
+              citation = new Citations.Citation {
+                id = "encounter-dimensions-height"
+                sourceId = "axioval:accessibility.project-profile"
+                locators {
+              new Citations.Locator { kind = "section"; value = "Conservative execution envelope" }
+                }
+                note = text("The 2.00 m height is a conservative Axioval evaluation envelope, not a DIN threshold.", "Die Höhe von 2,00 m ist eine konservative Axioval-Auswertungshülle und kein DIN-Grenzwert.")
+              }
+            }
+          }
           tags { "din-18040-1"; "4.3.2"; "geometry" }
         }
         new RuleSets.RuleInstance {
@@ -87,6 +156,30 @@ root = new RuleSets.RuleFolder {
             ["height_metres"] = new Values.NumberValue { value = 2.0 }
           }
           applicability = scoped(isSpace, "movement-area.turning-maneuvering")
+          parameterCitations {
+            new Citations.ParameterCitation {
+              parameterIds { "width_metres"; "length_metres" }
+              citation = new Citations.Citation {
+                id = "turning-dimensions"
+                sourceId = "urn:din:18040-1:2010-10"
+                locators {
+              new Citations.Locator { kind = "clause"; value = "4.3.2" }
+                }
+                note = text("The cited parameters reproduce the identified DIN dimensions.", "Die zitierten Parameter geben die angegebenen DIN-Abmessungen wieder.")
+              }
+            }
+            new Citations.ParameterCitation {
+              parameterIds { "height_metres" }
+              citation = new Citations.Citation {
+                id = "turning-dimensions-height"
+                sourceId = "axioval:accessibility.project-profile"
+                locators {
+              new Citations.Locator { kind = "section"; value = "Conservative execution envelope" }
+                }
+                note = text("The 2.00 m height is a conservative Axioval evaluation envelope, not a DIN threshold.", "Die Höhe von 2,00 m ist eine konservative Axioval-Auswertungshülle und kein DIN-Grenzwert.")
+              }
+            }
+          }
           tags { "din-18040-1"; "4.3.2"; "geometry" }
         }
       }
@@ -104,6 +197,19 @@ root = new RuleSets.RuleFolder {
           message = text("A continuous exact clear route width of 1.20 m was not proven.", "Eine durchgehend exakt lichte Wegbreite von 1,20 m wurde nicht nachgewiesen.")
           parameters { ["width_metres"] = new Values.NumberValue { value = 1.2 } }
           applicability = scoped(isRoute, "route.straight-no-direction-change-or-encounter")
+          parameterCitations {
+            new Citations.ParameterCitation {
+              parameterIds { "width_metres" }
+              citation = new Citations.Citation {
+                id = "straight-route-width"
+                sourceId = "urn:din:18040-1:2010-10"
+                locators {
+              new Citations.Locator { kind = "clause"; value = "4.3.2" }
+                }
+                note = text("The cited parameters reproduce the identified DIN dimensions.", "Die zitierten Parameter geben die angegebenen DIN-Abmessungen wieder.")
+              }
+            }
+          }
           tags { "din-18040-1"; "4.3.2"; "routing" }
         }
         new RuleSets.RuleInstance {
@@ -114,7 +220,22 @@ root = new RuleSets.RuleFolder {
           message = text("An exact clear door opening of 0.90 m was not proven.", "Eine exakt lichte Türöffnung von 0,90 m wurde nicht nachgewiesen.")
           parameters { ["width_metres"] = new Values.NumberValue { value = 0.9 } }
           applicability = scoped(isDoor, "accessible-door")
-          tags { "din-18040-1"; "4.6"; "opening" }
+          parameterCitations {
+            new Citations.ParameterCitation {
+              parameterIds { "width_metres" }
+              citation = new Citations.Citation {
+                id = "accessible-door-clear-width"
+                sourceId = "urn:din:18040-1:2010-10"
+                locators {
+              new Citations.Locator { kind = "clause"; value = "4.3.3.2" }
+              new Citations.Locator { kind = "table"; value = "1" }
+              new Citations.Locator { kind = "item"; value = "row 1" }
+                }
+                note = text("The cited parameters reproduce the identified DIN dimensions.", "Die zitierten Parameter geben die angegebenen DIN-Abmessungen wieder.")
+              }
+            }
+          }
+          tags { "din-18040-1"; "4.3.3.2"; "opening" }
         }
         new RuleSets.RuleInstance {
           id = "accessible-door-intent"
@@ -127,6 +248,19 @@ root = new RuleSets.RuleFolder {
             ["expected"] = new Values.BooleanValue { value = true }
           }
           applicability = scoped(isDoor, "accessible-door")
+          parameterCitations {
+            new Citations.ParameterCitation {
+              parameterIds { "property"; "expected" }
+              citation = new Citations.Citation {
+                id = "accessible-door-intent-policy"
+                sourceId = "axioval:accessibility.project-profile"
+                locators {
+              new Citations.Locator { kind = "section"; value = "Accessible-door modeling intent" }
+                }
+                note = text("This parameter binding is an Axioval example modeling convention.", "Diese Parameterbindung ist eine beispielhafte Axioval-Modellierungskonvention.")
+              }
+            }
+          }
           tags { "ifc4"; "property"; "accessibility" }
         }
       }
