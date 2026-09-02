@@ -28,7 +28,7 @@ local function scoped(typeSelector: Selectors.Selector, code: String): Selectors
 
 package = new Types.PackageMetadata {
   id = "axioval:specification.accessibility-din-18040-1"
-  version = "0.1.0"
+  version = "0.1.1"
   name = text("Accessibility — DIN 18040-1", "Barrierefreiheit — DIN 18040-1")
   description = text("DIN 18040-1 focused geometric accessibility requirements.", "Geometrische Anforderungen an die Barrierefreiheit mit Schwerpunkt DIN 18040-1.")
   repository = "https://github.com/axioval/libary"

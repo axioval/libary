@@ -199,7 +199,7 @@
               "value": "IfcDoor"
             }
           ],
-          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+          "sourceId": "https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1/HTML/"
         }
       ],
       "description": {
@@ -211,7 +211,7 @@
       "externalNames": [
         {
           "name": "IfcDoor",
-          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+          "typeSystem": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4"
         }
       ],
       "id": "axioval:ifc4.door",
@@ -232,7 +232,7 @@
               "value": "IfcRamp"
             }
           ],
-          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+          "sourceId": "https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1/HTML/"
         }
       ],
       "description": {
@@ -244,7 +244,7 @@
       "externalNames": [
         {
           "name": "IfcRamp",
-          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+          "typeSystem": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4"
         }
       ],
       "id": "axioval:ifc4.ramp",
@@ -265,7 +265,7 @@
               "value": "IfcSpace"
             }
           ],
-          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+          "sourceId": "https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1/HTML/"
         }
       ],
       "description": {
@@ -277,7 +277,7 @@
       "externalNames": [
         {
           "name": "IfcSpace",
-          "typeSystem": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+          "typeSystem": "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4"
         }
       ],
       "id": "axioval:ifc4.space",
@@ -308,7 +308,7 @@
       }
     },
     "repository": "https://github.com/axioval/libary",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "properties": {
     "axioval:ifc4.handicap-accessible": {
@@ -321,7 +321,7 @@
               "value": "HandicapAccessible"
             }
           ],
-          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+          "sourceId": "https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1/HTML/"
         }
       ],
       "description": {
@@ -357,7 +357,7 @@
               "value": "Pset_DoorCommon"
             }
           ],
-          "sourceId": "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+          "sourceId": "https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1/HTML/"
         }
       ],
       "description": {
@@ -383,9 +383,9 @@
   },
   "schemaVersion": "0.1.0",
   "sources": {
-    "urn:buildingsmart:ifc:IFC4-ADD2-TC1": {
+    "https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1/HTML/": {
       "designation": "IFC4 ADD2 TC1",
-      "id": "urn:buildingsmart:ifc:IFC4-ADD2-TC1",
+      "id": "https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1/HTML/",
       "kind": "technicalSpecification",
       "publisher": "buildingSMART International",
       "title": {
@@ -394,7 +394,7 @@
           "de": "Industry Foundation Classes IFC4 ADD2 TC1"
         }
       },
-      "url": "https://technical.buildingsmart.org/standards/ifc/ifc-schema-specifications/"
+      "url": "https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1/HTML/"
     }
   }
 }

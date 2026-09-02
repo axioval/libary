@@ -1,18 +1,24 @@
 amends "../../vendor/schema/schema/Definitions.pkl"
 
+import "@ifc/versions/Ifc4.pkl" as ifc4
+
 import "../../vendor/schema/schema/Types.pkl"
 import "../../vendor/schema/schema/Definitions.pkl"
 import "../../vendor/schema/schema/Citations.pkl"
+import "../../vendor/schema/schema/adapters/Ifc.pkl" as ifcAdapter
 
 local function text(en: String, de: String): Types.LocalizedText = new Types.LocalizedText {
   default = en
   translations { ["de"] = de }
 }
-local ifc4 = "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
+local ifc4Source = ifc4.release.sourceUri
+// IFC PSD/QTO occurrences are not bundled by openbim.ifc 0.2.1 yet. Keep
+// these template names explicit instead of pretending they are package-backed.
+local ifc4TemplateTypeSystem = "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
 
 package = new Types.PackageMetadata {
   id = "axioval:specification.accessibility-din-18040-1.definitions"
-  version = "0.1.0"
+  version = "0.1.1"
   name = text("Accessibility definitions — DIN 18040-1", "Definitionen zur Barrierefreiheit — DIN 18040-1")
   description = text("Reusable accessibility rule definitions.", "Wiederverwendbare Regeldefinitionen zur Barrierefreiheit.")
   repository = "https://github.com/axioval/libary"
@@ -22,18 +28,18 @@ package = new Types.PackageMetadata {
 
 local function ifcCitation(citationId: String, item: String): Citations.Citation = new Citations.Citation {
   id = citationId
-  sourceId = ifc4
+  sourceId = ifc4Source
   locators { new Citations.Locator { kind = "item"; value = item } }
 }
 
 sources {
-  [ifc4] = new Citations.Source {
-    id = ifc4
+  [ifc4Source] = new Citations.Source {
+    id = ifc4Source
     kind = "technicalSpecification"
-    designation = "IFC4 ADD2 TC1"
-    title = text("Industry Foundation Classes IFC4 ADD2 TC1", "Industry Foundation Classes IFC4 ADD2 TC1")
+    designation = ifc4.release.label
+    title = text("Industry Foundation Classes \(ifc4.release.label)", "Industry Foundation Classes \(ifc4.release.label)")
     publisher = "buildingSMART International"
-    url = "https://technical.buildingsmart.org/standards/ifc/ifc-schema-specifications/"
+    url = ifc4.release.sourceUri
   }
 }
 
@@ -42,21 +48,21 @@ objectTypes {
     id = "axioval:ifc4.space"
     name = text("Space", "Raum")
     description = text("An IFC spatial area.", "Ein räumlicher IFC-Bereich.")
-    externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "IfcSpace" } }
+    externalNames { ifcAdapter.entityExternalName(ifc4.entity("IfcSpace")) }
     citations { ifcCitation("ifc-space", "IfcSpace") }
   }
   ["axioval:ifc4.door"] = new Definitions.ObjectTypeDefinition {
     id = "axioval:ifc4.door"
     name = text("Door", "Tür")
     description = text("An IFC door occurrence.", "Ein IFC-Türvorkommen.")
-    externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "IfcDoor" } }
+    externalNames { ifcAdapter.entityExternalName(ifc4.entity("IfcDoor")) }
     citations { ifcCitation("ifc-door", "IfcDoor") }
   }
   ["axioval:ifc4.ramp"] = new Definitions.ObjectTypeDefinition {
     id = "axioval:ifc4.ramp"
     name = text("Ramp", "Rampe")
     description = text("An IFC ramp occurrence.", "Ein IFC-Rampenvorkommen.")
-    externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "IfcRamp" } }
+    externalNames { ifcAdapter.entityExternalName(ifc4.entity("IfcRamp")) }
     citations { ifcCitation("ifc-ramp", "IfcRamp") }
   }
 }
@@ -67,7 +73,7 @@ properties {
     name = text("Accessible", "Barrierefrei")
     description = text("IFC accessibility intent flag.", "IFC-Kennzeichen für die vorgesehene Barrierefreiheit.")
     valueKind = "boolean"
-    externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "HandicapAccessible" } }
+    externalNames { new Definitions.ExternalName { typeSystem = ifc4TemplateTypeSystem; name = "HandicapAccessible" } }
     citations { ifcCitation("ifc-handicap-accessible", "HandicapAccessible") }
   }
 }
@@ -77,7 +83,7 @@ propertySets {
     id = "axioval:ifc4.pset-door-common"
     name = text("Door common properties", "Allgemeine Türeigenschaften")
     description = text("IFC4 Pset_DoorCommon.", "IFC4 Pset_DoorCommon.")
-    externalNames { new Definitions.ExternalName { typeSystem = ifc4; name = "Pset_DoorCommon" } }
+    externalNames { new Definitions.ExternalName { typeSystem = ifc4TemplateTypeSystem; name = "Pset_DoorCommon" } }
     citations { ifcCitation("ifc-pset-door-common", "Pset_DoorCommon") }
   }
 }

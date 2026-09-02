@@ -18,6 +18,11 @@ PATH="$HOME/.local/bin:$PATH" ./scripts/check.sh
 python3 scripts/build_mcs.py
 ```
 
+The project lock resolves `openbim.ifc@0.2.1`; package authors can import a
+release view such as `@ifc/versions/Ifc4.pkl` and lower typed entity references
+through `vendor/schema/schema/adapters/Ifc.pkl`. IFC PSD/QTO occurrences are not
+bundled yet, so property and property-set names remain explicit authored data.
+
 The builder writes one deterministic, verified `.mcs` archive per package plus
 `dist/SHA256SUMS`. CI keeps these as short-lived artifacts. A release tag must be
 exactly `v<SemVer>`, and that version must equal every package manifest version.

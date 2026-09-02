@@ -12,7 +12,7 @@ local ifc4 = "urn:buildingsmart:ifc:IFC4-ADD2-TC1"
 
 package = new Types.PackageMetadata {
   id = "axioval:specification.fire-safety.definitions"
-  version = "0.1.0"
+  version = "0.1.1"
   name = text("Fire-safety definitions", "Brandschutzdefinitionen")
   description = text("Reusable fire-safety definitions.", "Wiederverwendbare Brandschutzdefinitionen.")
   repository = "https://github.com/axioval/libary"

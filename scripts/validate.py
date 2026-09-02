@@ -5,8 +5,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
-import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -24,37 +22,7 @@ def fail(message: str) -> None:
 
 
 def evaluate(module: Path) -> dict:
-    executable = shutil.which("pkl")
-    if executable is None:
-        fail("pkl is not installed or not on PATH")
-    process = subprocess.run(
-        [
-            executable,
-            "eval",
-            "-f",
-            "json",
-            "--root-dir",
-            str(ROOT),
-            "--allowed-modules",
-            "file:,pkl:",
-            "--allowed-resources",
-            "file:,prop:",
-            "--timeout",
-            "10",
-            str(module),
-        ],
-        cwd=module.parent,
-        text=True,
-        capture_output=True,
-        check=False,
-        env={**os.environ, "NO_COLOR": "1"},
-    )
-    if process.returncode:
-        fail(f"{module.relative_to(ROOT)}: Pkl evaluation failed\n{process.stderr}")
-    try:
-        value = json.loads(process.stdout)
-    except json.JSONDecodeError as error:
-        fail(f"{module.relative_to(ROOT)} did not render JSON: {error}")
+    value = schema_validate.evaluate(module, ROOT)
     if type(value) is not dict:
         fail(f"{module.relative_to(ROOT)} did not render an object")
     return value
@@ -86,9 +54,7 @@ def main() -> None:
     if not (SCHEMA / "schema/Definitions.pkl").is_file():
         fail("vendor/schema is missing; clone with --recurse-submodules")
     expected_version = (ROOT / ".pkl-version").read_text().strip()
-    executable = shutil.which("pkl")
-    if executable is None:
-        fail("pkl is not installed or not on PATH")
+    executable = schema_validate.pkl_executable()
     version = subprocess.run(
         [executable, "--version"], text=True, capture_output=True, check=True
     ).stdout
@@ -136,12 +102,7 @@ def main() -> None:
         )
         snapshot(rules_module, rules, args.update)
 
-    subprocess.run(
-        [executable, "eval", "PklProject"],
-        cwd=ROOT,
-        check=True,
-        stdout=subprocess.DEVNULL,
-    )
+    schema_validate.evaluate_project(ROOT)
     print(f"validated {len(manifests)} bilingual discipline package(s)")
 
 

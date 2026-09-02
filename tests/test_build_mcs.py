@@ -21,9 +21,9 @@ class BuildMCSTests(unittest.TestCase):
         self.assertEqual(
             discovered,
             [
-                "accessibility-din-18040-1-0.1.0.mcs",
-                "fire-safety-0.1.0.mcs",
-                "openings-penetrations-0.1.0.mcs",
+                "accessibility-din-18040-1-0.1.1.mcs",
+                "fire-safety-0.1.1.mcs",
+                "openings-penetrations-0.1.1.mcs",
             ],
         )
 

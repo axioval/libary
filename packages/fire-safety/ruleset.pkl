@@ -22,7 +22,7 @@ local function projectCitation(citationId: String, section: String): Citations.C
 
 package = new Types.PackageMetadata {
   id = "axioval:specification.fire-safety"
-  version = "0.1.0"
+  version = "0.1.1"
   name = text("Fire safety", "Brandschutz")
   description = text("Fire-safety coordination and geometry rules.", "Regeln für Brandschutzkoordination und Geometrie.")
   repository = "https://github.com/axioval/libary"

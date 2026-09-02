@@ -19,7 +19,9 @@ This repository owns concrete, vendor-neutral rule definition packages and rules
 - Citations are declarative only. They never change applicability, evidence,
   verdicts, legal force, or compliance status; free-text tags are not citations.
 - Geometry rules name trusted capability IDs and concrete dimensions. Missing runtime capabilities or evidence must fail closed.
-- IFC concepts use IFC4 ADD2 TC1 names verified against the buildingSMART PSD/QTO catalog.
+- IFC entity concepts use release-bound references from the pinned `openbim.ifc`
+  package and lower them through the MCS IFC adapter. PSD/QTO property and set
+  names stay explicitly authored until that package bundles template occurrences.
 - Multi-population rules use named applicability groups; every requirement targets
   existing group IDs in the same rule.
 - Explanatory images stay inside their package, include English and German

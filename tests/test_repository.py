@@ -60,6 +60,43 @@ class RepositoryContracts(unittest.TestCase):
                 ).read_text(),
             )
 
+    def test_accessibility_uses_release_bound_ifc_entities(self):
+        project = (ROOT / "PklProject").read_text()
+        definitions = (
+            ROOT / "packages/accessibility-din-18040-1/definitions.pkl"
+        ).read_text()
+        snapshot = json.loads(
+            (
+                ROOT
+                / "packages/accessibility-din-18040-1/expected/definitions.json"
+            ).read_text()
+        )
+
+        self.assertIn("openbim.ifc@0.2.1", project)
+        self.assertIn('import "@ifc/versions/Ifc4.pkl" as ifc4', definitions)
+        self.assertIn('import "../../vendor/schema/schema/adapters/Ifc.pkl"', definitions)
+        for entity, definition_id in (
+            ("IfcSpace", "axioval:ifc4.space"),
+            ("IfcDoor", "axioval:ifc4.door"),
+            ("IfcRamp", "axioval:ifc4.ramp"),
+        ):
+            self.assertIn(
+                f'ifcAdapter.entityExternalName(ifc4.entity("{entity}"))',
+                definitions,
+            )
+            external_name = snapshot["objectTypes"][definition_id]["externalNames"][0]
+            self.assertEqual(external_name["name"], entity)
+            self.assertEqual(
+                external_name["typeSystem"],
+                "https://identifier.buildingsmart.org/uri/buildingsmart/ifc/4",
+            )
+        self.assertNotIn('name = "IfcSpace"', definitions)
+        self.assertNotIn('name = "IfcDoor"', definitions)
+        self.assertNotIn('name = "IfcRamp"', definitions)
+        self.assertIn("ifc4TemplateTypeSystem", definitions)
+        self.assertIn('name = "HandicapAccessible"', definitions)
+        self.assertIn('name = "Pset_DoorCommon"', definitions)
+
     def test_packages_cite_sources_without_copying_normative_prose(self):
         forbidden = "Ausreichend groß ist eine Fläche von"
         for readme in sorted((ROOT / "packages").glob("*/README.md")):

@@ -3,7 +3,7 @@
   "manifestVersion": "0.1.0",
   "kind": "ruleset",
   "id": "axioval:specification.openings-penetrations",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "schemaVersion": "0.1.0",
   "entrypoint": "ruleset.pkl",
   "definitionEntrypoints": ["definitions.pkl"],

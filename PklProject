@@ -1,3 +1,8 @@
 amends "pkl:Project"
 
 // Rules import the pinned schema submodule using repository-local paths.
+dependencies {
+  ["ifc"] {
+    uri = "package://openbimrs.github.io/pkl/openbim.ifc@0.2.1"
+  }
+}
