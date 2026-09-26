@@ -99,6 +99,7 @@ definitions {
       ["width_metres"] = new Definitions.ParameterDefinition { id = "width_metres"; name = text("Width in metres", "Breite in Metern"); kind = "number" }
       ["length_metres"] = new Definitions.ParameterDefinition { id = "length_metres"; name = text("Length in metres", "Länge in Metern"); kind = "number" }
       ["height_metres"] = new Definitions.ParameterDefinition { id = "height_metres"; name = text("Conservative evaluation height in metres", "Konservative Prüfhöhe in Metern"); kind = "number" }
+      ["orientation"] = new Definitions.ParameterDefinition { id = "orientation"; name = text("Rectangle orientation", "Ausrichtung des Rechtecks"); description = text("Which rotations of the rectangle count as a fit; `any` accepts every rotation.", "Welche Drehungen des Rechtecks als passend gelten; `any` lässt jede Drehung zu."); kind = "string" }
     }
   }
   ["axioval:definition.minimum-clear-route"] = new Definitions.RuleDefinition {

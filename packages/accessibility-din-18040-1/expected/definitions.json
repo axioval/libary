@@ -93,6 +93,25 @@
           },
           "required": true
         },
+        "orientation": {
+          "allowedValues": [],
+          "citations": [],
+          "description": {
+            "default": "Which rotations of the rectangle count as a fit; `any` accepts every rotation.",
+            "translations": {
+              "de": "Welche Drehungen des Rechtecks als passend gelten; `any` lässt jede Drehung zu."
+            }
+          },
+          "id": "orientation",
+          "kind": "string",
+          "name": {
+            "default": "Rectangle orientation",
+            "translations": {
+              "de": "Ausrichtung des Rechtecks"
+            }
+          },
+          "required": true
+        },
         "width_metres": {
           "allowedValues": [],
           "citations": [],

@@ -78,6 +78,7 @@ root = new RuleSets.RuleFolder {
             ["width_metres"] = new Values.NumberValue { value = 1.8 }
             ["length_metres"] = new Values.NumberValue { value = 1.8 }
             ["height_metres"] = new Values.NumberValue { value = 2.0 }
+            ["orientation"] = new Values.StringValue { value = "any" }
           }
           applicability = scoped(isSpace, "movement-area.meeting-two-wheelchairs")
           parameterCitations {
@@ -103,6 +104,17 @@ root = new RuleSets.RuleFolder {
                 note = text("The 2.00 m height is a conservative Axioval evaluation envelope, not a DIN threshold.", "Die Höhe von 2,00 m ist eine konservative Axioval-Auswertungshülle und kein DIN-Grenzwert.")
               }
             }
+            new Citations.ParameterCitation {
+              parameterIds { "orientation" }
+              citation = new Citations.Citation {
+                id = "meeting-orientation"
+                sourceId = "axioval:accessibility.project-profile"
+                locators {
+              new Citations.Locator { kind = "section"; value = "Movement area orientation" }
+                }
+                note = text("The movement area may lie at any rotation; the cited clause fixes its size, not its alignment.", "Die Bewegungsfläche darf beliebig gedreht liegen; die zitierte Ziffer legt ihre Größe fest, nicht ihre Ausrichtung.")
+              }
+            }
           }
           tags { "din-18040-1"; "4.3.2"; "geometry" }
         }
@@ -116,6 +128,7 @@ root = new RuleSets.RuleFolder {
             ["width_metres"] = new Values.NumberValue { value = 1.5 }
             ["length_metres"] = new Values.NumberValue { value = 1.5 }
             ["height_metres"] = new Values.NumberValue { value = 2.0 }
+            ["orientation"] = new Values.StringValue { value = "any" }
           }
           applicability = scoped(isSpace, "movement-area.meeting-wheelchair-person")
           parameterCitations {
@@ -141,6 +154,17 @@ root = new RuleSets.RuleFolder {
                 note = text("The 2.00 m height is a conservative Axioval evaluation envelope, not a DIN threshold.", "Die Höhe von 2,00 m ist eine konservative Axioval-Auswertungshülle und kein DIN-Grenzwert.")
               }
             }
+            new Citations.ParameterCitation {
+              parameterIds { "orientation" }
+              citation = new Citations.Citation {
+                id = "encounter-orientation"
+                sourceId = "axioval:accessibility.project-profile"
+                locators {
+              new Citations.Locator { kind = "section"; value = "Movement area orientation" }
+                }
+                note = text("The movement area may lie at any rotation; the cited clause fixes its size, not its alignment.", "Die Bewegungsfläche darf beliebig gedreht liegen; die zitierte Ziffer legt ihre Größe fest, nicht ihre Ausrichtung.")
+              }
+            }
           }
           tags { "din-18040-1"; "4.3.2"; "geometry" }
         }
@@ -154,6 +178,7 @@ root = new RuleSets.RuleFolder {
             ["width_metres"] = new Values.NumberValue { value = 1.5 }
             ["length_metres"] = new Values.NumberValue { value = 1.5 }
             ["height_metres"] = new Values.NumberValue { value = 2.0 }
+            ["orientation"] = new Values.StringValue { value = "any" }
           }
           applicability = scoped(isSpace, "movement-area.turning-maneuvering")
           parameterCitations {
@@ -177,6 +202,17 @@ root = new RuleSets.RuleFolder {
               new Citations.Locator { kind = "section"; value = "Conservative execution envelope" }
                 }
                 note = text("The 2.00 m height is a conservative Axioval evaluation envelope, not a DIN threshold.", "Die Höhe von 2,00 m ist eine konservative Axioval-Auswertungshülle und kein DIN-Grenzwert.")
+              }
+            }
+            new Citations.ParameterCitation {
+              parameterIds { "orientation" }
+              citation = new Citations.Citation {
+                id = "turning-orientation"
+                sourceId = "axioval:accessibility.project-profile"
+                locators {
+              new Citations.Locator { kind = "section"; value = "Movement area orientation" }
+                }
+                note = text("The movement area may lie at any rotation; the cited clause fixes its size, not its alignment.", "Die Bewegungsfläche darf beliebig gedreht liegen; die zitierte Ziffer legt ihre Größe fest, nicht ihre Ausrichtung.")
               }
             }
           }

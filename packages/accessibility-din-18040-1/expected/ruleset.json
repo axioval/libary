@@ -130,6 +130,27 @@
                 "parameterIds": [
                   "height_metres"
                 ]
+              },
+              {
+                "citation": {
+                  "id": "meeting-orientation",
+                  "locators": [
+                    {
+                      "kind": "section",
+                      "value": "Movement area orientation"
+                    }
+                  ],
+                  "note": {
+                    "default": "The movement area may lie at any rotation; the cited clause fixes its size, not its alignment.",
+                    "translations": {
+                      "de": "Die Bewegungsfläche darf beliebig gedreht liegen; die zitierte Ziffer legt ihre Größe fest, nicht ihre Ausrichtung."
+                    }
+                  },
+                  "sourceId": "axioval:accessibility.project-profile"
+                },
+                "parameterIds": [
+                  "orientation"
+                ]
               }
             ],
             "parameters": {
@@ -140,6 +161,10 @@
               "length_metres": {
                 "type": "number",
                 "value": 1.8
+              },
+              "orientation": {
+                "type": "string",
+                "value": "any"
               },
               "width_metres": {
                 "type": "number",
@@ -237,6 +262,27 @@
                 "parameterIds": [
                   "height_metres"
                 ]
+              },
+              {
+                "citation": {
+                  "id": "encounter-orientation",
+                  "locators": [
+                    {
+                      "kind": "section",
+                      "value": "Movement area orientation"
+                    }
+                  ],
+                  "note": {
+                    "default": "The movement area may lie at any rotation; the cited clause fixes its size, not its alignment.",
+                    "translations": {
+                      "de": "Die Bewegungsfläche darf beliebig gedreht liegen; die zitierte Ziffer legt ihre Größe fest, nicht ihre Ausrichtung."
+                    }
+                  },
+                  "sourceId": "axioval:accessibility.project-profile"
+                },
+                "parameterIds": [
+                  "orientation"
+                ]
               }
             ],
             "parameters": {
@@ -247,6 +293,10 @@
               "length_metres": {
                 "type": "number",
                 "value": 1.5
+              },
+              "orientation": {
+                "type": "string",
+                "value": "any"
               },
               "width_metres": {
                 "type": "number",
@@ -344,6 +394,27 @@
                 "parameterIds": [
                   "height_metres"
                 ]
+              },
+              {
+                "citation": {
+                  "id": "turning-orientation",
+                  "locators": [
+                    {
+                      "kind": "section",
+                      "value": "Movement area orientation"
+                    }
+                  ],
+                  "note": {
+                    "default": "The movement area may lie at any rotation; the cited clause fixes its size, not its alignment.",
+                    "translations": {
+                      "de": "Die Bewegungsfläche darf beliebig gedreht liegen; die zitierte Ziffer legt ihre Größe fest, nicht ihre Ausrichtung."
+                    }
+                  },
+                  "sourceId": "axioval:accessibility.project-profile"
+                },
+                "parameterIds": [
+                  "orientation"
+                ]
               }
             ],
             "parameters": {
@@ -354,6 +425,10 @@
               "length_metres": {
                 "type": "number",
                 "value": 1.5
+              },
+              "orientation": {
+                "type": "string",
+                "value": "any"
               },
               "width_metres": {
                 "type": "number",
